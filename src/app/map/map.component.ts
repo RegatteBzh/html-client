@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { OSM_TILE_LAYER_URL } from '@yaga/leaflet-ng2';
-import { latLng, LatLng, LatLngBounds, Point } from 'leaflet';
+import { LatLng, LatLngBounds, Point } from 'leaflet';
 import { Boat } from '../models/boat';
 
 @Component({

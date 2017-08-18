@@ -1,15 +1,19 @@
 import { Point, LatLng } from 'leaflet';
 
+import 'rxjs/add/operator/toPromise';
+
 export class Boat {
-    position: LatLng;
-    angle: number;
-    speed: number;
-    icon: string;
-    iconAnchor: Point;
-    iconSize: Point;
-    shadow: string;
-    shadowAnchor: Point;
-    shadowSize: Point;
+
+    public position: LatLng;
+    public direction: number;
+    public speed: number;
+    public icon: string;
+    public iconAnchor: Point;
+    public iconSize: Point;
+    public shadow: string;
+    public hadowAnchor: Point;
+    public shadowSize: Point;
+    public shadowAnchor: Point;
 
     constructor(
         icon: string,
@@ -27,14 +31,16 @@ export class Boat {
         this.shadowSize = shadowSize || new Point(0, 0);
     }
 
-    setPosition(position: LatLng, angle: number, speed: number) {
+    setPosition(position: LatLng, direction: number, speed: number) {
         this.position = position;
-        this.angle = angle;
+        this.direction = direction;
         this.speed = speed;
     }
 
     getIconUrl() {
-        const angle = `000${this.angle}`.slice(-3);
-        return `${this.icon}-${angle}.png`;
+        const direction = `000${this.direction}`.slice(-3);
+        return `${this.icon}-${direction}.png`;
     }
+
 }
+

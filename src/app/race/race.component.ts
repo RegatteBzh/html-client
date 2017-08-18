@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
 import { Boat } from '../models/boat';
 
+import { RaceService } from './race.service';
+
 @Component({
   selector: 'app-race',
   templateUrl: './race.component.html',
@@ -9,7 +11,7 @@ import { Boat } from '../models/boat';
 })
 export class RaceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private raceService: RaceService) { }
 
   public boat = new Boat(
     '/assets/boats/imoca60/imoca',
@@ -26,6 +28,8 @@ export class RaceComponent implements OnInit {
       150,
       18
     );
+
+    this.raceService.updateBoat(2, this.boat);
 
     this.route.push(
       new LatLng(51, 7)

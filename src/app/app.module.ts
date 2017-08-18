@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, PlatformRef } from '@angular/core';
 import { FormsModule} from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { YagaModule } from '@yaga/leaflet-ng2';
 
@@ -9,6 +10,8 @@ import { AppRoutingModule } from './app.routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RaceComponent } from './race/race.component';
 import { MapComponent } from './map/map.component';
+
+import { RaceService } from './race/race.service';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,10 @@ import { MapComponent } from './map/map.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    YagaModule
+    YagaModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [RaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
