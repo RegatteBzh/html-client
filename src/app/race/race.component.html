@@ -1,0 +1,5 @@
+<app-map [boat]="boat" [route]="route"></app-map>
+<div>
+    <label for="angle">Boat angle</label>
+    <input name="angle" type="number" [(ngModel)]="boat.angle" min="0" max="359"/>
+</div>
