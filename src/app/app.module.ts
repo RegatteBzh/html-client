@@ -12,13 +12,15 @@ import { RaceComponent } from './race/race.component';
 import { MapComponent } from './map/map.component';
 
 import { RaceService } from './race/race.service';
+import { CompassComponent } from './compass/compass.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     RaceComponent,
-    MapComponent
+    MapComponent,
+    CompassComponent
   ],
   imports: [
     BrowserModule,
