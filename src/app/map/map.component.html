@@ -1,24 +1,26 @@
-<div class="map">
-  <yaga-map
-  [zoom]="zoom"
-  [maxBounds]="maxBound">
-    <yaga-marker [lat]="boat.position.lat" [lng]="boat.position.lng">
-      <yaga-icon [iconUrl]="boat.getIconUrl()"
-                 [iconSize]="boat.iconSize" 
-                 [iconAnchor]="boat.iconAnchor" 
-                 [shadowUrl]="boat.shadow"
-                 [shadowSize]="boat.shadowSize"
-                 [shadowAnchor]="boat.shadowAnchor">
-      </yaga-icon>
-    </yaga-marker>
-    <yaga-polyline [latLngs]="route">
-    </yaga-polyline>
-    <yaga-tile-layer *ngFor="let map of maps" [url]="map.url" [opacity]="map.opacity"></yaga-tile-layer>
-  </yaga-map>
+<div class="mapControl">
+  <div class="map">
+    <yaga-map
+    [zoom]="zoom"
+    [maxBounds]="maxBound">
+      <yaga-marker [lat]="boat.position.lat" [lng]="boat.position.lng">
+        <yaga-icon [iconUrl]="boat.getIconUrl()"
+                  [iconSize]="boat.iconSize" 
+                  [iconAnchor]="boat.iconAnchor" 
+                  [shadowUrl]="boat.shadow"
+                  [shadowSize]="boat.shadowSize"
+                  [shadowAnchor]="boat.shadowAnchor">
+        </yaga-icon>
+      </yaga-marker>
+      <yaga-polyline [latLngs]="route">
+      </yaga-polyline>
+      <yaga-tile-layer *ngFor="let map of maps" [url]="map.url" [opacity]="map.opacity"></yaga-tile-layer>
+    </yaga-map>
+  </div>
+  <ul class="layer-control">
+    <li *ngFor="let map of maps">
+      <span>{{map.name}}</span>
+      <input type="radio" name="layerSelect">
+    </li>
+  </ul>
 </div>
-<ul class="layer-control">
-  <li *ngFor="let map of maps">
-    <span>{{map.name}}</span>
-    <input type="radio" name="layerSelect">
-  </li>
-</ul>

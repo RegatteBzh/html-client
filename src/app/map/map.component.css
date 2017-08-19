@@ -3,3 +3,8 @@
     width: 700px;
     height: 700px;
 }
+
+.mapControl {
+    display: inline-block;
+    vertical-align: top;
+}

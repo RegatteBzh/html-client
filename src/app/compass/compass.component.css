@@ -1,0 +1,36 @@
+.compass {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+
+.directionValue {
+    color: #fff;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+#compass_cursor {
+    fill:#2948ab;
+    cursor: move;
+}
+
+#compass_cursor:hover {
+    fill: #3760E6;
+}
+
+text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
