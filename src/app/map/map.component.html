@@ -1,8 +1,10 @@
 <div class="mapControl">
   <div class="map">
     <yaga-map
-    [zoom]="zoom"
-    [maxBounds]="maxBound">
+    [(zoom)]="zoom"
+    [(maxBounds)]="maxBound"
+    maxZoom="10"
+    minZoom="2">
       <yaga-marker [lat]="boatDisplay.skipper.position.lat" [lng]="boatDisplay.skipper.position.lng">
         <yaga-icon [iconUrl]="boatDisplay.getIconUrl()"
                   [iconSize]="boatDisplay.iconSize" 
