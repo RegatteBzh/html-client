@@ -16,13 +16,14 @@
       </yaga-marker>
       <yaga-polyline [latLngs]="route">
       </yaga-polyline>
-      <yaga-tile-layer *ngFor="let map of maps" [url]="map.url" [opacity]="map.opacity"></yaga-tile-layer>
+      <!--<yaga-tile-layer *ngFor="let map of maps" [url]="map.url" [opacity]="map.opacity"></yaga-tile-layer>-->
+      <yaga-tile-layer [url]="currentMap.url"></yaga-tile-layer>
     </yaga-map>
   </div>
   <ul class="layer-control">
     <li *ngFor="let map of maps; let idx = index">
-      <input type="radio" id="{{map.name}}" name="layerSelect" [checked]="idx === 0" [value]="map" (change)="onSelectionChange(map)">
-      <label for="{{map.name}}">{{map.name}}</label>
+      <input type="radio" id="map{{idx}}" name="layerSelect" [checked]="idx === 0" [value]="map" (change)="onSelectionChange(map)">
+      <label for="map{{idx}}">{{map.name}}</label>
     </li>
   </ul>
 </div>
