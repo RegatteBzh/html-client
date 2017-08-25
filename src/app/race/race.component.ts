@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
-import { Boat } from '../models/boat';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
+import { BoatDisplay } from '../models/boatdisplay';
 import { RaceService } from './race.service';
 
 @Component({
@@ -11,9 +13,12 @@ import { RaceService } from './race.service';
 })
 export class RaceComponent implements OnInit {
 
-  constructor(private raceService: RaceService) { }
+  constructor(
+    private raceService: RaceService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
-  public boat = new Boat(
+  public boatDisplay = new BoatDisplay(
     '/assets/boats/imoca60/imoca',
     new Point(25, 25),
     new Point(50, 50)
@@ -23,13 +28,18 @@ export class RaceComponent implements OnInit {
 
 
   ngOnInit() {
-    this.boat.setPosition(
+    this.boatDisplay.setPosition(
       new LatLng(51, 7),
       150,
       18
     );
 
-    this.raceService.updateBoat(2, this.boat);
+    this.activatedRoute.paramMap
+      .switchMap((params: ParamMap) => {
+        console.log(params);
+        return this.raceService.updateBoatDisplay(+params.get('id'), this.boatDisplay);
+      })
+      .subscribe();
 
     this.route.push(
       new LatLng(51, 7)

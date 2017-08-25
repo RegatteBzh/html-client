@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/toPromise';
 
-export class Boat {
+export class Race {
 
     public id: Number;
     public name: String;

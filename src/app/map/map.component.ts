@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { OSM_TILE_LAYER_URL } from '@yaga/leaflet-ng2';
 import { LatLng, LatLngBounds, Point } from 'leaflet';
-import { Boat } from '../models/boat';
+import { BoatDisplay } from '../models/boatdisplay';
 
 @Component({
   selector: 'app-map',
@@ -11,7 +11,7 @@ import { Boat } from '../models/boat';
 })
 export class MapComponent implements OnInit {
 
-  @Input() boat: Boat;
+  @Input() boatDisplay: BoatDisplay;
   @Input() route: LatLng[];
 
   public basicMapUrl: string = OSM_TILE_LAYER_URL;

@@ -3,13 +3,13 @@
     <yaga-map
     [zoom]="zoom"
     [maxBounds]="maxBound">
-      <yaga-marker [lat]="boat.position.lat" [lng]="boat.position.lng">
-        <yaga-icon [iconUrl]="boat.getIconUrl()"
-                  [iconSize]="boat.iconSize" 
-                  [iconAnchor]="boat.iconAnchor" 
-                  [shadowUrl]="boat.shadow"
-                  [shadowSize]="boat.shadowSize"
-                  [shadowAnchor]="boat.shadowAnchor">
+      <yaga-marker [lat]="boatDisplay.skipper.position.lat" [lng]="boatDisplay.skipper.position.lng">
+        <yaga-icon [iconUrl]="boatDisplay.getIconUrl()"
+                  [iconSize]="boatDisplay.iconSize" 
+                  [iconAnchor]="boatDisplay.iconAnchor" 
+                  [shadowUrl]="boatDisplay.shadow"
+                  [shadowSize]="boatDisplay.shadowSize"
+                  [shadowAnchor]="boatDisplay.shadowAnchor">
         </yaga-icon>
       </yaga-marker>
       <yaga-polyline [latLngs]="route">
