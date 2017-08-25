@@ -18,9 +18,9 @@
     </yaga-map>
   </div>
   <ul class="layer-control">
-    <li *ngFor="let map of maps">
-      <span>{{map.name}}</span>
-      <input type="radio" name="layerSelect">
+    <li *ngFor="let map of maps; let idx = index">
+      <input type="radio" id="{{map.name}}" name="layerSelect" [checked]="idx === 0" [value]="map" (change)="onSelectionChange(map)">
+      <label for="{{map.name}}">{{map.name}}</label>
     </li>
   </ul>
 </div>

@@ -9,7 +9,7 @@ import { RaceService } from './race.service';
 @Component({
   selector: 'app-race',
   templateUrl: './race.component.html',
-  styleUrls: ['./race.component.css']
+  styleUrls: ['./race.component.less']
 })
 export class RaceComponent implements OnInit {
 

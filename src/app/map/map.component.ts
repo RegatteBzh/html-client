@@ -7,7 +7,7 @@ import { BoatDisplay } from '../models/boatdisplay';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.less']
 })
 export class MapComponent implements OnInit {
 
@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
     {
       name: 'topo',
       url: 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png',
-      opacity: 0,
+      opacity: 1,
       selected: true
     },
     {
@@ -34,12 +34,19 @@ export class MapComponent implements OnInit {
     {
       name: 'etopo',
       url: 'https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}',
-      opacity: 1
+      opacity: 0
     }
   ];
 
   constructor() {
     this. maxBound = new LatLngBounds(new LatLng(-90, -180), new LatLng(90, 180));
+  }
+
+  onSelectionChange(map) {
+    this.maps.forEach(mapElt => {
+      mapElt.opacity = 0;
+    });
+    map.opacity = 1;
   }
 
   ngOnInit() {
