@@ -20,7 +20,7 @@
       <yaga-polyline [latLngs]="route">
       </yaga-polyline>
       <!--<yaga-tile-layer *ngFor="let map of maps" [url]="map.url" [opacity]="map.opacity"></yaga-tile-layer>-->
-      <yaga-tile-layer [url]="currentMap.url"></yaga-tile-layer>
+      <yaga-tile-layer [url]="currentMap.url" #mainLayer></yaga-tile-layer>
     </yaga-map>
   </div>
   <ul class="layer-control">

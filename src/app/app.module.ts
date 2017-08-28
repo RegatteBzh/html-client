@@ -12,6 +12,10 @@ import { RaceComponent } from './race/race.component';
 import { MapComponent } from './map/map.component';
 
 import { RaceService } from './race/race.service';
+import { MapService } from './map/map.service';
+import { ConfigService } from './config.service';
+
+
 import { CompassComponent } from './compass/compass.component';
 
 @NgModule({
@@ -29,7 +33,11 @@ import { CompassComponent } from './compass/compass.component';
     YagaModule,
     HttpModule
   ],
-  providers: [RaceService],
+  providers: [
+    ConfigService,
+    RaceService,
+    MapService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

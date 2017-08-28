@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { BoatDisplay } from '../models/boatdisplay';
 import { Skipper } from '../models/skipper';
+import { ConfigService } from '../config.service';
 
 @Injectable()
 export class RaceService {
@@ -18,12 +19,13 @@ export class RaceService {
 
     constructor(
         private http: Http,
+        private configService: ConfigService,
     ) {
 
     }
 
     updateBoatDisplay(skipperId: number, boatDisplay: BoatDisplay): Promise<BoatDisplay> {
-        return this.http.get(`${this.apiUrl}/skippers/${skipperId}`)
+        return this.http.get(`${this.configService.apiUrl()}/skippers/${skipperId}`)
             .toPromise()
             .then(response => {
                 const skipper = response.json();
@@ -41,7 +43,7 @@ export class RaceService {
     }
 
     getSkippers(): Promise<Skipper[]> {
-        return this.http.get(`${this.apiUrl}/skippers/`)
+        return this.http.get(`${this.configService.apiUrl()}/skippers/`)
         .toPromise()
         .then(response => {
             const skippersResponse = response.json();

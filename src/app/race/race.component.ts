@@ -36,7 +36,6 @@ export class RaceComponent implements OnInit {
 
     this.activatedRoute.paramMap
       .switchMap((params: ParamMap) => {
-        console.log(params);
         return this.raceService.updateBoatDisplay(+params.get('id'), this.boatDisplay);
       })
       .subscribe();
