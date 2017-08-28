@@ -3,8 +3,11 @@
     <yaga-map
     [(zoom)]="zoom"
     [(maxBounds)]="maxBound"
-    maxZoom="10"
-    minZoom="2">
+    (zoomstart)="resetWind($event)"
+    (move)="resetWind($event)"
+    maxZoom="15"
+    minZoom="2"
+    #mainMap>
       <yaga-marker [lat]="boatDisplay.skipper.position.lat" [lng]="boatDisplay.skipper.position.lng">
         <yaga-icon [iconUrl]="boatDisplay.getIconUrl()"
                   [iconSize]="boatDisplay.iconSize" 
