@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from '../config.service';
 
@@ -8,13 +9,13 @@ import { ConfigService } from '../config.service';
 export class MapService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private configService: ConfigService,
   ) { }
 
 
-  loadMetaTiles(tiles: String[], type: String, data: any) {
-    console.log(tiles);
+  loadMetadata(type: String): Observable<any> {
+    return this.http.get(`${this.configService.apiUrl()}/data/wind000.json`);
   }
 
 }
