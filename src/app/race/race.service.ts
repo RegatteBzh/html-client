@@ -31,7 +31,7 @@ export class RaceService {
                 boatDisplay.skipper.setRace(response.race);
                 boatDisplay.skipper.setSail(response.sail);
                 boatDisplay.skipper.setParameters(
-                    new LatLng(response.position.x, response.position.y),
+                    new LatLng(response.position.lng, response.position.lat),
                     response.direction,
                     response.speed
                 );
@@ -50,7 +50,7 @@ export class RaceService {
                 skipper.setRace(skipperElt.race);
                 skipper.setSail(skipperElt.sail);
                 skipper.setParameters(
-                    new LatLng(skipperElt.position.x, skipperElt.position.y),
+                    new LatLng(skipperElt.position.lng, skipperElt.position.lat),
                     skipperElt.direction,
                     skipperElt.speed
                 );
