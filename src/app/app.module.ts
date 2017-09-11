@@ -15,8 +15,8 @@ import { RaceService } from './race/race.service';
 import { MapService } from './map/map.service';
 import { ConfigService } from './config.service';
 
-
 import { CompassComponent } from './compass/compass.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { CompassComponent } from './compass/compass.component';
     DashboardComponent,
     RaceComponent,
     MapComponent,
-    CompassComponent
+    CompassComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

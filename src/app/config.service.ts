@@ -5,6 +5,16 @@ export class ConfigService {
 
   constructor() { }
 
+  private token: string;
+
+  setToken(token: string) {
+    this.token = token;
+  }
+
+  getToken(): string {
+    return this.token;
+  }
+
   apiUrl(): String {
     return 'http://localhost:3000';
   }

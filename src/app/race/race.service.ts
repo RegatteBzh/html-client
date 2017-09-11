@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LatLng } from 'leaflet';
 import { Sail } from '../models/sail';
 import { Boat } from '../models/boat';
@@ -14,7 +13,6 @@ import { ConfigService } from '../config.service';
 
 @Injectable()
 export class RaceService {
-    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(
         private http: HttpClient,
@@ -24,7 +22,10 @@ export class RaceService {
     }
 
     updateBoatDisplay(skipperId: number, boatDisplay: BoatDisplay): Promise<BoatDisplay> {
-        return this.http.get(`${this.configService.apiUrl()}/skippers/${skipperId}`)
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json; charset=utf-8')
+            .set('authorization', this.configService.getToken());
+        return this.http.get(`${this.configService.apiUrl()}/api/skippers/${skipperId}`, { headers: headers })
             .toPromise()
             .then((response: any) => {
                 boatDisplay.skipper.setBoat(response.boat);
@@ -41,10 +42,13 @@ export class RaceService {
     }
 
     getSkippers(): Promise<Skipper[]> {
-        return this.http.get(`${this.configService.apiUrl()}/skippers/`)
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json; charset=utf-8')
+            .set('authorization', this.configService.getToken());
+        return this.http.get(`${this.configService.apiUrl()}/api/skippers/`, { headers: headers })
         .toPromise()
         .then((response: any[]) => {
-            const skippers: Skipper[] = response.map(skipperElt => {
+            const skippers: Skipper[] = (response || []).map(skipperElt => {
                 const skipper = new Skipper();
                 skipper.setBoat(skipperElt.boat);
                 skipper.setRace(skipperElt.race);
