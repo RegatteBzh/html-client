@@ -1,16 +1,16 @@
 <div class="content">
   <div class="frame">
 
-    <h2>Welcome to Regatta</h2>
+    <h2>{{'login_welcome' | translate}}</h2>
 
     <a href="{{urlPrefix}}/auth/facebook/login" class="btn btn-primary">
-      <span class="fa fa-facebook"></span>
-      Facebook
+      <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      {{ 'login_facebook' | translate }}
     </a>
 
     <a href="{{urlPrefix}}/auth/google/login" class="btn btn-danger">
-      <span class="fa fa-google-plus"></span>
-      Google
+      <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+      {{ 'login_google' | translate }}
     </a>
 
   </div>

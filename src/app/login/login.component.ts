@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../services/config/config.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
 
   }
 
-  public urlPrefix;
+   public urlPrefix;
 
   ngOnInit() {
-    this.urlPrefix = this.configService.apiUrl();
+     this.urlPrefix = this.configService.apiUrl();
 
     this.activatedRoute.params.subscribe((params: Params) => {
         this.configService.setToken(params['token']);

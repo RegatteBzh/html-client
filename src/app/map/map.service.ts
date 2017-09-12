@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../services/config/config.service';
 
 @Injectable()
 export class MapService {

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/do';
 
 import { Observable } from 'rxjs/Observable';
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {

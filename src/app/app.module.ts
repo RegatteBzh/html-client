@@ -4,6 +4,8 @@ import { FormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { YagaModule } from '@yaga/leaflet-ng2';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import {Http} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -15,8 +17,9 @@ import { LoginComponent } from './login/login.component';
 
 import { RaceService } from './race/race.service';
 import { MapService } from './map/map.service';
-import { ConfigService } from './config.service';
-import { AuthInterceptorService } from './auth-interceptor/auth-interceptor.service';
+import { ConfigService } from './services/config/config.service';
+import { AuthInterceptorService } from './services/auth-interceptor/auth-interceptor.service';
+import { LanguageService } from './services/language/language.service';
 
 @NgModule({
   declarations: [
@@ -33,12 +36,18 @@ import { AuthInterceptorService } from './auth-interceptor/auth-interceptor.serv
     FormsModule,
     YagaModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: customTranslateLoader,
+      deps: [Http]
+  }),
   ],
   providers: [
     ConfigService,
     RaceService,
     MapService,
     AuthInterceptorService,
+    LanguageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
@@ -48,3 +57,7 @@ import { AuthInterceptorService } from './auth-interceptor/auth-interceptor.serv
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function customTranslateLoader(http: Http) {
+  return new TranslateStaticLoader(http, 'assets/i18n', '.json');
+}

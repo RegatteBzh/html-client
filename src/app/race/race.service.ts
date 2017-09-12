@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { BoatDisplay } from '../models/boatdisplay';
 import { Skipper } from '../models/skipper';
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../services/config/config.service';
 
 @Injectable()
 export class RaceService {

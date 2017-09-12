@@ -5,7 +5,7 @@ import { LatLng, LatLngBounds, Point, Event } from 'leaflet';
 import { BoatDisplay } from '../models/boatdisplay';
 
 import { MapService } from './map.service';
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../services/config/config.service';
 
 import 'leaflet-velocity';
 
