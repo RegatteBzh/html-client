@@ -22,10 +22,7 @@ export class RaceService {
     }
 
     updateBoatDisplay(skipperId: number, boatDisplay: BoatDisplay): Promise<BoatDisplay> {
-        const headers = new HttpHeaders()
-            .set('Content-Type', 'application/json; charset=utf-8')
-            .set('authorization', this.configService.getToken());
-        return this.http.get(`${this.configService.apiUrl()}/api/skippers/${skipperId}`, { headers: headers })
+        return this.http.get(`/api/skippers/${skipperId}`)
             .toPromise()
             .then((response: any) => {
                 boatDisplay.skipper.setBoat(response.boat);
@@ -42,12 +39,9 @@ export class RaceService {
     }
 
     getSkippers(): Promise<Skipper[]> {
-        const headers = new HttpHeaders()
-            .set('Content-Type', 'application/json; charset=utf-8')
-            .set('authorization', this.configService.getToken());
-        return this.http.get(`${this.configService.apiUrl()}/api/skippers/`, { headers: headers })
+        return this.http.get(`/api/skippers/`)
         .toPromise()
-        .then((response: any[]) => {
+        .then((response: any) => {
             const skippers: Skipper[] = (response || []).map(skipperElt => {
                 const skipper = new Skipper();
                 skipper.setBoat(skipperElt.boat);

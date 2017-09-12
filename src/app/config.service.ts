@@ -5,14 +5,12 @@ export class ConfigService {
 
   constructor() { }
 
-  private token: string;
-
   setToken(token: string) {
-    this.token = token;
+    sessionStorage.setItem('authorization', token || '');
   }
 
   getToken(): string {
-    return this.token;
+    return sessionStorage.getItem('authorization') || '';
   }
 
   apiUrl(): String {
