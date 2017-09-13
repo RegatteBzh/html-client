@@ -1,0 +1,11 @@
+msgid "app_disconnect"
+msgstr ""
+
+msgid "login_welcome"
+msgstr ""
+
+msgid "login_google"
+msgstr ""
+
+msgid "login_facebook"
+msgstr ""

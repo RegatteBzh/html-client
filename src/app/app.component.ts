@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 
 import {LanguageService} from './services/language/language.service';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 import {Subscription} from 'rxjs/Subscription';
 

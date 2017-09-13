@@ -4,8 +4,9 @@ import { FormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { YagaModule } from '@yaga/leaflet-ng2';
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
-import {Http} from '@angular/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslatePoHttpLoader } from '@biesbjerg/ngx-translate-po-http-loader';
+import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -39,10 +40,13 @@ import { LanguageService } from './services/language/language.service';
     FormsModule,
     YagaModule,
     HttpClientModule,
+    HttpModule,
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: customTranslateLoader,
-      deps: [Http]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      }
   }),
   ],
   providers: [
@@ -62,6 +66,6 @@ import { LanguageService } from './services/language/language.service';
 })
 export class AppModule { }
 
-export function customTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, 'assets/i18n', '.json');
+export function createTranslateLoader(http: Http) {
+  return new TranslatePoHttpLoader(http, 'assets/i18n', '.po');
 }
