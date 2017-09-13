@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
 
 import { MapComponent as YagaMapComponent, TileLayerDirective as YagaTileLayerDirective } from '@yaga/leaflet-ng2';
-import { LatLng, LatLngBounds, Point, Event } from 'leaflet';
+import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
 import { BoatDisplay } from '../../models/boatdisplay';
 
 import { MapService } from '../../services/map/map.service';
@@ -46,7 +46,7 @@ export class MapComponent implements AfterViewInit {
     this.currentMap = map;
   }
 
-  getTiles(event: Event): any[] {
+  getTiles(event: LeafletEvent): any[] {
     let tiles = [];
     Object.keys(event.target._layers).forEach((key) => {
       if (event.target._layers[key]._tiles) {
@@ -56,7 +56,7 @@ export class MapComponent implements AfterViewInit {
     return tiles;
   }
 
-  resetWind(event: Event) {
+  resetWind(event: LeafletEvent) {
     if (this.vLayer) {
       this.vLayer._clearWind();
     }
