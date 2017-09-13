@@ -11,10 +11,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 
 import { CompassComponent } from './components/compass/compass.component';
+import { MapComponent } from './components/map/map.component';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { RaceComponent } from './views/race/race.component';
-import { MapComponent } from './views/map/map.component';
 import { LoginComponent } from './views/login/login.component';
 
 import { RaceService } from './services/race/race.service';
