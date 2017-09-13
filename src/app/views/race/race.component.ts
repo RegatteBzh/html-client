@@ -3,8 +3,8 @@ import { Point, LatLng } from 'leaflet';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import { BoatDisplay } from '../models/boatdisplay';
-import { RaceService } from './race.service';
+import { BoatDisplay } from '../../models/boatdisplay';
+import { RaceService } from '../../services/race/race.service';
 
 @Component({
   selector: 'app-race',

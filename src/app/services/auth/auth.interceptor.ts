@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 import {
   HttpRequest,
@@ -13,13 +14,13 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/do';
 
 import { Observable } from 'rxjs/Observable';
-import { ConfigService } from '../config/config.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthInterceptorService implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    public configService: ConfigService,
+    public authService: AuthService,
     public router: Router,
   ) { }
 
@@ -29,14 +30,14 @@ export class AuthInterceptorService implements HttpInterceptor {
       isApi = true;
       request = request.clone({
         setHeaders: {
-          Authorization: this.configService.getToken()
+          Authorization: this.authService.getToken()
         },
-        url: request.url.replace(/^\/api\//, `${this.configService.apiUrl()}/api/`)
+        url: request.url.replace(/^\/api\//, `${environment.apiUrl}/api/`)
       });
     }
     return next.handle(request).do(event => {}, err => {
       if (isApi && (err.status === 401 || err.status === 403)) {
-        this.configService.setToken(null);
+        this.authService.setToken(null);
         this.router.navigate(['/login']);
       }
     });

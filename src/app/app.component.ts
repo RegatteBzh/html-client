@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ConfigService } from './services/config/config.service';
+import { AuthService } from './services/auth/auth.service';
 
 import {LanguageService} from './services/language/language.service';
 import {TranslateService} from 'ng2-translate';
@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewChecked {
   public isConnected: boolean;
 
   constructor(
-    private configService: ConfigService,
+    private authService: AuthService,
     private router: Router,
     private translateService: TranslateService,
     private languageService: LanguageService,
@@ -43,13 +43,13 @@ export class AppComponent implements AfterViewChecked {
   }
 
   public disconnect () {
-    this.configService.setToken(null);
+    this.authService.setToken(null);
     this.router.navigate(['/login']);
 
   }
 
   ngAfterViewChecked() {
-    const hasToken = !!this.configService.getToken()
+    const hasToken = this.authService.hasToken();
     if (this.isConnected !== hasToken) {
       this.isConnected = hasToken;
       this.cdRef.detectChanges();

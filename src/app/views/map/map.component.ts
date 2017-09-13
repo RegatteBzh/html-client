@@ -2,10 +2,10 @@ import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
 
 import { MapComponent as YagaMapComponent, TileLayerDirective as YagaTileLayerDirective } from '@yaga/leaflet-ng2';
 import { LatLng, LatLngBounds, Point, Event } from 'leaflet';
-import { BoatDisplay } from '../models/boatdisplay';
+import { BoatDisplay } from '../../models/boatdisplay';
 
-import { MapService } from './map.service';
-import { ConfigService } from '../services/config/config.service';
+import { MapService } from '../../services/map/map.service';
+import { ConfigService } from '../../services/config/config.service';
 
 import 'leaflet-velocity';
 

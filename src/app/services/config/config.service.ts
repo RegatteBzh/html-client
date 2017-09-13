@@ -1,21 +1,10 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ConfigService {
 
   constructor() { }
-
-  setToken(token: string) {
-    sessionStorage.setItem('authorization', token || '');
-  }
-
-  getToken(): string {
-    return sessionStorage.getItem('authorization') || '';
-  }
-
-  apiUrl(): String {
-    return 'http://localhost:3000';
-  }
 
   mapLayers() {
     return [

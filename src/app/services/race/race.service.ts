@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LatLng } from 'leaflet';
-import { Sail } from '../models/sail';
-import { Boat } from '../models/boat';
-import { Race } from '../models/race';
+import { Sail } from '../../models/sail';
+import { Boat } from '../../models/boat';
+import { Race } from '../../models/race';
 
 import 'rxjs/add/operator/toPromise';
 
-import { BoatDisplay } from '../models/boatdisplay';
-import { Skipper } from '../models/skipper';
-import { ConfigService } from '../services/config/config.service';
+import { BoatDisplay } from '../../models/boatdisplay';
+import { Skipper } from '../../models/skipper';
+import { ConfigService } from '../../services/config/config.service';
 
 @Injectable()
 export class RaceService {

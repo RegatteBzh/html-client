@@ -9,16 +9,19 @@ import {Http} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RaceComponent } from './race/race.component';
-import { MapComponent } from './map/map.component';
-import { CompassComponent } from './compass/compass.component';
-import { LoginComponent } from './login/login.component';
 
-import { RaceService } from './race/race.service';
-import { MapService } from './map/map.service';
+import { CompassComponent } from './components/compass/compass.component';
+
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { RaceComponent } from './views/race/race.component';
+import { MapComponent } from './views/map/map.component';
+import { LoginComponent } from './views/login/login.component';
+
+import { RaceService } from './services/race/race.service';
+import { MapService } from './services/map/map.service';
 import { ConfigService } from './services/config/config.service';
-import { AuthInterceptorService } from './services/auth-interceptor/auth-interceptor.service';
+import { AuthInterceptor } from './services/auth/auth.interceptor';
+import { AuthService} from './services/auth/auth.service';
 import { LanguageService } from './services/language/language.service';
 
 @NgModule({
@@ -46,11 +49,12 @@ import { LanguageService } from './services/language/language.service';
     ConfigService,
     RaceService,
     MapService,
-    AuthInterceptorService,
+    AuthInterceptor,
+    AuthService,
     LanguageService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RaceService } from '../race/race.service';
-import { Skipper } from '../models/skipper';
+import { RaceService } from '../../services/race/race.service';
+import { Skipper } from '../../models/skipper';
 
 @Component({
   selector: 'app-dashboard',
