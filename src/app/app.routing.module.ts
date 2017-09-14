@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { RaceComponent } from './views/race/race.component';
+import { SkipperComponent } from './views/skipper/skipper.component';
 import { LoginComponent } from './views/login/login.component';
 
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'login/:token', component: LoginComponent },
   { path: 'dashboard',  component: DashboardComponent },
-  { path: 'race/:id',  component: RaceComponent },
+  { path: 'skipper/:id',  component: SkipperComponent },
 ];
 
 @NgModule({

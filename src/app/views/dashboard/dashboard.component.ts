@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RaceService } from '../../services/race/race.service';
+import { SkipperService } from '../../services/skipper/skipper.service';
 import { Skipper } from '../../models/skipper';
+
+import { RaceService } from '../../services/race/race.service';
+import { Race } from '../../models/race';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,13 +14,21 @@ import { Skipper } from '../../models/skipper';
 export class DashboardComponent implements OnInit {
 
   public skippers: Skipper[] = [];
+  public races: Race[] = [];
 
-  constructor(private raceService: RaceService) { }
+  constructor(
+    private skipperService: SkipperService,
+    private raceService: RaceService,
+  ) { }
 
   ngOnInit() {
 
-    this.raceService.getSkippers().then(skippers => {
+    this.skipperService.getSkippers().then(skippers => {
       this.skippers = skippers;
+    });
+
+    this.raceService.getRaces().then(races => {
+      this.races = races;
     });
   }
 

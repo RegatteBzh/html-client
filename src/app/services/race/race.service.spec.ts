@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { RaceService } from './race.service';
 
-describe('MapService', () => {
+describe('RaceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [RaceService]

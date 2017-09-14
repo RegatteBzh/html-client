@@ -15,9 +15,10 @@ import { CompassComponent } from './components/compass/compass.component';
 import { MapComponent } from './components/map/map.component';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { RaceComponent } from './views/race/race.component';
+import { SkipperComponent } from './views/skipper/skipper.component';
 import { LoginComponent } from './views/login/login.component';
 
+import { SkipperService } from './services/skipper/skipper.service';
 import { RaceService } from './services/race/race.service';
 import { MapService } from './services/map/map.service';
 import { ConfigService } from './services/config/config.service';
@@ -29,7 +30,7 @@ import { LanguageService } from './services/language/language.service';
   declarations: [
     AppComponent,
     DashboardComponent,
-    RaceComponent,
+    SkipperComponent,
     MapComponent,
     CompassComponent,
     LoginComponent,
@@ -51,6 +52,7 @@ import { LanguageService } from './services/language/language.service';
   ],
   providers: [
     ConfigService,
+    SkipperService,
     RaceService,
     MapService,
     AuthInterceptor,

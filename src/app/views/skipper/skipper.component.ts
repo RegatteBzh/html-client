@@ -4,17 +4,17 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { BoatDisplay } from '../../models/boatdisplay';
-import { RaceService } from '../../services/race/race.service';
+import { SkipperService } from '../../services/skipper/skipper.service';
 
 @Component({
-  selector: 'app-race',
-  templateUrl: './race.component.html',
-  styleUrls: ['./race.component.less']
+  selector: 'app-skipper',
+  templateUrl: './skipper.component.html',
+  styleUrls: ['./skipper.component.less']
 })
-export class RaceComponent implements OnInit {
+export class SkipperComponent implements OnInit {
 
   constructor(
-    private raceService: RaceService,
+    private skipperService: SkipperService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -36,7 +36,7 @@ export class RaceComponent implements OnInit {
 
     this.activatedRoute.paramMap
       .switchMap((params: ParamMap) => {
-        return this.raceService.updateBoatDisplay(+params.get('id'), this.boatDisplay);
+        return this.skipperService.updateBoatDisplay(+params.get('id'), this.boatDisplay);
       })
       .subscribe();
 
