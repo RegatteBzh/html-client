@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^4.3.0",
     "@angular/platform-browser-dynamic": "^4.3.0",
     "@angular/router": "^4.3.0",
-    "@biesbjerg/ngx-translate-po-http-loader": "^1.0.1",
     "@ngx-translate/core": "^6.0.0",
     "@ngx-translate/http-loader": "^1.1.0",
     "@yaga/leaflet-ng2": "^1.0.0-rc7",

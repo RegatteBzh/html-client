@@ -21,6 +21,10 @@ export class DashboardComponent implements OnInit {
     private raceService: RaceService,
   ) { }
 
+  register(id) {
+    console.log('Register Race', id);
+  }
+
   ngOnInit() {
 
     this.skipperService.getSkippers().then(skippers => {
