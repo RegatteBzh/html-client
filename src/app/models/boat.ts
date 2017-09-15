@@ -1,4 +1,3 @@
-import 'rxjs/add/operator/toPromise';
 
 export class Boat {
 

@@ -23,11 +23,13 @@
     "@angular/router": "^4.3.0",
     "@ngx-translate/core": "^6.0.0",
     "@ngx-translate/http-loader": "^1.1.0",
+    "@types/lodash": "^4.14.74",
     "@yaga/leaflet-ng2": "^1.0.0-rc7",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "leaflet-velocity": "^1.2.3",
+    "lodash": "^4.17.4",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

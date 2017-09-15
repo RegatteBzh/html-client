@@ -1,7 +1,6 @@
 import { Point, LatLng } from 'leaflet';
 import { Skipper } from './skipper';
 
-import 'rxjs/add/operator/toPromise';
 
 export class BoatDisplay {
 

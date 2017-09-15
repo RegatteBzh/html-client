@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { SkipperService } from '../../services/skipper/skipper.service';
 import { Skipper } from '../../models/skipper';
+import { Router } from '@angular/router';
 
 import { RaceService } from '../../services/race/race.service';
 import { Race } from '../../models/race';
@@ -19,21 +20,25 @@ export class DashboardComponent implements OnInit {
   constructor(
     private skipperService: SkipperService,
     private raceService: RaceService,
+    private router: Router,
   ) { }
 
   register(id) {
-    console.log('Register Race', id);
+    this.raceService.registerRace(id).subscribe(skipper => {
+      this.router.navigate([`/skipper/${skipper.id}`]);
+    });
   }
 
   ngOnInit() {
 
-    this.skipperService.getSkippers().then(skippers => {
+    this.skipperService.getSkippers().subscribe(skippers => {
       this.skippers = skippers;
     });
 
-    this.raceService.getRaces().then(races => {
+    this.raceService.getRaces().subscribe(races => {
       this.races = races;
     });
+
   }
 
 }

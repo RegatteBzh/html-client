@@ -3,13 +3,12 @@ import { Sail } from './sail';
 import { Boat } from './boat';
 import { Race } from './race';
 
-import 'rxjs/add/operator/toPromise';
 
 export class Skipper {
 
-    public id: Number;
-    public direction: Number;
-    public speed: Number;
+    public id: number;
+    public direction: number;
+    public speed: number;
     public position: LatLng;
     public sail: Sail;
     public boat: Boat;

@@ -1,31 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
 
 import { Race } from '../../models/race';
-
-import 'rxjs/add/operator/toPromise';
+import { Skipper } from '../../models/skipper';
 
 
 @Injectable()
 export class RaceService {
 
   constructor(
-    private http: HttpClient,
+    private httpClient: HttpClient,
   ) { }
 
-  getRaces(): Promise<Race[]> {
-    return this.http.get(`/api/races/`)
-    .toPromise()
-    .then((response: any) => {
-        const races: Race[] = (response || []).map(raceElt => {
-            const race = new Race();
-            race.name = raceElt.name;
-            race.id = raceElt.id;
-            return race;
-        });
 
-        return races;
-    });
-}
+  /**
+   * Get all Available races
+   * @return {Observable<Race[]>}
+   */
+  getRaces(): Observable<Race[]> {
+    return this.httpClient.get<Race[]>(`/api/races/`);
+  }
+
+  /**
+   * Register a race
+   * @param id Identifier of the race
+   * @return {Observable<Skipper>}
+   */
+  registerRace(id: number): Observable<Skipper> {
+    return this.httpClient.post<Skipper>(`/api/races/${id}/register`, {});
+  }
 
 }
