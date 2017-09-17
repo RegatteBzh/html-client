@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
 
-import { MapComponent as YagaMapComponent, TileLayerDirective as YagaTileLayerDirective } from '@yaga/leaflet-ng2';
+import { MapComponent as YagaMapComponent, TileLayerDirective as YagaTileLayerDirective, MarkerDirective as YagaMarkerDirective } from '@yaga/leaflet-ng2';
 import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
 import { BoatDisplay } from '../../models/boatdisplay';
 
@@ -33,6 +33,9 @@ export class MapComponent implements AfterViewInit {
 
   @ViewChild('mainLayer')
   public mainLayer: YagaTileLayerDirective;
+
+  @ViewChild('boatMarker')
+  public boatMarker: YagaMarkerDirective;
 
   public maps = this.configService.mapLayers();
 
