@@ -20,7 +20,7 @@ export class SkipperService {
     }
 
     updateBoatDisplay(skipperId: number, boatDisplay: BoatDisplay): Observable<BoatDisplay> {
-        return this.http.get<Skipper>(`/api/skippers/${skipperId}`).map((skipper) => {
+        return this.http.get<Skipper>(`/api/skippers/${skipperId}/`).map((skipper) => {
             boatDisplay.skipper.setBoat(skipper.boat);
             boatDisplay.skipper.setRace(skipper.race);
             boatDisplay.skipper.setSail(skipper.sail);
