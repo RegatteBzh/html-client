@@ -4,6 +4,8 @@ import { MapComponent as YagaMapComponent, TileLayerDirective as YagaTileLayerDi
 import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
 import { BoatDisplay } from '../../models/boatdisplay';
 
+import '../../plugins/boat.plugin';
+
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
 
@@ -78,6 +80,11 @@ export class MapComponent implements AfterViewInit {
       });
       this.mainMap.addLayer(this.vLayer);
     });
+
+    this.mainMap.addLayer(
+      L.boatLayer({
+      })
+    );
   }
 
 }
