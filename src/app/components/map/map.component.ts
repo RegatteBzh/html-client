@@ -1,10 +1,15 @@
 import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
 
-import { MapComponent as YagaMapComponent, TileLayerDirective as YagaTileLayerDirective, MarkerDirective as YagaMarkerDirective } from '@yaga/leaflet-ng2';
+import {
+  MapComponent as YagaMapComponent,
+  TileLayerDirective as YagaTileLayerDirective,
+  MarkerDirective as YagaMarkerDirective
+} from '@yaga/leaflet-ng2';
+
 import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
 import { BoatDisplay } from '../../models/boatdisplay';
 
-import '../../plugins/boat.plugin';
+import { BoatLayer } from '../../plugins/boat.plugin';
 
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
@@ -78,15 +83,18 @@ export class MapComponent implements AfterViewInit {
           displayEmptyString: 'No wind data'
         },
         data: data,
-        maxVelocity: 0.6,
-        velocityScale: 0.10
+        maxVelocity: 15,
+        minVelocity: 0,
+        velocityScale: 0.05
       });
       this.mainMap.addLayer(this.vLayer);
     });
 
     this.mainMap.addLayer(
-      L.boatLayer({
-      })
+      new BoatLayer(
+        new LatLng(50, 0),
+        0,
+      )
     );
   }
 
