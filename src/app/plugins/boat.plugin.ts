@@ -1,67 +1,55 @@
-import { LatLng, Marker, LatLngExpression } from 'leaflet';
-//import { extend } from 'lodash';
+import { LatLng, Marker, Icon, LatLngExpression } from 'leaflet';
 
-/*declare namespace L {
-    export function canvasLayer(): any;
-    export function boatLayer(latlng: LatLng, bearing: number): any;
-    export function setOptions(obj: Class, options: any): any;
-}*/
-
-export class BoatLayer extends Marker {
-    constructor (latlng: LatLngExpression, bearing: number) {
-        super(latlng);
+class BoatIcon extends Icon {
+    private _iconPath: SVGGElement;
+    constructor() {
+        super({
+            iconUrl: ''
+        });
     }
 
+    createIcon(oldIcon?: HTMLElement): HTMLElement {
+        const div = (oldIcon && oldIcon.tagName === 'DIV' ? oldIcon : document.createElement('div'));
+        const style = div.getAttribute('style');
+        div.setAttribute('style', `${style};margin-left:-25px;margin-top:-25px`);
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('width', '50');
+        svg.setAttribute('height', '50');
+        div.appendChild(svg);
+        const g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('transform', 'translate(25, 25)');
+        svg.appendChild(g);
+        this._iconPath = document.createElementNS(svgNS, 'path');
+        this._iconPath.setAttribute('d', 'm 16,6 c 0,-6 0,-6 0,-12 -14,0 -14,0 -32,6 18,6 18,6 32,6 z');
+        this._iconPath.setAttribute('style', 'fill:#219bff;stroke:#2535b3;stroke-width:1');
+        g.appendChild(this._iconPath);
+        this.setRotation(0);
+        return div;
+    }
 
+    setRotation(angle) {
+        const normalizedAngle = (90 + angle) % 360;
+        this._iconPath.setAttribute('transform', `rotate(${normalizedAngle})`)
+    }
 }
 
-// const BoatLayer = Marker.extend({
-//     initialize(options: any) {
+export class BoatMarker extends Marker {
+    public _svgIcon: BoatIcon;
+    constructor(latlng: LatLngExpression, bearing: number) {
+        const _svgIcon = new BoatIcon();
+        super(latlng, {
+            icon: _svgIcon
+        });
+        this._svgIcon = _svgIcon;
+    }
 
-//         console.log(options);
-//         Marker.mergeOptions(options.latlng);
-//         //Marker.prototype.initialize.call(this, options.latlng);
+    setRotation(angle) {
+        this._svgIcon.setRotation(angle);
+    }
 
-//         /*const opts = extend(
-//             {
-//                 latLng: new LatLng(0, 0),
-//                 bearing: 0,
-//             },
-//             options,
-//         );
-//         this._latlng = opts.latLng;
-//         this.bearing = opts.bearing;*/
-//     },
-//     /*onAdd(map) {
-//         this._canvasLayer = L.canvasLayer().delegate(this);
-//         this._canvasLayer.addTo(map);
-//         this._map = map;
-//     },
-//     onRemove() { },
+    setPosition(latlng: LatLngExpression) {
+        this.setLatLng(latlng);
+    }
+}
 
-//     onDrawLayer() {
-//         if (!this._context) {
-//             this._initBoat(this);
-//         }
-
-//         // console.log('Draw', this._canvasLayer._map.getBounds());
-//     },
-
-//     _initBoat(self) {
-//         this._context = this._canvasLayer._canvas.getContext('2d');
-//         console.log(this._map);
-//         this._map.on('dragstart', () => this._boatStop());
-//         this._map.on('dragend', () => this._boatRestart);
-//         this._map.on('zoomstart', () => this._boatStop());
-//         this._map.on('zoomend', () => this._boatRestart);
-//         this._map.on('resize', () => this._boatRestart());
-//     },
-
-//     _boatStop() { },
-
-//     _boatRestart() { },*/
-// });
-
-/*L.boatLayer = function (latlng: LatLng, bearing: number) {
-    return new BoatLayer(latlng, bearing);
-};*/

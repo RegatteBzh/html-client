@@ -9,7 +9,7 @@ import {
 import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
 import { BoatDisplay } from '../../models/boatdisplay';
 
-import { BoatLayer } from '../../plugins/boat.plugin';
+import { BoatMarker } from '../../plugins/boat.plugin';
 
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
@@ -39,8 +39,10 @@ export class MapComponent implements AfterViewInit {
   @ViewChild('mainLayer')
   public mainLayer: YagaTileLayerDirective;
 
-  @ViewChild('boatMarker')
-  public boatMarker: YagaMarkerDirective;
+  // @ViewChild('boatMarker')
+  // public boatMarker: YagaMarkerDirective;
+
+  public boatMarker: BoatMarker;
 
   public maps = this.configService.mapLayers();
 
@@ -90,12 +92,13 @@ export class MapComponent implements AfterViewInit {
       this.mainMap.addLayer(this.vLayer);
     });
 
-    this.mainMap.addLayer(
-      new BoatLayer(
-        new LatLng(50, 0),
-        0,
-      )
-    );
+    this.boatMarker = new BoatMarker(
+      new LatLng(50, 0),
+      0,
+    ).addTo(this.mainMap);
+
+    this.boatMarker.setRotation(30);
+    this.boatMarker.setPosition(new LatLng(0, 0));
   }
 
 }
