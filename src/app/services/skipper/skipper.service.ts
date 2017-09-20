@@ -23,8 +23,8 @@ export class SkipperService {
     }
 
     setSkipperDirection(skipperId: number, direction: number) {
-        this.http.post(`/api/skippers/${skipperId}/`, {
-            direction: direction
+        this.http.post(`/api/skippers/${skipperId}/bearing`, {
+            bearing: direction
         });
     }
 
