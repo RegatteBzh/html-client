@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+
+import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
 
-import { BoatDisplay } from '../../models/boatdisplay';
 import { SkipperService } from '../../services/skipper/skipper.service';
+import { Skipper } from '../../models/skipper';
 
 @Component({
   selector: 'app-skipper',
@@ -18,17 +20,23 @@ export class SkipperComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  public boatDisplay = new BoatDisplay(
-    '/assets/boats/imoca60/imoca',
-    new Point(25, 25),
-    new Point(50, 50)
-  );
+  private directionStab: Subscription;
 
   public route: LatLng[] = [];
+  public skipper = new Skipper();
 
+  changeDirection(event) {
+    if (this.directionStab) {
+      this.directionStab.unsubscribe();
+    }
+    this.directionStab = Observable.timer(1000).subscribe(() => {
+        console.log('Save direction');
+        this.skipperService.setSkipperDirection(this.skipper.id, event);
+    });
+  }
 
   ngOnInit() {
-    this.boatDisplay.setPosition(
+    this.skipper.setParameters(
       new LatLng(51, 7),
       150,
       18
@@ -36,9 +44,11 @@ export class SkipperComponent implements OnInit {
 
     this.activatedRoute.paramMap
       .switchMap((params: ParamMap) => {
-        return this.skipperService.updateBoatDisplay(+params.get('id'), this.boatDisplay);
+        return this.skipperService.getSkipper(+params.get('id'));
       })
-      .subscribe();
+      .subscribe((skipperResp) => {
+        this.skipper = skipperResp;
+      });
 
     this.route.push(
       new LatLng(51, 7)

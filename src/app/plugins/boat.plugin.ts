@@ -2,6 +2,7 @@ import { LatLng, Marker, Icon, LatLngExpression } from 'leaflet';
 
 class BoatIcon extends Icon {
     private _iconPath: SVGGElement;
+    private _angle = 90;
     constructor() {
         super({
             iconUrl: ''
@@ -23,6 +24,7 @@ class BoatIcon extends Icon {
         this._iconPath = document.createElementNS(svgNS, 'path');
         this._iconPath.setAttribute('d', 'm 16,6 c 0,-6 0,-6 0,-12 -14,0 -14,0 -32,6 18,6 18,6 32,6 z');
         this._iconPath.setAttribute('style', 'fill:#219bff;stroke:#2535b3;stroke-width:1');
+        this._iconPath.setAttribute('transform', `rotate(${this._angle})`);
         g.appendChild(this._iconPath);
         this.setRotation(0);
         return div;
@@ -30,7 +32,11 @@ class BoatIcon extends Icon {
 
     setRotation(angle) {
         const normalizedAngle = (90 + angle) % 360;
-        this._iconPath.setAttribute('transform', `rotate(${normalizedAngle})`)
+        if (!this._iconPath) {
+            return;
+        }
+        this._angle = normalizedAngle;
+        this._iconPath.setAttribute('transform', `rotate(${this._angle})`);
     }
 }
 
@@ -52,4 +58,3 @@ export class BoatMarker extends Marker {
         this.setLatLng(latlng);
     }
 }
-

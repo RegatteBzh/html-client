@@ -1,3 +1,3 @@
-<app-map [boatDisplay]="boatDisplay" [route]="route"></app-map>
-<app-compass [(direction)]="boatDisplay.skipper.direction">
+<app-map [position]="skipper.position" [direction]="skipper.direction" [route]="route"></app-map>
+<app-compass [(direction)]="skipper.direction" (directionChange)="changeDirection($event)">
 </app-compass>

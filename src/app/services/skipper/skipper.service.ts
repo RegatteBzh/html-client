@@ -7,7 +7,6 @@ import { Race } from '../../models/race';
 
 import { Observable } from 'rxjs/Rx';
 
-import { BoatDisplay } from '../../models/boatdisplay';
 import { Skipper } from '../../models/skipper';
 
 @Injectable()
@@ -19,19 +18,14 @@ export class SkipperService {
 
     }
 
-    updateBoatDisplay(skipperId: number, boatDisplay: BoatDisplay): Observable<BoatDisplay> {
-        return this.http.get<Skipper>(`/api/skippers/${skipperId}/`).map((skipper) => {
-            boatDisplay.skipper.setBoat(skipper.boat);
-            boatDisplay.skipper.setRace(skipper.race);
-            boatDisplay.skipper.setSail(skipper.sail);
-            boatDisplay.skipper.setParameters(
-                new LatLng(skipper.position.lng, skipper.position.lat),
-                skipper.direction,
-                skipper.speed
-            );
-            return boatDisplay;
-        });
+    getSkipper(skipperId: number): Observable<Skipper> {
+        return this.http.get<Skipper>(`/api/skippers/${skipperId}/`);
+    }
 
+    setSkipperDirection(skipperId: number, direction: number) {
+        this.http.post(`/api/skippers/${skipperId}/`, {
+            direction: direction
+        });
     }
 
     getSkippers(): Observable<Skipper[]> {

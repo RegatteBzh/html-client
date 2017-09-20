@@ -21,9 +21,9 @@ export class Skipper {
     }
 
     setParameters(position: LatLng, direction: number, speed: number) {
-        this.position = position;
-        this.direction = direction;
-        this.speed = speed;
+        this.setPosition(position);
+        this.setDirection(direction);
+        this.setSpeed(speed);
     }
 
     setBoat(fromApi: any) {
@@ -42,6 +42,18 @@ export class Skipper {
         if (fromApi) {
             this.sail = new Sail(fromApi.type.name, fromApi.name, fromApi.id);
         }
+    }
+
+    setPosition(position: LatLng) {
+        this.position = position;
+    }
+
+    setDirection(direction: number) {
+        this.direction = direction;
+    }
+
+    setSpeed(speed: number) {
+        this.speed = speed;
     }
 
 }

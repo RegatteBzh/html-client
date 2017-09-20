@@ -7,7 +7,7 @@ import {
 } from '@yaga/leaflet-ng2';
 
 import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
-import { BoatDisplay } from '../../models/boatdisplay';
+
 
 import { BoatMarker } from '../../plugins/boat.plugin';
 
@@ -23,8 +23,18 @@ import 'leaflet-velocity';
 })
 export class MapComponent implements AfterViewInit {
 
-  @Input() boatDisplay: BoatDisplay;
+  private directionValue = 0;
+
+  @Input() position: LatLng;
   @Input() route: LatLng[];
+  @Input()
+  get direction() {
+    return this.directionValue;
+  }
+  set direction(val) {
+    this.directionValue = val;
+    this.boatMarker.setRotation(val);
+  }
 
   public topoMapUrl = 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png';
   public zoom = 2;
@@ -52,6 +62,10 @@ export class MapComponent implements AfterViewInit {
   ) {
     this. maxBound = new LatLngBounds(new LatLng(-90, -180), new LatLng(90, 180));
     this.currentMap = this.maps[0];
+    this.boatMarker = new BoatMarker(
+      new LatLng(0, 0),
+      0,
+    );
   }
 
   onSelectionChange(map) {
@@ -92,12 +106,9 @@ export class MapComponent implements AfterViewInit {
       this.mainMap.addLayer(this.vLayer);
     });
 
-    this.boatMarker = new BoatMarker(
-      new LatLng(50, 0),
-      0,
-    ).addTo(this.mainMap);
+    this.boatMarker.addTo(this.mainMap);
 
-    this.boatMarker.setRotation(30);
+    //this.boatMarker.setRotation(30);
     this.boatMarker.setPosition(new LatLng(0, 0));
   }
 

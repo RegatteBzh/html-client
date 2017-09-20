@@ -10,11 +10,11 @@ export class CompassComponent implements OnInit {
   private directionValue = 0;
   private mouseDownOnCursor: boolean;
 
-  @Output() directionChange = new EventEmitter();
-  @Input() get direction() {
+  @Output() directionChange = new EventEmitter<number>();
+  @Input()
+  get direction() {
     return this.directionValue;
   }
-
   set direction(val) {
     this.directionValue = val;
     this.directionChange.emit(this.directionValue);
