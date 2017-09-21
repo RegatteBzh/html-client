@@ -4,5 +4,10 @@
     "login_google": "Goolge",
     "login_facebook": "Facebook",
     "dashboard_your_races": "Your races",
-    "dashboard_available_races": "Available races"
+    "dashboard_available_races": "Available races",
+    "skipper_control_speed_label": "Speed",
+    "skipper_control_position_label": "Position",
+    "skipper_control_sail_label": "Sail",
+    "skipper_control_bearing_label": "Bearing",
+    "speed_knot_unit": "kt"
 }

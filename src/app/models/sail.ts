@@ -1,14 +1,14 @@
 
 export class Sail {
 
-    public id: Number;
-    public name: String;
-    public type: String;
+    public id: number;
+    public name: string;
+    public type: string;
 
     constructor(
         type?: string,
         name?: string,
-        id?: Number
+        id?: number
     ) {
         this.type = type;
         this.name = name;

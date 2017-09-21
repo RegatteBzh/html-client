@@ -1,0 +1,48 @@
+.boat-control {
+    display: inline-block;
+    margin-left: 10px;
+
+    .pos {
+        display: inline-block;
+        vertical-align: top;
+        span {
+            display: block;
+    
+            &.lat:before {
+                content: "S ";
+                font-weight: bold;
+            }
+    
+            &.lng:before {
+                content: "W ";
+                font-weight: bold;
+            }
+    
+            &.lat:after,&.lng:after {
+                content: "°";
+                font-weight: bold;
+            }
+    
+        }
+    }
+
+    div.control-item {
+        margin: 5px 0 5px 0;
+
+        label {
+            min-width: 60px;
+        }
+    }
+
+    div.boat-computer {
+        border: solid 2px #263B48;
+        padding: 15px;
+        border-radius: 15px;
+    }
+}
+
+.digi {
+    font-family: 'DSDIGI';
+    font-size: 1.5em;
+    color: green;
+}

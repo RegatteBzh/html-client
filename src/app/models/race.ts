@@ -1,11 +1,11 @@
 export class Race {
 
-    public id: Number;
-    public name: String;
+    public id: number;
+    public name: string;
 
     constructor(
         name?: string,
-        id?: Number
+        id?: number
     ) {
         this.name = name;
         this.id = id;

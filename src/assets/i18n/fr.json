@@ -4,5 +4,10 @@
     "login_google": "Goolge",
     "login_facebook": "Facebook",
     "dashboard_your_races": "Vos compétitions",
-    "dashboard_available_races": "Compétitions disponibles"
+    "dashboard_available_races": "Compétitions disponibles",
+    "skipper_control_speed_label": "Vitesse",
+    "skipper_control_position_label": "Position",
+    "skipper_control_sail_label": "Voile",
+    "skipper_control_bearing_label": "Cap",
+    "speed_knot_unit": "nd"
 }

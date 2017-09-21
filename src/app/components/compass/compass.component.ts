@@ -69,7 +69,7 @@ export class CompassComponent implements OnInit {
   }
 
   getRotation() {
-    return `rotate(${this.direction})`;
+    return `rotate(${this.direction || 0})`;
   }
 
 }

@@ -24,19 +24,19 @@ class BoatIcon extends Icon {
         this._iconPath = document.createElementNS(svgNS, 'path');
         this._iconPath.setAttribute('d', 'm 16,6 c 0,-6 0,-6 0,-12 -14,0 -14,0 -32,6 18,6 18,6 32,6 z');
         this._iconPath.setAttribute('style', 'fill:#219bff;stroke:#2535b3;stroke-width:1');
-        this._iconPath.setAttribute('transform', `rotate(${this._angle})`);
+        this._iconPath.setAttribute('transform', `rotate(${this._angle || 0})`);
         g.appendChild(this._iconPath);
         this.setRotation(0);
         return div;
     }
 
     setRotation(angle) {
-        const normalizedAngle = (90 + angle) % 360;
+        const normalizedAngle = (90 + (angle || 0)) % 360;
         if (!this._iconPath) {
             return;
         }
         this._angle = normalizedAngle;
-        this._iconPath.setAttribute('transform', `rotate(${this._angle})`);
+        this._iconPath.setAttribute('transform', `rotate(${this._angle || 0})`);
     }
 }
 

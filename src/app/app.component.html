@@ -4,7 +4,7 @@
 <nav *ngIf="isConnected">
     <button type="button" (click)="disconnect()" >
       <i class="fa fa-user" aria-hidden="true"></i>
-      {{'app_disconnect' | translate}}
+      <span translate="app_disconnect"></span>
     </button>
 </nav>
 <router-outlet></router-outlet>

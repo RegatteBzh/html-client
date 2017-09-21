@@ -68,10 +68,6 @@ export class MapComponent implements AfterViewInit {
     );
   }
 
-  onSelectionChange(map) {
-    this.currentMap = map;
-  }
-
   getTiles(event: LeafletEvent): any[] {
     let tiles = [];
     Object.keys(event.target._layers).forEach((key) => {
@@ -108,8 +104,6 @@ export class MapComponent implements AfterViewInit {
 
     this.boatMarker.addTo(this.mainMap);
 
-    //this.boatMarker.setRotation(30);
-    this.boatMarker.setPosition(new LatLng(0, 0));
   }
 
 }

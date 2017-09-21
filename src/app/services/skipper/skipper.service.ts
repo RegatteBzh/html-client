@@ -22,8 +22,8 @@ export class SkipperService {
         return this.http.get<Skipper>(`/api/skippers/${skipperId}/`);
     }
 
-    setSkipperDirection(skipperId: number, direction: number) {
-        this.http.post(`/api/skippers/${skipperId}/bearing`, {
+    setSkipperDirection(skipperId: number, direction: number): Observable<any> {
+        return this.http.post(`/api/skippers/${skipperId}/bearing`, {
             bearing: direction
         });
     }

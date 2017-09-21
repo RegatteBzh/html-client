@@ -11,35 +11,38 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 
+// Components
 import { CompassComponent } from './components/compass/compass.component';
 import { MapComponent } from './components/map/map.component';
 
+// Views
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { SkipperComponent } from './views/skipper/skipper.component';
 import { LoginComponent } from './views/login/login.component';
+import { SkipperComponent } from './views/skipper/skipper.component';
 
-import { SkipperService } from './services/skipper/skipper.service';
-import { RaceService } from './services/race/race.service';
-import { MapService } from './services/map/map.service';
-import { ConfigService } from './services/config/config.service';
+// Services
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { AuthService} from './services/auth/auth.service';
+import { ConfigService } from './services/config/config.service';
 import { LanguageService } from './services/language/language.service';
+import { MapService } from './services/map/map.service';
+import { RaceService } from './services/race/race.service';
+import { SkipperService } from './services/skipper/skipper.service';
+import { TrigoService } from './services/trigo/trigo.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    SkipperComponent,
-    MapComponent,
     CompassComponent,
+    DashboardComponent,
     LoginComponent,
+    MapComponent,
+    SkipperComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     FormsModule,
-    YagaModule,
     HttpClientModule,
     HttpModule,
     TranslateModule.forRoot({
@@ -48,16 +51,18 @@ import { LanguageService } from './services/language/language.service';
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-  }),
+    }),
+    YagaModule,
   ],
   providers: [
-    ConfigService,
-    SkipperService,
-    RaceService,
-    MapService,
     AuthInterceptor,
     AuthService,
+    ConfigService,
     LanguageService,
+    MapService,
+    RaceService,
+    SkipperService,
+    TrigoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

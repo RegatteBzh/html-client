@@ -15,9 +15,11 @@ export class Skipper {
     public race: Race;
 
     constructor(
-
     ) {
-
+        this.position = new LatLng(0, 0);
+        this.sail = new Sail();
+        this.boat = new Boat();
+        this.race = new Race();
     }
 
     setParameters(position: LatLng, direction: number, speed: number) {

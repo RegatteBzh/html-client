@@ -13,6 +13,11 @@ export class ConfigService {
         url: 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
       },
       {
+        name: 'blue-marble',
+        url: 'http://s3.amazonaws.com/com.modestmaps.bluemarble/{z}-r{y}-c{x}.jpg',
+        info: 'http://polymaps.org/ex/blue-marble.html'
+      },
+      {
         name: 'Topo',
         url: 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png'
       },
