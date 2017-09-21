@@ -24,9 +24,18 @@ import 'leaflet-velocity';
 export class MapComponent implements AfterViewInit {
 
   private directionValue = 0;
+  private positionValue = new LatLng(0, 0);
 
-  @Input() position: LatLng;
   @Input() route: LatLng[];
+  @Input()
+  get position(): LatLng {
+    return this.positionValue;
+  }
+  set position(val: LatLng) {
+    this.positionValue = val;
+    this.boatMarker.setPosition(val);
+  }
+
   @Input()
   get direction() {
     return this.directionValue;
