@@ -1,14 +1,16 @@
 <div class="compass">
     <span class="directionValue">{{direction}}°</span>
-    <svg height="240" width="240">
+    <svg height="240" width="240" #compass>
             <g
             inkscape:label="Calque 1"
             inkscape:groupmode="layer"
             id="layer1"
             transform="translate(120, 120)"
             (mousemove)="mouseCursorMove($event)"
+            (touchmove)="mouseCursorMove($event)"
             (mouseleave)="mouseCursorUp()"
-            (mouseup)="mouseCursorUp()">
+            (mouseup)="mouseCursorUp()"
+            (touchend)="mouseCursorUp()">
            <rect
               style="opacity:1;fill:#151b23;fill-opacity:1;stroke-width:0.89823699;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
               id="rect4445"
@@ -578,7 +580,8 @@
                 inkscape:connector-curvature="0"
                 sodipodi:nodetypes="cccccc"
                 [attr.transform]="getRotation()"
-                (mousedown)="mouseCursorDown()"/>
+                (mousedown)="mouseCursorDown()"
+                (touchstart)="mouseCursorDown()"/>
         </g>
     </svg>
 </div>

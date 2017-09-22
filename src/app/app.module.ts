@@ -23,6 +23,7 @@ import { SkipperComponent } from './views/skipper/skipper.component';
 // Services
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { AuthService} from './services/auth/auth.service';
+import { BoatService } from './services/boat/boat.service';
 import { ConfigService } from './services/config/config.service';
 import { LanguageService } from './services/language/language.service';
 import { MapService } from './services/map/map.service';
@@ -57,6 +58,7 @@ import { TrigoService } from './services/trigo/trigo.service';
   providers: [
     AuthInterceptor,
     AuthService,
+    BoatService,
     ConfigService,
     LanguageService,
     MapService,

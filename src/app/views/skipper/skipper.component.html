@@ -1,10 +1,16 @@
-<app-map [position]="skipper.position" [direction]="skipper.direction" [route]="route"></app-map>
+<div class="map">
+    <app-map [position]="skipper.position" [direction]="skipper.direction" [route]="route"></app-map>
+</div>
 <div class="boat-control">
     <div class="bearing">
         <app-compass [(direction)]="skipper.direction" (directionChange)="changeDirection($event)">
         </app-compass>
     </div>
     <div class="boat-computer">
+        <div class="control-item">
+            <label translate="skipper_control_boat_label"></label>
+            <span class="digi">{{ skipper.boat.name }}</span>
+        </div>
         <div class="control-item">
             <label translate="skipper_control_speed_label"></label>
             <span class="digi">{{ getSpeed(skipper) | number:'1.1-1'}}</span>
@@ -24,7 +30,11 @@
         </div>
         <div class="control-item">
             <label translate="skipper_control_sail_label"></label>
-            <span class="digi">{{ getSail(skipper) }}</span>
+            <select [(ngModel)]="selectedSail" class="sail-selector" (change)="selectSail(selectedSail)">
+                <option *ngFor="let sail of availableSails" [ngValue]="sail">
+                    {{sail.name | translate}}
+                </option>
+              </select>
         </div>
     </div>
 </div>

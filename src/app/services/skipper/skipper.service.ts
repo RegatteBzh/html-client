@@ -22,14 +22,16 @@ export class SkipperService {
         return this.http.get<Skipper>(`/api/skippers/${skipperId}/`);
     }
 
-    setSkipperDirection(skipperId: number, direction: number): Observable<any> {
-        return this.http.post(`/api/skippers/${skipperId}/bearing`, {
-            bearing: direction
-        });
+    setSkipperDirection(skipperId: number, bearing: number): Observable<any> {
+        return this.http.post(`/api/skippers/${skipperId}/bearing`, { bearing });
     }
 
     getSkippers(): Observable<Skipper[]> {
         return this.http.get<Skipper[]>('/api/skippers/');
+    }
+
+    setSkipperSail(skipperId: number, sailId: number): Observable<any> {
+        return this.http.post(`/api/skippers/${skipperId}/sail`, { sailId });
     }
 
 }

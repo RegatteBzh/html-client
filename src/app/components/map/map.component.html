@@ -1,5 +1,5 @@
 <div class="mapControl">
-  <select [(ngModel)]="currentMap">
+  <select [(ngModel)]="currentMap" class="source-selector">
       <option *ngFor="let map of maps" [ngValue]="map">
           {{map.name}}
       </option>

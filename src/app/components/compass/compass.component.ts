@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-compass',
@@ -19,6 +19,9 @@ export class CompassComponent implements OnInit {
     this.directionValue = val;
     this.directionChange.emit(this.directionValue);
   }
+
+  @ViewChild('compass')
+  public compassSvg: ElementRef;
 
   constructor() {
     this.mouseDownOnCursor = false;

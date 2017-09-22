@@ -1,6 +1,5 @@
 .boat-control {
     display: inline-block;
-    margin-left: 10px;
 
     .pos {
         display: inline-block;
@@ -34,15 +33,39 @@
         }
     }
 
-    div.boat-computer {
-        border: solid 2px #263B48;
-        padding: 15px;
-        border-radius: 15px;
-    }
+}
+
+div.boat-computer,div.bearing,div.map {
+    border: solid 2px #263B48;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+div.boat-computer,div.bearing {
+    display: block;
+}
+
+div.map {
+    display: inline-block;
+    vertical-align: top;
 }
 
 .digi {
     font-family: 'DSDIGI';
     font-size: 1.5em;
     color: green;
+}
+
+.sail-selector {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 5px;
+    width: 268px;
+    border-radius: 5px;
+    background-color: #263b48;
+    color: #fff;
+    margin: 0 0 5px 0;
 }

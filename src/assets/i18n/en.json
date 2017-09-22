@@ -9,5 +9,13 @@
     "skipper_control_position_label": "Position",
     "skipper_control_sail_label": "Sail",
     "skipper_control_bearing_label": "Bearing",
-    "speed_knot_unit": "kt"
+    "skipper_control_boat_label": "Boat",
+    "speed_knot_unit": "kt",
+    "maxi_trimaran-code zéro": "Code zéro",
+    "maxi_trimaran-foc": "Foc",
+    "maxi_trimaran-foc2": "Foc2",
+    "maxi_trimaran-gennaker": "Gennaker",
+    "maxi_trimaran-genois": "Génois",
+    "maxi_trimaran-spi léger": "Spi léger",
+    "maxi_trimaran-spi": "Spi"
 }
