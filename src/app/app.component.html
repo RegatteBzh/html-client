@@ -6,6 +6,10 @@
       <i class="fa fa-user" aria-hidden="true"></i>
       <span translate="app_disconnect"></span>
     </button>
+    <select (change)="changeLang($event.target.value)">
+      <option value="en">{{ 'en' | translate }}</option>
+      <option value="fr">{{ 'fr' | translate }}</option>
+    </select>
 </nav>
 <router-outlet></router-outlet>
 

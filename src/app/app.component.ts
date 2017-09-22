@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewChecked, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './services/auth/auth.service';
@@ -13,11 +13,12 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements AfterViewChecked, OnInit {
 
   public languageSubscriber: Subscription;
 
   public isConnected: boolean;
+  public language: string;
 
   constructor(
     private authService: AuthService,
@@ -46,6 +47,16 @@ export class AppComponent implements AfterViewChecked {
     this.authService.setToken(null);
     this.router.navigate(['/login']);
 
+  }
+
+  ngOnInit(): void {
+    this.languageService.get().subscribe((lang) => {
+      this.language = lang;
+    });
+  }
+
+  changeLang(lang: string) {
+    this.languageService.set(lang);
   }
 
   ngAfterViewChecked() {

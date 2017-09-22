@@ -14,7 +14,7 @@ export class LanguageService {
         }
     }
 
-    get() {
+    get(): Observable<string> {
         return new Observable<string>(fn => this._language.subscribe(fn));
     }
 

@@ -1,7 +1,9 @@
 {
+    "fr": "French",
+    "en": "English",
     "app_disconnect": "Disconnect",
     "login_welcome": "Welcome to Regatta",
-    "login_google": "Goolge",
+    "login_google": "Google",
     "login_facebook": "Facebook",
     "dashboard_your_races": "Your races",
     "dashboard_available_races": "Available races",
