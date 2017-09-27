@@ -35,6 +35,7 @@ export class SkipperComponent implements OnInit {
   public skipper = new Skipper();
   public availableSails: Sail[];
   public selectedSail: Sail;
+  private disablePoller = false;
 
   public poller: Observable<number>;
 
@@ -44,8 +45,11 @@ export class SkipperComponent implements OnInit {
     }
     this.skipper.windAngle = -1;
     this.directionStab = Observable.timer(1000).subscribe(() => {
-        this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((bearingResp) => {
-          // do nothing
+        this.disablePoller = true;
+        this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((skipperResp: Skipper) => {
+          extend(this.skipper, omit(skipperResp, ['sail']));
+        }, () => {}, () => {
+          this.disablePoller = false;
         });
     });
   }
@@ -59,11 +63,13 @@ export class SkipperComponent implements OnInit {
   }
 
   selectSail(sail) {
-    this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((sailResp) => {
-      console.log(sailResp);
-      this.skipper.sail = sail;
-    }, () => {
+    this.disablePoller = true;
+    this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((skipperResp: Skipper) => {
+        extend(this.skipper, skipperResp);
+      }, () => {
       this.selectedSail = this.skipper.sail;
+    }, () => {
+      this.disablePoller = false;
     });
   }
 
@@ -78,7 +84,7 @@ export class SkipperComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.skipperService.getSkipper(+params.id).subscribe((skipperResp: Skipper) => {
+      this.skipperService.getSkipper(params.id).subscribe((skipperResp: Skipper) => {
         this.skipper = skipperResp;
         this.boatService.getSails(this.skipper.boat.id).subscribe((sailList: Sail[]) => {
           this.availableSails = sailList;

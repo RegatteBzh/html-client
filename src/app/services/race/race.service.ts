@@ -27,7 +27,7 @@ export class RaceService {
    * @param id Identifier of the race
    * @return {Observable<Skipper>}
    */
-  registerRace(id: number): Observable<Skipper> {
+  registerRace(id: string): Observable<Skipper> {
     return this.httpClient.post<Skipper>(`/api/races/${id}/register`, {});
   }
 

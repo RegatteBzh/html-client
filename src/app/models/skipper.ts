@@ -6,7 +6,7 @@ import { Race } from './race';
 
 export class Skipper {
 
-    public id: number;
+    public id: string;
     public direction: number;
     public speed: number;
     public position: LatLng;

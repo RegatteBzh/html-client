@@ -18,11 +18,11 @@ export class SkipperService {
 
     }
 
-    getSkipper(skipperId: number): Observable<Skipper> {
+    getSkipper(skipperId: string): Observable<Skipper> {
         return this.http.get<Skipper>(`/api/skippers/${skipperId}/`);
     }
 
-    setSkipperDirection(skipperId: number, bearing: number): Observable<any> {
+    setSkipperDirection(skipperId: string, bearing: number): Observable<any> {
         return this.http.post(`/api/skippers/${skipperId}/bearing`, { bearing });
     }
 
@@ -30,7 +30,7 @@ export class SkipperService {
         return this.http.get<Skipper[]>('/api/skippers/');
     }
 
-    setSkipperSail(skipperId: number, sailId: number): Observable<any> {
+    setSkipperSail(skipperId: string, sailId: string): Observable<any> {
         return this.http.post(`/api/skippers/${skipperId}/sail`, { sailId });
     }
 

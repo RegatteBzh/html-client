@@ -15,7 +15,7 @@ export class BoatService {
 
     }
 
-    getSails(boatId: number): Observable<Sail[]> {
+    getSails(boatId: string): Observable<Sail[]> {
         return this.http.get<Sail[]>(`/api/boats/${boatId}/sails/`);
     }
 
