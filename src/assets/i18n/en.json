@@ -12,6 +12,7 @@
     "skipper_control_sail_label": "Sail",
     "skipper_control_bearing_label": "Bearing",
     "skipper_control_boat_label": "Boat",
+    "skipper_control_wind_dir_label": "Wind dir.",
     "speed_knot_unit": "kt",
     "maxi_trimaran-code zéro": "Code zéro",
     "maxi_trimaran-foc": "Foc",

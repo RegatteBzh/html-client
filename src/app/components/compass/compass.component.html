@@ -6,8 +6,8 @@
             inkscape:groupmode="layer"
             id="layer1"
             transform="translate(120, 120)"
-            (mousemove)="mouseCursorMove($event)"
-            (touchmove)="mouseCursorMove($event)"
+            (mousemove)="mouseCursorMove($event, 'mouse')"
+            (touchmove)="mouseCursorMove($event, 'touch')"
             (mouseleave)="mouseCursorUp()"
             (mouseup)="mouseCursorUp()"
             (touchend)="mouseCursorUp()">

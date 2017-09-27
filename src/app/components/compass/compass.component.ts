@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { first } from 'lodash';
 
 @Component({
   selector: 'app-compass',
@@ -28,28 +29,7 @@ export class CompassComponent implements OnInit {
   }
 
   getAngle(x: number, y: number) {
-    if (x === 0 && y === 0) {
-      return 0;
-    }
-    if (x === 0 && y > 0) {
-      return 0;
-    }
-    if (x === 0 && y < 0) {
-      return -180;
-    }
-    if (x > 0) {
-      return 90 - Math.atan(y / x) * 180 / Math.PI;
-    }
-    if (y < 0 && x > 0) {
-      return 90 + Math.atan(y / x) * 180 / Math.PI;
-    }
-    if (y < 0 && x < 0) {
-      return 270 - Math.atan(y / x) * 180 / Math.PI;
-    }
-    if (y > 0 && x < 0) {
-      return 270 - Math.atan(y / x) * 180 / Math.PI;
-    }
-    return 180 + Math.atan(y / x) * 180 / Math.PI;
+    return (360 + Math.atan2(x, y) * 180 / Math.PI) % 360;
   }
 
   ngOnInit() {
@@ -63,10 +43,30 @@ export class CompassComponent implements OnInit {
     this.mouseDownOnCursor = false;
   }
 
-  mouseCursorMove(event) {
+  mouseCursorMove(event, type: string) {
     if (this.mouseDownOnCursor) {
-      const x = event.offsetX - 120;
-      const y = 120 - event.offsetY;
+      let offsetX = 0;
+      let offsetY = 0;
+      const compassRect = this.compassSvg.nativeElement.getBoundingClientRect();
+      switch (type) {
+        case 'mouse':
+          offsetX = event.offsetX;
+          offsetY = event.offsetY;
+          break;
+        case 'touch':
+          const touch: any = first(event.touches);
+          if (touch) {
+            offsetX = touch.clientX - compassRect.x;
+            offsetY = touch.clientY - compassRect.y;
+            event.stopPropagation();
+            event.preventDefault();
+          }
+          break;
+        default:
+      }
+      const x = offsetX - (compassRect.width / 2);
+      const y = (compassRect.width / 2) - offsetY;
+
       this.direction = Math.round(this.getAngle(x, y));
     }
   }

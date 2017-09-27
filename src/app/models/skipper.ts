@@ -13,6 +13,7 @@ export class Skipper {
     public sail: Sail;
     public boat: Boat;
     public race: Race;
+    public windAngle: number;
 
     constructor(
     ) {

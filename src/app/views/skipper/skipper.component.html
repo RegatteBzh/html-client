@@ -17,10 +17,15 @@
             <span class="digi" translate="speed_knot_unit"></span>
         </div>
         <div class="control-item">
-                <label translate="skipper_control_bearing_label"></label>
-                <span class="digi">{{ skipper.direction | number:'1.0-0'}}</span>
-                <span class="digi">°</span>
-            </div>
+            <label translate="skipper_control_bearing_label"></label>
+            <span class="digi">{{ skipper.direction | number:'1.0-0'}}</span>
+            <span class="digi">°</span>
+        </div>
+        <div class="control-item">
+            <label translate="skipper_control_wind_dir_label"></label>
+            <span class="digi">{{ skipper.windAngle | number:'1.0-0'}}</span>
+            <span class="digi">°</span>
+        </div>
         <div class="control-item">
             <label translate="skipper_control_position_label"></label>
             <span class="pos digi">
