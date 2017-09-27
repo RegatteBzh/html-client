@@ -56,8 +56,8 @@ export class CompassComponent implements OnInit {
         case 'touch':
           const touch: any = first(event.touches);
           if (touch) {
-            offsetX = touch.clientX - compassRect.x;
-            offsetY = touch.clientY - compassRect.y;
+            offsetX = touch.clientX - (compassRect.x || compassRect.left);
+            offsetY = touch.clientY - (compassRect.y || compassRect.top);
             event.stopPropagation();
             event.preventDefault();
           }
@@ -66,7 +66,9 @@ export class CompassComponent implements OnInit {
       }
       const x = offsetX - (compassRect.width / 2);
       const y = (compassRect.width / 2) - offsetY;
-
+      if (!x && !y) {
+        return;
+      }
       this.direction = Math.round(this.getAngle(x, y));
     }
   }
