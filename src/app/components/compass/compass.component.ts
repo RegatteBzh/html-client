@@ -18,7 +18,6 @@ export class CompassComponent implements OnInit {
   }
   set direction(val) {
     this.directionValue = val;
-    this.directionChange.emit(this.directionValue);
   }
 
   @ViewChild('compass')
@@ -70,6 +69,7 @@ export class CompassComponent implements OnInit {
         return;
       }
       this.direction = Math.round(this.getAngle(x, y));
+      this.directionChange.emit(this.directionValue);
     }
   }
 

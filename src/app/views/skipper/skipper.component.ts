@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { find } from 'lodash';
+import { find, omit, extend } from 'lodash';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
@@ -36,14 +36,16 @@ export class SkipperComponent implements OnInit {
   public availableSails: Sail[];
   public selectedSail: Sail;
 
+  public poller: Observable<number>;
+
   changeDirection(event) {
     if (this.directionStab) {
       this.directionStab.unsubscribe();
     }
+    this.skipper.windAngle = -1;
     this.directionStab = Observable.timer(1000).subscribe(() => {
-        console.log('Save direction');
         this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((bearingResp) => {
-          console.log(bearingResp);
+          // do nothing
         });
     });
   }
@@ -65,6 +67,15 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  startPoller () {
+    this.poller = Observable.timer(5000, 5000);
+    this.poller.subscribe(() => {
+      this.skipperService.getSkipper(this.skipper.id).subscribe((skipperResp: Skipper) => {
+        extend(this.skipper, omit(skipperResp, ['sail']));
+      });
+    });
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.skipperService.getSkipper(+params.id).subscribe((skipperResp: Skipper) => {
@@ -74,6 +85,7 @@ export class SkipperComponent implements OnInit {
           this.skipper.sail = find(this.availableSails, { id: this.skipper.sail.id });
           this.selectedSail = this.skipper.sail;
         });
+        this.startPoller();
       }, () => {
         this.router.navigate(['/dashboard']);
       });
