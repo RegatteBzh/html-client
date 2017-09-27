@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { find } from 'lodash';
 
@@ -26,6 +26,7 @@ export class SkipperComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private trigoService: TrigoService,
     private boatService: BoatService,
+    private router: Router,
   ) { }
 
   private directionStab: Subscription;
@@ -51,6 +52,10 @@ export class SkipperComponent implements OnInit {
     return this.trigoService.meterToKnot(skipper.speed);
   }
 
+  getWindSpeed(skipper: Skipper): number {
+    return this.trigoService.meterToKnot(skipper.windSpeed);
+  }
+
   selectSail(sail) {
     this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((sailResp) => {
       console.log(sailResp);
@@ -69,6 +74,8 @@ export class SkipperComponent implements OnInit {
           this.skipper.sail = find(this.availableSails, { id: this.skipper.sail.id });
           this.selectedSail = this.skipper.sail;
         });
+      }, () => {
+        this.router.navigate(['/dashboard']);
       });
     });
 

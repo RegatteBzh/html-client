@@ -14,6 +14,7 @@ export class Skipper {
     public boat: Boat;
     public race: Race;
     public windAngle: number;
+    public windSpeed: number;
 
     constructor(
     ) {
