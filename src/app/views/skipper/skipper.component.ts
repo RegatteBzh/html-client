@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { find, omit, extend } from 'lodash';
+import { find, omit, extend, map } from 'lodash';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
@@ -13,6 +13,7 @@ import { BoatService } from '../../services/boat/boat.service';
 
 import { Skipper } from '../../models/skipper';
 import { Sail } from '../../models/sail';
+import { Waypoint } from '../../models/waypoint';
 
 @Component({
   selector: 'app-skipper',
@@ -91,24 +92,20 @@ export class SkipperComponent implements OnInit {
           this.skipper.sail = find(this.availableSails, { id: this.skipper.sail.id });
           this.selectedSail = this.skipper.sail;
         });
+
+
+        this.skipperService.getWaypoints(params.id).subscribe((waypoints: Waypoint[]) => {
+          this.route = map(waypoints, (waypoint) => waypoint.position);
+          this.route.push(this.skipper.position);
+        });
+
         this.startPoller();
       }, () => {
         this.router.navigate(['/dashboard']);
       });
+
     });
 
-  //   /*this.route.push(
-  //     new LatLng(51, 7)
-  //   );
-  //   this.route.push(
-  //     new LatLng(50, 6)
-  //   );
-  //   this.route.push(
-  //     new LatLng(51, 5)
-  //   );
-  //   this.route.push(
-  //     new LatLng(49, 3)
-  //   );*/
   }
 
 }

@@ -8,6 +8,7 @@ import { Race } from '../../models/race';
 import { Observable } from 'rxjs/Rx';
 
 import { Skipper } from '../../models/skipper';
+import { Waypoint } from '../../models/waypoint';
 
 @Injectable()
 export class SkipperService {
@@ -32,6 +33,10 @@ export class SkipperService {
 
     setSkipperSail(skipperId: string, sailId: string): Observable<any> {
         return this.http.post(`/api/skippers/${skipperId}/sail`, { sailId });
+    }
+
+    getWaypoints(skipperId: string): Observable<Waypoint[]> {
+        return this.http.get<Waypoint[]>(`/api/skippers/${skipperId}/waypoints`);
     }
 
 }
