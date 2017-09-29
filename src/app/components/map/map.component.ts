@@ -26,7 +26,7 @@ export class MapComponent implements AfterViewInit {
   private directionValue = 0;
   private positionValue = new LatLng(0, 0);
 
-  @Input() route: LatLng[];
+  @Input() waypoints: LatLng[];
   @Input()
   get position(): LatLng {
     return this.positionValue;

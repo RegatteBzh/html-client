@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { find, omit, extend, map } from 'lodash';
+import { find, omit, extend, map, forEach } from 'lodash';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
@@ -32,7 +32,7 @@ export class SkipperComponent implements OnInit {
 
   private directionStab: Subscription;
 
-  public route: LatLng[] = [];
+  public waypoints: LatLng[] = [];
   public skipper = new Skipper();
   public availableSails: Sail[];
   public selectedSail: Sail;
@@ -83,22 +83,31 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  getSails(boatId: string) {
+    this.boatService.getSails(boatId).subscribe((sailList: Sail[]) => {
+      this.availableSails = sailList;
+      this.skipper.sail = find(this.availableSails, { id: this.skipper.sail.id });
+      this.selectedSail = this.skipper.sail;
+    });
+  }
+
+  getWaypoints(skipper: Skipper) {
+    this.skipperService.getWaypoints(skipper.id).subscribe((waypoints: Waypoint[]) => {
+      const way: LatLng[] = [];
+      forEach(waypoints, (waypoint) => {
+        way.push(waypoint.position);
+      });
+      way.push(skipper.position);
+      this.waypoints = way;
+    });
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.skipperService.getSkipper(params.id).subscribe((skipperResp: Skipper) => {
         this.skipper = skipperResp;
-        this.boatService.getSails(this.skipper.boat.id).subscribe((sailList: Sail[]) => {
-          this.availableSails = sailList;
-          this.skipper.sail = find(this.availableSails, { id: this.skipper.sail.id });
-          this.selectedSail = this.skipper.sail;
-        });
-
-
-        this.skipperService.getWaypoints(params.id).subscribe((waypoints: Waypoint[]) => {
-          this.route = map(waypoints, (waypoint) => waypoint.position);
-          this.route.push(this.skipper.position);
-        });
-
+        this.getSails(this.skipper.boat.id);
+        this.getWaypoints(this.skipper);
         this.startPoller();
       }, () => {
         this.router.navigate(['/dashboard']);
