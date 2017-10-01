@@ -30,10 +30,10 @@ export class MapComponent implements AfterViewInit {
   private positionValue = new LatLng(0, 0);
 
   @Input()
-  get route(): LatLng[] {
+  get waypoints(): LatLng[] {
     return this.waypointPolyline.getLatLngs();
   }
-  set route(val: LatLng[]) {
+  set waypoints(val: LatLng[]) {
     if ((val || []).length) {
       this.waypointPolyline.setLatLngs(val);
       this.waypointPolyline.redraw();
