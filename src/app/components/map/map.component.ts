@@ -3,8 +3,11 @@ import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
 import {
   MapComponent as YagaMapComponent,
   TileLayerDirective as YagaTileLayerDirective,
-  MarkerDirective as YagaMarkerDirective
+  MarkerDirective as YagaMarkerDirective,
+  PolylineDirective as YagaPolylineDirective,
 } from '@yaga/leaflet-ng2';
+
+import { forEach } from 'lodash';
 
 import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
 
@@ -26,7 +29,17 @@ export class MapComponent implements AfterViewInit {
   private directionValue = 0;
   private positionValue = new LatLng(0, 0);
 
-  @Input() route: LatLng[];
+  @Input()
+  get route(): LatLng[] {
+    return this.waypointPolyline.getLatLngs();
+  }
+  set route(val: LatLng[]) {
+    if ((val || []).length) {
+      this.waypointPolyline.setLatLngs(val);
+      this.waypointPolyline.redraw();
+    }
+  }
+
   @Input()
   get position(): LatLng {
     return this.positionValue;
@@ -48,6 +61,7 @@ export class MapComponent implements AfterViewInit {
   public topoMapUrl = 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png';
   public zoom = 2;
   public maxBound: LatLngBounds;
+  public waypointPolyline: YagaPolylineDirective<GeoJSON.GeometryCollection>;
 
   public currentMap;
   public vLayer;
@@ -57,9 +71,6 @@ export class MapComponent implements AfterViewInit {
 
   @ViewChild('mainLayer')
   public mainLayer: YagaTileLayerDirective;
-
-  // @ViewChild('boatMarker')
-  // public boatMarker: YagaMarkerDirective;
 
   public boatMarker: BoatMarker;
 
@@ -94,6 +105,8 @@ export class MapComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+
+    this.waypointPolyline = new YagaPolylineDirective<GeoJSON.GeometryCollection>(this.mainMap);
 
     this.mapService.loadMetadata('wind').subscribe((data: any[]) => {
       this.vLayer = L.velocityLayer({
