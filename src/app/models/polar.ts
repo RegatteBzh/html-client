@@ -9,10 +9,14 @@ export class Polar {
         this.data = data;
     }
 
-    getSpeedAt(wind, direction) {
+    getSpeedAt(wind: number, direction: number) {
         const sampledWind = Math.round(wind / 10) * 10;
         const sampledDirection = Math.round(direction / 5) * 5;
-        return this.data[sampledWind][sampledDirection];
+        if (this.data.length > sampledWind) {
+            return this.data[sampledWind][sampledDirection % 180];
+        } else {
+            return this.data[this.data.length - 1][sampledDirection % 180];
+        }
     }
 
 }

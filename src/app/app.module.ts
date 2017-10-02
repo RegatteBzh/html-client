@@ -27,6 +27,7 @@ import { BoatService } from './services/boat/boat.service';
 import { ConfigService } from './services/config/config.service';
 import { LanguageService } from './services/language/language.service';
 import { MapService } from './services/map/map.service';
+import { PolarService } from './services/polar/polar.service';
 import { RaceService } from './services/race/race.service';
 import { SkipperService } from './services/skipper/skipper.service';
 import { TrigoService } from './services/trigo/trigo.service';
@@ -62,6 +63,7 @@ import { TrigoService } from './services/trigo/trigo.service';
     ConfigService,
     LanguageService,
     MapService,
+    PolarService,
     RaceService,
     SkipperService,
     TrigoService,

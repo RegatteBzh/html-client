@@ -10,10 +10,12 @@ import 'rxjs/add/operator/switchMap';
 import { SkipperService } from '../../services/skipper/skipper.service';
 import { TrigoService } from '../../services/trigo/trigo.service';
 import { BoatService } from '../../services/boat/boat.service';
+import { PolarService } from '../../services/polar/polar.service';
 
 import { Skipper } from '../../models/skipper';
 import { Sail } from '../../models/sail';
 import { Waypoint } from '../../models/waypoint';
+import { Polar } from '../../models/polar';
 
 @Component({
   selector: 'app-skipper',
@@ -27,6 +29,7 @@ export class SkipperComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private trigoService: TrigoService,
     private boatService: BoatService,
+    private polarService: PolarService,
     private router: Router,
   ) { }
 
@@ -37,6 +40,7 @@ export class SkipperComponent implements OnInit {
   public availableSails: Sail[];
   public selectedSail: Sail;
   private disablePoller = false;
+  private currentPolar: Polar;
 
   public poller: Observable<number>;
 
@@ -67,6 +71,7 @@ export class SkipperComponent implements OnInit {
     this.disablePoller = true;
     this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((skipperResp: Skipper) => {
         extend(this.skipper, skipperResp);
+        this.loadPolars();
       }, () => {
       this.selectedSail = this.skipper.sail;
     }, () => {
@@ -102,12 +107,19 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  loadPolars() {
+    this.polarService.getPolars(this.skipper.sail.id).subscribe((polar: Polar) => {
+      this.currentPolar = polar;
+    });
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.skipperService.getSkipper(params.id).subscribe((skipperResp: Skipper) => {
         this.skipper = skipperResp;
         this.getSails(this.skipper.boat.id);
         this.getWaypoints(this.skipper);
+        this.loadPolars();
         this.startPoller();
       }, () => {
         this.router.navigate(['/dashboard']);

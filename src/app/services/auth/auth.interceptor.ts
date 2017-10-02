@@ -38,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (/^\/assets\//.test(request.url)) {
       isApi = true;
       request = request.clone({
-        url: request.url.replace(/^\/assets\//, `${environment.apiUrl}/`)
+        url: request.url.replace(/^\/assets\//, `${environment.apiUrl}/data/`)
       });
     }
     return next.handle(request).do(event => {}, err => {
