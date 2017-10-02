@@ -35,6 +35,12 @@ export class AuthInterceptor implements HttpInterceptor {
         url: request.url.replace(/^\/api\//, `${environment.apiUrl}/api/`)
       });
     }
+    if (/^\/assets\//.test(request.url)) {
+      isApi = true;
+      request = request.clone({
+        url: request.url.replace(/^\/assets\//, `${environment.apiUrl}/`)
+      });
+    }
     return next.handle(request).do(event => {}, err => {
       if (isApi && (err.status === 401 || err.status === 403)) {
         this.authService.setToken(null);
