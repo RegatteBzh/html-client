@@ -34,8 +34,8 @@ export class WindAxis {
     }
 
     getWindAt(position: LatLng): number {
-        const x = Math.round(position.lng / this.header.dx);
-        const y = Math.round(position.lat / this.header.dy);
+        const x = Math.round(((position.lng + 360) % 360) / this.header.dx);
+        const y = Math.round((this.header.la1 - position.lat) / this.header.dy);
         return this.data[y * this.header.nx + x];
     }
 
@@ -88,6 +88,6 @@ export class WindSpeed {
         y?: number
     ) {
         this.value = Math.sqrt(Math.pow(x || 0, 2) + Math.pow(y || 0, 2));
-        this.bearing = this.value ? Math.atan2(y, x) * 180 / Math.PI : 0;
+        this.bearing = this.value ? (90 - Math.atan2(y, x) * 180 / Math.PI + 360) % 360 : 0;
     }
 }

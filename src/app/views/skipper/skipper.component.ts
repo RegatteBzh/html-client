@@ -51,11 +51,11 @@ export class SkipperComponent implements OnInit {
       this.directionStab.unsubscribe();
     }
     this.skipper.windAngle = -1;
+    this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {
         this.disablePoller = true;
         this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((skipperResp: Skipper) => {
           extend(this.skipper, omit(skipperResp, ['sail']));
-          this.forecastRoute();
         }, () => {}, () => {
           this.disablePoller = false;
         });
