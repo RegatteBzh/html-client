@@ -7,15 +7,16 @@ import { find, omit, extend, map, forEach } from 'lodash';
 import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
 
-import { SkipperService } from '../../services/skipper/skipper.service';
-import { TrigoService } from '../../services/trigo/trigo.service';
 import { BoatService } from '../../services/boat/boat.service';
 import { PolarService } from '../../services/polar/polar.service';
+import { MapService } from '../../services/map/map.service';
+import { SkipperService } from '../../services/skipper/skipper.service';
+import { TrigoService } from '../../services/trigo/trigo.service';
 
-import { Skipper } from '../../models/skipper';
-import { Sail } from '../../models/sail';
-import { Waypoint } from '../../models/waypoint';
 import { Polar } from '../../models/polar';
+import { Sail } from '../../models/sail';
+import { Skipper } from '../../models/skipper';
+import { Waypoint } from '../../models/waypoint';
 
 @Component({
   selector: 'app-skipper',
@@ -25,24 +26,25 @@ import { Polar } from '../../models/polar';
 export class SkipperComponent implements OnInit {
 
   constructor(
-    private skipperService: SkipperService,
     private activatedRoute: ActivatedRoute,
-    private trigoService: TrigoService,
     private boatService: BoatService,
+    private skipperService: SkipperService,
+    private mapService: MapService,
     private polarService: PolarService,
     private router: Router,
+    private trigoService: TrigoService,
   ) { }
 
-  private directionStab: Subscription;
-
-  public waypoints: LatLng[] = [];
-  public skipper = new Skipper();
-  public availableSails: Sail[];
-  public selectedSail: Sail;
-  private disablePoller = false;
   private currentPolar: Polar;
+  private directionStab: Subscription;
+  private disablePoller = false;
+  private poller: Observable<number>;
 
-  public poller: Observable<number>;
+  public availableSails: Sail[];
+  public forecast: LatLng[];
+  public selectedSail: Sail;
+  public skipper = new Skipper();
+  public waypoints: LatLng[] = [];
 
   changeDirection(event) {
     if (this.directionStab) {
@@ -53,6 +55,7 @@ export class SkipperComponent implements OnInit {
         this.disablePoller = true;
         this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((skipperResp: Skipper) => {
           extend(this.skipper, omit(skipperResp, ['sail']));
+          this.forecastRoute();
         }, () => {}, () => {
           this.disablePoller = false;
         });
@@ -71,7 +74,10 @@ export class SkipperComponent implements OnInit {
     this.disablePoller = true;
     this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((skipperResp: Skipper) => {
         extend(this.skipper, skipperResp);
-        this.loadPolars();
+        this.loadPolars().then((polar) => {
+          this.forecastRoute();
+          return polar;
+        });
       }, () => {
       this.selectedSail = this.skipper.sail;
     }, () => {
@@ -107,10 +113,19 @@ export class SkipperComponent implements OnInit {
     });
   }
 
-  loadPolars() {
-    this.polarService.getPolars(this.skipper.sail.id).subscribe((polar: Polar) => {
-      this.currentPolar = polar;
+  loadPolars(): Promise<Polar> {
+    return new Promise((resolve, reject) => {
+      this.polarService.getPolars(this.skipper.sail.id).subscribe((polar: Polar) => {
+        this.currentPolar = polar;
+        resolve(polar);
+      }, (err) => {
+        reject(err);
+      });
     });
+  }
+
+  forecastRoute() {
+    this.forecast = this.mapService.forecastRoute(this.skipper.position, this.skipper.direction, this.currentPolar);
   }
 
   ngOnInit() {

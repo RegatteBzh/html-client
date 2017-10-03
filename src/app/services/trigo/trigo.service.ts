@@ -22,8 +22,9 @@ export class TrigoService {
         return speed / 1.943844492;
     }
 
+    // http://www.movable-type.co.uk/scripts/latlong.html#destPoint
     pointAtDistanceAndBearing(from: LatLng, distKm: number, bearingDegree: number): LatLng {
-        const dr = distKm / this.EarthRadius;
+        const dr = (distKm || 0) / this.EarthRadius;
         const bearingRad = (bearingDegree * (Math.PI / 180));
 
         const latFrom = (from.lat * (Math.PI / 180));
@@ -37,7 +38,7 @@ export class TrigoService {
 
         lngTo = ( (lngTo + 3 * Math.PI) % (2 * Math.PI) ) - Math.PI;
 
-        return new LatLng(latTo, lngTo);
+        return new LatLng(latTo * 180 / Math.PI, lngTo * 180 / Math.PI);
     }
 
 }

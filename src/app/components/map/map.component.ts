@@ -8,16 +8,13 @@ import {
 } from '@yaga/leaflet-ng2';
 
 import { forEach } from 'lodash';
-
-import { LatLng, LatLngBounds, Point, LeafletEvent } from 'leaflet';
-
+import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions } from 'leaflet';
+import 'leaflet-velocity';
 
 import { BoatMarker } from '../../plugins/boat.plugin';
 
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
-
-import 'leaflet-velocity';
 
 @Component({
   selector: 'app-map',
@@ -28,6 +25,15 @@ export class MapComponent implements AfterViewInit {
 
   private directionValue = 0;
   private positionValue = new LatLng(0, 0);
+  private vLayer;
+  private boatMarker: BoatMarker;
+
+  public zoom = 2;
+  public maxBound: LatLngBounds;
+  public waypointPolyline: YagaPolylineDirective<GeoJSON.GeometryCollection>;
+  public forecastPolyline: YagaPolylineDirective<GeoJSON.GeometryCollection>;
+  public currentMap;
+  public maps = this.configService.mapLayers();
 
   @Input()
   get waypoints(): LatLng[] {
@@ -37,6 +43,17 @@ export class MapComponent implements AfterViewInit {
     if ((val || []).length) {
       this.waypointPolyline.setLatLngs(val);
       this.waypointPolyline.redraw();
+    }
+  }
+
+  @Input()
+  get forecast(): LatLng[] {
+    return this.forecastPolyline.getLatLngs();
+  }
+  set forecast(val: LatLng[]) {
+    if ((val || []).length) {
+      this.forecastPolyline.setLatLngs(val);
+      this.forecastPolyline.redraw();
     }
   }
 
@@ -58,13 +75,6 @@ export class MapComponent implements AfterViewInit {
     this.boatMarker.setRotation(val);
   }
 
-  public topoMapUrl = 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png';
-  public zoom = 2;
-  public maxBound: LatLngBounds;
-  public waypointPolyline: YagaPolylineDirective<GeoJSON.GeometryCollection>;
-
-  public currentMap;
-  public vLayer;
 
   @ViewChild('mainMap')
   public mainMap: YagaMapComponent;
@@ -72,9 +82,6 @@ export class MapComponent implements AfterViewInit {
   @ViewChild('mainLayer')
   public mainLayer: YagaTileLayerDirective;
 
-  public boatMarker: BoatMarker;
-
-  public maps = this.configService.mapLayers();
 
   constructor(
     private mapService: MapService,
@@ -104,10 +111,7 @@ export class MapComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-
-    this.waypointPolyline = new YagaPolylineDirective<GeoJSON.GeometryCollection>(this.mainMap);
-
+  setWindMap() {
     this.mapService.loadMetadata('wind').subscribe((data: any[]) => {
       this.vLayer = L.velocityLayer({
         displayValues: true,
@@ -123,8 +127,25 @@ export class MapComponent implements AfterViewInit {
       });
       this.mainMap.addLayer(this.vLayer);
     });
+  }
 
+  setBoatMarker() {
     this.boatMarker.addTo(this.mainMap);
+  }
+
+  ngAfterViewInit() {
+
+    this.waypointPolyline = new YagaPolylineDirective<GeoJSON.GeometryCollection>(this.mainMap);
+    this.forecastPolyline = new YagaPolylineDirective<GeoJSON.GeometryCollection>(this.mainMap);
+
+    this.forecastPolyline.setStyle({
+      color: '#00ff00',
+      lineJoin: 'round',
+      dashArray: '6'
+    });
+
+    this.setWindMap();
+    this.setBoatMarker();
 
   }
 

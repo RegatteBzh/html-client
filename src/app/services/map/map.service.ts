@@ -26,7 +26,7 @@ export class MapService {
     return Observable.create(observer => {
       this.httpClient.get<WindAxis[]>(`/assets/winds/wind000.json`).subscribe((data: WindAxis[]) => {
         this.currentWind = new Wind(data);
-        observer.next(data);
+        observer.next(this.currentWind.data);
       });
     });
   }
@@ -48,7 +48,8 @@ export class MapService {
       for (let i = 0; i < 4; i++) {
         const lastPos = result[result.length - 1];
         const windSpeed = this.getWindAt(lastPos);
-        const speed = polar.getSpeedAt(windSpeed.value, windSpeed.bearing);
+        const relativeWindBearing = (windSpeed.bearing - bearingDegree + 360) % 180;
+        const speed = polar.getSpeedAt(windSpeed.value, relativeWindBearing);
         const distance = speed * 3.6 * 6;
         result.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distance, bearingDegree));
       }

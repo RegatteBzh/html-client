@@ -1,7 +1,12 @@
 import { LatLng } from 'leaflet';
-import { find } from 'lodash';
+import { find, extend, map } from 'lodash';
 
 export class WindHeader {
+
+    constructor (data) {
+        extend(this, data);
+    }
+
     public dx: number;
     public dy: number;
     public la1: number;
@@ -23,6 +28,11 @@ export class WindAxis {
     public data: number[];
     public header: WindHeader;
 
+    constructor(data: WindAxis) {
+        this.data = data.data;
+        this.header = new WindHeader(data.header);
+    }
+
     getWindAt(position: LatLng): number {
         const x = Math.round(position.lng / this.header.dx);
         const y = Math.round(position.lat / this.header.dy);
@@ -37,7 +47,9 @@ export class Wind {
     constructor(
         data?: WindAxis[],
     ) {
-        this.data = data;
+        this.data = map(data, (axis) => {
+            return new WindAxis(axis);
+        });
     }
 
     public getU(): WindAxis {
