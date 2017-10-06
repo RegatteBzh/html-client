@@ -48,7 +48,7 @@ export class MapService {
       for (let i = 0; i < 4; i++) {
         const lastPos = result[result.length - 1];
         const windSpeed = this.getWindAt(lastPos);
-        const relativeWindBearing = (windSpeed.bearing - bearingDegree + +180 + 360) % 180;
+        const relativeWindBearing =  180 - (Math.abs(bearingDegree - windSpeed.bearing) % 180);
         const speed = polar.getSpeedAt(windSpeed.value, relativeWindBearing);
         const distance = speed * 3.6 * 6;
         result.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distance, bearingDegree));
