@@ -88,6 +88,7 @@ export class SkipperComponent implements OnInit {
   startPoller () {
     this.poller = Observable.timer(5000, 5000);
     this.poller.subscribe(() => {
+      this.forecastRoute();
       this.skipperService.getSkipper(this.skipper.id).subscribe((skipperResp: Skipper) => {
         extend(this.skipper, omit(skipperResp, ['sail']));
       });
