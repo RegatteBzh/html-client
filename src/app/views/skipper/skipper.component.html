@@ -1,5 +1,5 @@
 <div class="map">
-    <app-map [position]="skipper.position" [direction]="skipper.direction" [waypoints]="waypoints" [forecast]="forecast"></app-map>
+    <app-map [position]="skipper.position" [direction]="skipper.direction" [waypoints]="waypoints" [forecast]="forecast.way"></app-map>
 </div>
 <div class="boat-control">
     <div class="bearing">
@@ -13,7 +13,7 @@
         </div>
         <div class="control-item">
             <label translate="skipper_control_speed_label"></label>
-            <span class="digi">{{ getSpeed(skipper) | number:'1.1-1'}}</span>
+            <span class="digi" [ngClass]="{temporary: !isForecastSpeedConfirmed()}">{{ (getSpeed(skipper) || forecast.getFirstSpeed()) | number:'1.1-1'}}</span>
             <span class="digi" translate="speed_knot_unit"></span>
         </div>
         <div class="control-item">

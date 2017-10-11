@@ -10,6 +10,7 @@ import { Polar } from '../../models/polar';
 
 import { TrigoService } from '../trigo/trigo.service';
 import { WindSpeed } from '../../models/wind';
+import { Forecast } from '../../models/forecast';
 
 @Injectable()
 export class MapService {
@@ -42,16 +43,17 @@ export class MapService {
     );
   }
 
-  forecastRoute(position: LatLng, bearingDegree: number, polar: Polar): LatLng[] {
-      const result: LatLng[] = [];
-      result.push(position);
+  forecastRoute(position: LatLng, bearingDegree: number, polar: Polar): Forecast {
+      const result = new Forecast();
+      result.way.push(position);
       for (let i = 0; i < 4; i++) {
-        const lastPos = result[result.length - 1];
+        const lastPos = result.getLastPosition();
         const windSpeed = this.getWindAt(lastPos);
         const relativeWindBearing =  180 - (Math.abs(bearingDegree - windSpeed.bearing) % 180);
         const speed = polar.getSpeedAt(windSpeed.value, relativeWindBearing);
         const distance = speed * 3.6 * 6;
-        result.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distance, bearingDegree));
+        result.speed.push(this.trigoService.meterToKnot(speed));
+        result.way.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distance, bearingDegree));
       }
       return result;
   }

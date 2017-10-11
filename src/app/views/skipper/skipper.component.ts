@@ -17,6 +17,7 @@ import { Polar } from '../../models/polar';
 import { Sail } from '../../models/sail';
 import { Skipper } from '../../models/skipper';
 import { Waypoint } from '../../models/waypoint';
+import { Forecast } from '../../models/forecast';
 
 @Component({
   selector: 'app-skipper',
@@ -41,7 +42,7 @@ export class SkipperComponent implements OnInit {
   private poller: Observable<number>;
 
   public availableSails: Sail[];
-  public forecast: LatLng[];
+  public forecast = new Forecast();
   public selectedSail: Sail;
   public skipper = new Skipper();
   public waypoints: LatLng[] = [];
@@ -51,6 +52,7 @@ export class SkipperComponent implements OnInit {
       this.directionStab.unsubscribe();
     }
     this.skipper.windAngle = -1;
+    this.skipper.speed = 0;
     this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {
         this.disablePoller = true;
@@ -127,6 +129,10 @@ export class SkipperComponent implements OnInit {
 
   forecastRoute() {
     this.forecast = this.mapService.forecastRoute(this.skipper.position, this.skipper.direction, this.currentPolar);
+  }
+
+  isForecastSpeedConfirmed (): boolean {
+    return (Math.round(10 * this.forecast.getFirstSpeed()) === 0) || (Math.round(10 * this.getSpeed(this.skipper)) !== 0);
   }
 
   ngOnInit() {
