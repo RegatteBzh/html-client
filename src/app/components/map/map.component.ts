@@ -7,7 +7,7 @@ import {
   PolylineDirective as YagaPolylineDirective,
 } from '@yaga/leaflet-ng2';
 
-import { forEach } from 'lodash';
+import { forEach, map, first } from 'lodash';
 import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions } from 'leaflet';
 import 'leaflet-velocity';
 
@@ -15,6 +15,13 @@ import { BoatMarker } from '../../plugins/boat.plugin';
 
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
+
+import { Wind } from '../../models/wind';
+
+class WindSelect {
+  public name: string;
+  public index: number;
+}
 
 @Component({
   selector: 'app-map',
@@ -34,6 +41,8 @@ export class MapComponent implements AfterViewInit {
   public forecastPolyline: YagaPolylineDirective<GeoJSON.GeometryCollection>;
   public currentMap;
   public maps = this.configService.mapLayers();
+  public currentWindIndex: WindSelect = new WindSelect();
+  public windIndexes: WindSelect[] = [];
 
   @Input()
   get waypoints(): LatLng[] {
@@ -111,22 +120,34 @@ export class MapComponent implements AfterViewInit {
     }
   }
 
-  setWindMap() {
-    this.mapService.loadMetadata('wind').subscribe((data: any[]) => {
-      this.vLayer = L.velocityLayer({
-        displayValues: true,
-        displayOptions: {
-          velocityType: 'GBR Wind',
-          displayPosition: 'bottomleft',
-          displayEmptyString: 'No wind data'
-        },
-        data: data,
-        maxVelocity: 15,
-        minVelocity: 0,
-        velocityScale: 0.05
-      });
-      this.mainMap.addLayer(this.vLayer);
+  loadWindMap() {
+    this.mapService.loadCurrentWind().subscribe((data: any[]) => {
+      this.setWindMap();
     });
+  }
+
+  setWindMap(index?: number) {
+    index = index || 0;
+    if (this.vLayer) {
+      this.mainMap.removeLayer(this.vLayer);
+    }
+    this.vLayer = L.velocityLayer({
+      displayValues: true,
+      displayOptions: {
+        velocityType: 'GBR Wind',
+        displayPosition: 'bottomleft',
+        displayEmptyString: 'No wind data'
+      },
+      data: this.mapService.getForecastWind(index).data,
+      maxVelocity: 15,
+      minVelocity: 0,
+      velocityScale: 0.05
+    });
+    this.mainMap.addLayer(this.vLayer);
+  }
+
+  selectWind(event: WindSelect) {
+    this.setWindMap(event.index);
   }
 
   setBoatMarker() {
@@ -144,8 +165,18 @@ export class MapComponent implements AfterViewInit {
       dashArray: '6'
     });
 
-    this.setWindMap();
+    this.loadWindMap();
     this.setBoatMarker();
+    this.mapService.loadForecastWinds().subscribe((winds: Wind[]) => {
+      this.windIndexes = map<Wind, WindSelect>(winds, (wind: Wind, index: number) => {
+        const w = new WindSelect();
+        const hour = this.mapService.forecastOptions.stepHour * index;
+        w.index = index;
+        w.name = `${hour} H`;
+        return w;
+      });
+      this.currentWindIndex = first(this.windIndexes);
+    });
 
   }
 
