@@ -132,16 +132,16 @@ export class MapComponent implements AfterViewInit {
       this.mainMap.removeLayer(this.vLayer);
     }
     this.vLayer = L.velocityLayer({
-      displayValues: true,
+      /*displayValues: true,
       displayOptions: {
         velocityType: 'GBR Wind',
         displayPosition: 'bottomleft',
         displayEmptyString: 'No wind data'
-      },
+      },*/
       data: this.mapService.getForecastWind(index).data,
       maxVelocity: 15,
       minVelocity: 0,
-      velocityScale: 0.05
+      velocityScale: 0.01
     });
     this.mainMap.addLayer(this.vLayer);
   }
