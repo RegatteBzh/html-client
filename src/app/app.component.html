@@ -2,14 +2,23 @@
 <div style="text-align:center">
 </div>
 <nav *ngIf="isConnected">
+    <a [routerLink]="['/dashboard']" >
+      <i class="fa fa-tachometer" aria-hidden="true"></i>
+      <span translate="app.dashboard"></span>
+    </a>
+    <a [routerLink]="['/me']" >
+      <i class="fa fa-id-card-o" aria-hidden="true"></i>
+      <span translate="app.me"></span>
+    </a>
     <button type="button" (click)="disconnect()" >
       <i class="fa fa-user" aria-hidden="true"></i>
-      <span translate="app_disconnect"></span>
+      <span translate="app.disconnect"></span>
     </button>
     <select (change)="changeLang($event.target.value)">
-      <option value="en">{{ 'en' | translate }}</option>
-      <option value="fr">{{ 'fr' | translate }}</option>
+      <option value="en" translate="en"></option>
+      <option value="fr" translate="fr"></option>
     </select>
 </nav>
-<router-outlet></router-outlet>
-
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

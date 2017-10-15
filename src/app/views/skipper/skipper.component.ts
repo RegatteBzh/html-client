@@ -55,12 +55,12 @@ export class SkipperComponent implements OnInit {
     this.skipper.speed = 0;
     this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {
-        this.disablePoller = true;
-        this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((skipperResp: Skipper) => {
-          extend(this.skipper, omit(skipperResp, ['sail']));
-        }, () => {}, () => {
-          this.disablePoller = false;
-        });
+      this.disablePoller = true;
+      this.skipperService.setSkipperDirection(this.skipper.id, event).subscribe((skipperResp: Skipper) => {
+        extend(this.skipper, omit(skipperResp, ['sail']));
+      }, () => { }, () => {
+        this.disablePoller = false;
+      });
     });
   }
 
@@ -75,19 +75,19 @@ export class SkipperComponent implements OnInit {
   selectSail(sail) {
     this.disablePoller = true;
     this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((skipperResp: Skipper) => {
-        extend(this.skipper, skipperResp);
-        this.loadPolars().then((polar) => {
-          this.forecastRoute();
-          return polar;
-        });
-      }, () => {
+      extend(this.skipper, skipperResp);
+      this.loadPolars().then((polar) => {
+        this.forecastRoute();
+        return polar;
+      });
+    }, () => {
       this.selectedSail = this.skipper.sail;
     }, () => {
       this.disablePoller = false;
     });
   }
 
-  startPoller () {
+  startPoller() {
     this.poller = Observable.timer(5000, 5000);
     this.poller.subscribe(() => {
       this.forecastRoute();
@@ -99,6 +99,9 @@ export class SkipperComponent implements OnInit {
 
   getSails(boatId: string) {
     this.boatService.getSails(boatId).subscribe((sailList: Sail[]) => {
+      forEach(sailList, (sail) => {
+        sail.name = 'sail.' + sail.name.replace(/-/g, '.');
+      });
       this.availableSails = sailList;
       this.skipper.sail = find(this.availableSails, { id: this.skipper.sail.id });
       this.selectedSail = this.skipper.sail;
@@ -131,7 +134,7 @@ export class SkipperComponent implements OnInit {
     this.forecast = this.mapService.forecastRoute(this.skipper.position, this.skipper.direction, this.currentPolar);
   }
 
-  isForecastSpeedConfirmed (): boolean {
+  isForecastSpeedConfirmed(): boolean {
     return (Math.round(10 * this.forecast.getFirstSpeed()) === 0) || (Math.round(10 * this.getSpeed(this.skipper)) !== 0);
   }
 

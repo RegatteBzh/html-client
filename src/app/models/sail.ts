@@ -1,4 +1,3 @@
-
 export class Sail {
 
     public id: string;

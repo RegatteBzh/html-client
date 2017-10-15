@@ -10,10 +10,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 
-// Components
-/*import { CompassComponent } from './components/compass/compass.component';
-import { MapComponent } from './components/map/map.component';*/
-
 // Services
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { AuthService} from './services/auth/auth.service';
@@ -21,6 +17,7 @@ import { BoatService } from './services/boat/boat.service';
 import { ConfigService } from './services/config/config.service';
 import { LanguageService } from './services/language/language.service';
 import { MapService } from './services/map/map.service';
+import { MeService } from './services/me/me.service';
 import { PolarService } from './services/polar/polar.service';
 import { RaceService } from './services/race/race.service';
 import { SkipperService } from './services/skipper/skipper.service';
@@ -51,6 +48,7 @@ import { TrigoService } from './services/trigo/trigo.service';
     ConfigService,
     LanguageService,
     MapService,
+    MeService,
     PolarService,
     RaceService,
     SkipperService,

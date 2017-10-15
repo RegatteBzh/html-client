@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: 'app/views/login/login.module#LoginModule' },
   { path: 'dashboard',  loadChildren: 'app/views/dashboard/dashboard.module#DashboardModule' },
   { path: 'skipper',  loadChildren: 'app/views/skipper/skipper.module#SkipperModule' },
+  { path: 'me',  loadChildren: 'app/views/me/me.module#MeModule' },
 ];
 
 @NgModule({

@@ -8,42 +8,42 @@
     </div>
     <div class="boat-computer">
         <div class="control-item">
-            <label translate="skipper_control_boat_label"></label>
+            <label translate="skipper.control.boat_label"></label>
             <span class="digi">{{ skipper.boat.name }}</span>
         </div>
         <div class="control-item">
-            <label translate="skipper_control_speed_label"></label>
+            <label translate="skipper.control.speed_label"></label>
             <span class="digi" [ngClass]="{temporary: !isForecastSpeedConfirmed()}">{{ (getSpeed(skipper) || forecast.getFirstSpeed()) | number:'1.1-1'}}</span>
-            <span class="digi" translate="speed_knot_unit"></span>
+            <span class="digi" translate="misc.speed.knot_unit"></span>
         </div>
         <div class="control-item">
-            <label translate="skipper_control_bearing_label"></label>
+            <label translate="skipper.control.bearing_label"></label>
             <span class="digi">{{ skipper.direction | number:'1.0-0'}}</span>
             <span class="digi">°</span>
         </div>
         <div class="control-item">
-            <label translate="skipper_control_wind_dir_label"></label>
+            <label translate="skipper.control.wind_dir_label"></label>
             <span class="digi" *ngIf="skipper.windAngle>=0">{{ skipper.windAngle | number:'1.0-0'}}</span>
             <span class="digi" *ngIf="skipper.windAngle<0">--</span>
             <span class="digi">°</span>
         </div>
         <div class="control-item">
-            <label translate="skipper_control_wind_speed_label"></label>
+            <label translate="skipper.control.wind_speed_label"></label>
             <span class="digi">{{ getWindSpeed(skipper) | number:'1.1-1'}}</span>
-            <span class="digi" translate="speed_knot_unit"></span>
+            <span class="digi" translate="misc.speed.knot_unit"></span>
         </div>
         <div class="control-item">
-            <label translate="skipper_control_position_label"></label>
+            <label translate="skipper.control.position_label"></label>
             <span class="pos digi">
                 <span class="lat">{{skipper.position.lat | number:'1.3-3'}}</span>
                 <span class="lng">{{skipper.position.lng | number:'1.3-3'}}</span>
             </span>
         </div>
         <div class="control-item">
-            <label translate="skipper_control_sail_label"></label>
+            <label translate="skipper.control.sail_label"></label>
             <select [(ngModel)]="selectedSail" class="sail-selector" (change)="selectSail(selectedSail)">
                 <option *ngFor="let sail of availableSails" [ngValue]="sail">
-                    {{sail.name | translate}}
+                    {{ sail.name | translate}}
                 </option>
               </select>
         </div>

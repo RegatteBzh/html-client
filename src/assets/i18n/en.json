@@ -1,25 +1,70 @@
 {
     "fr": "French",
     "en": "English",
-    "app_disconnect": "Disconnect",
-    "login_welcome": "Welcome to Regatta",
-    "login_google": "Google",
-    "login_facebook": "Facebook",
-    "dashboard_your_races": "Your races",
-    "dashboard_available_races": "Available races",
-    "skipper_control_speed_label": "Speed",
-    "skipper_control_position_label": "Position",
-    "skipper_control_sail_label": "Sail",
-    "skipper_control_bearing_label": "Bearing",
-    "skipper_control_boat_label": "Boat",
-    "skipper_control_wind_dir_label": "Wind dir.",
-    "skipper_control_wind_speed_label": "Wind sp.",
-    "speed_knot_unit": "kt",
-    "maxi_trimaran-code zéro": "Code zéro",
-    "maxi_trimaran-foc": "Foc",
-    "maxi_trimaran-foc2": "Foc2",
-    "maxi_trimaran-gennaker": "Gennaker",
-    "maxi_trimaran-genois": "Génois",
-    "maxi_trimaran-spi léger": "Spi léger",
-    "maxi_trimaran-spi": "Spi"
+    "app": {
+        "disconnect": "Disconnect",
+        "dashboard": "Dashboard",
+        "me": "Profil"
+    },
+    "login": {
+        "welcome": "Welcome to Regatta",
+        "google": "Google",
+        "facebook": "Facebook"
+    },
+    "me": {
+        "email_label": "Email Address",
+        "name_label": "Name",
+        "nic_label": "Nicname",
+        "submit": "Save"
+    },
+    "dashboard": {
+        "your_races": "Your races",
+        "available_races": "Available races",
+        "welcome": "Welcome {{name}}"
+    },
+    "skipper": {
+        "control": {
+            "speed_label": "Speed",
+            "position_label": "Position",
+            "sail_label": "Sail",
+            "bearing_label": "Bearing",
+            "boat_label": "Boat",
+            "wind_dir_label": "Wind dir.",
+            "wind_speed_label": "Wind sp."
+        }
+    },
+    "misc": {
+        "speed": {
+            "knot_unit": "kt"
+        }
+    },
+    "sail": {
+        "maxi_trimaran": {
+            "code zéro": "Code zéro",
+            "foc": "Foc",
+            "foc2": "Foc2",
+            "gennaker": "Gennaker",
+            "genois": "Génois",
+            "spi léger": "Spi léger",
+            "spi": "Spi"
+        },
+        "mini_6.50_v2": {
+            "code zéro": "Code zéro",
+            "foc": "Foc",
+            "foc2": "Foc2",
+            "gennaker": "Gennaker",
+            "genois": "Génois",
+            "spi léger": "Spi léger",
+            "spi": "Spi"
+        },
+        "imoca60": {
+            "code zéro": "Code zéro",
+            "foc": "Foc",
+            "foc2": "Foc2",
+            "gennaker": "Gennaker",
+            "genois": "Génois",
+            "spi léger": "Spi léger",
+            "spi": "Spi"
+        }
+    }
 }

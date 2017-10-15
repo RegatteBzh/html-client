@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { RaceService } from '../../services/race/race.service';
 import { Race } from '../../models/race';
 
+import { MeService } from '../../services/me/me.service';
+import { Player } from '../../models/player';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,10 +19,12 @@ export class DashboardComponent implements OnInit {
 
   public skippers: Skipper[] = [];
   public races: Race[] = [];
+  public me: Player = new Player();
 
   constructor(
     private skipperService: SkipperService,
     private raceService: RaceService,
+    private meService: MeService,
     private router: Router,
   ) { }
 
@@ -37,6 +42,10 @@ export class DashboardComponent implements OnInit {
 
     this.raceService.getRaces().subscribe(races => {
       this.races = races;
+    });
+
+    this.meService.getIdentity().subscribe((player: Player) => {
+      this.me = player;
     });
 
   }
