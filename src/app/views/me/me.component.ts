@@ -13,6 +13,7 @@ import { Player } from '../../models/player';
 export class MeComponent implements OnInit {
 
   public me: Player = new Player();
+  public saving: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,7 +24,10 @@ export class MeComponent implements OnInit {
   }
 
   saveUser() {
-    this.meService.setNic(this.me.nic).subscribe();
+    this.saving = true;
+    this.meService.setNic(this.me.nic).subscribe(() => {
+      this.router.navigate(['/dashboard']);
+    });
   }
 
   ngOnInit() {

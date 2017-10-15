@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="nic" translate="me.nic_label"></label>
-                <input type="string" class="form-control" name="nic" [(ngModel)]="me.nic">
+                <input type="string" class="form-control" name="nic" [(ngModel)]="me.nic" [disabled]="saving">
             </div>
             <button type="submit" class="btn btn-default">
                 <span translate="me.submit"></span>
