@@ -15,7 +15,9 @@
         "email_label": "Adresse email",
         "name_label": "Nom",
         "nic_label": "Pseudo",
-        "submit": "Enregistrer"
+        "friend_label": "Chercher des amis",
+        "submit": "Enregistrer",
+        "search_placeholder": "Chercher ..."
     },
     "dashboard": {
         "your_races": "Vos compétitions",

@@ -15,7 +15,9 @@
         "email_label": "Email Address",
         "name_label": "Name",
         "nic_label": "Nicname",
-        "submit": "Save"
+        "friend_label": "Search friends",
+        "submit": "Save",
+        "search_placeholder": "Search ..."
     },
     "dashboard": {
         "your_races": "Your races",

@@ -14,6 +14,8 @@ export class MeComponent implements OnInit {
 
   public me: Player = new Player();
   public saving: boolean;
+  public players: Player[] = [];
+  public friend: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,6 +30,10 @@ export class MeComponent implements OnInit {
     this.meService.setNic(this.me.nic).subscribe(() => {
       this.router.navigate(['/dashboard']);
     });
+  }
+
+  reloadPlayer(event) {
+    console.log(event);
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6  col-sm-12">
         <form name="meForm" (ngSubmit)="saveUser()">
             <div class="form-group">
                 <label for="email" translate="me.email_label"></label>
@@ -16,6 +16,20 @@
             <button type="submit" class="btn btn-default">
                 <span translate="me.submit"></span>
             </button>
+        </form>
+    </div>
+    <div class="col-md-6  col-sm-12">
+        <form class="ui form" (ngSubmit)="DoNothing()">
+            <div class="form-group">
+                <label translate="me.friend_label"></label>
+                <sm-select
+                    placeholder="{{ 'me.search_placeholder' | translate }}"
+                    [(model)]="friend"
+                    [options]="{'fullTextSearch': true}"
+                    (modelChange)="reloadPlayer($event)">
+                    <option *ngFor="let player of players" value="{{player.id}}">{{player.name}}</option>
+                </sm-select>
+            </div>
         </form>
     </div>
 </div>
