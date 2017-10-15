@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { SkipperComponent } from './views/skipper/skipper.component';
-import { LoginComponent } from './views/login/login.component';
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'login/:token', component: LoginComponent },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'skipper/:id',  component: SkipperComponent },
+  { path: 'login', loadChildren: 'app/views/login/login.module#LoginModule' },
+  { path: 'dashboard',  loadChildren: 'app/views/dashboard/dashboard.module#DashboardModule' },
+  { path: 'skipper',  loadChildren: 'app/views/skipper/skipper.module#SkipperModule' },
 ];
 
 @NgModule({

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { YagaModule } from '@yaga/leaflet-ng2';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule } from '@angular/http';
@@ -12,13 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 
 // Components
-import { CompassComponent } from './components/compass/compass.component';
-import { MapComponent } from './components/map/map.component';
-
-// Views
-import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { LoginComponent } from './views/login/login.component';
-import { SkipperComponent } from './views/skipper/skipper.component';
+/*import { CompassComponent } from './components/compass/compass.component';
+import { MapComponent } from './components/map/map.component';*/
 
 // Services
 import { AuthInterceptor } from './services/auth/auth.interceptor';
@@ -35,11 +29,6 @@ import { TrigoService } from './services/trigo/trigo.service';
 @NgModule({
   declarations: [
     AppComponent,
-    CompassComponent,
-    DashboardComponent,
-    LoginComponent,
-    MapComponent,
-    SkipperComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -54,7 +43,6 @@ import { TrigoService } from './services/trigo/trigo.service';
         deps: [HttpClient]
       }
     }),
-    YagaModule,
   ],
   providers: [
     AuthInterceptor,
