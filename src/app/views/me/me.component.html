@@ -19,16 +19,24 @@
         </form>
     </div>
     <div class="col-md-6  col-sm-12">
-        <form class="ui form" (ngSubmit)="DoNothing()">
+        <form name="friendForm">
             <div class="form-group">
-                <label translate="me.friend_label"></label>
-                <sm-select
+                <label translate="me.friend_label" for="friend"></label>
+                <sui-select class="selection"
+                            name="friend"
+                            [(ngModel)]="friend"
+                            [isSearchable]="true"
+                            [optionsLookup]="refreshFriendSearch">
+                    <sui-select-option *ngFor="let player of players" value="player.id"></sui-select-option>
+                </sui-select>
+                <!--<sui-select
                     placeholder="{{ 'me.search_placeholder' | translate }}"
-                    [(model)]="friend"
+                    [(ngModel)]="friend"
                     [options]="{'fullTextSearch': true}"
-                    (modelChange)="reloadPlayer($event)">
+                    [isSearchable]="true"
+                    (ngModelChange)="reloadPlayer($event)">
                     <option *ngFor="let player of players" value="{{player.id}}">{{player.name}}</option>
-                </sm-select>
+                </sui-select>-->
             </div>
         </form>
     </div>

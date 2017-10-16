@@ -4,6 +4,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MeService } from '../../services/me/me.service';
 import { Player } from '../../models/player';
 
+interface IOption {
+    title: string;
+    index?: number;
+}
 
 @Component({
   selector: 'app-login',
@@ -23,6 +27,13 @@ export class MeComponent implements OnInit {
     private meService: MeService,
   ) {
 
+  }
+
+  public async refreshFriendSearch(query: string): Promise<IOption[]> {
+    console.log(query);
+    return new Promise<IOption[]>(resolve => {
+      resolve([]);
+    });
   }
 
   saveUser() {
