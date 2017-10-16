@@ -12,7 +12,7 @@ class BoatIcon extends Icon {
     createIcon(oldIcon?: HTMLElement): HTMLElement {
         const div = (oldIcon && oldIcon.tagName === 'DIV' ? oldIcon : document.createElement('div'));
         const style = div.getAttribute('style');
-        div.setAttribute('style', `${style};margin-left:-25px;margin-top:-25px`);
+        div.setAttribute('style', `${style};margin-left:-25px;margin-top:-25px;position:absolute`);
         const svgNS = 'http://www.w3.org/2000/svg';
         const svg = document.createElementNS(svgNS, 'svg');
         svg.setAttribute('width', '50');

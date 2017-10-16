@@ -94,11 +94,17 @@ export class MapService {
       for (let i = 0; i < this.forecastOptions.steps; i++) {
         const lastPos = result.getLastPosition();
         const windSpeed = this.getWindAt(lastPos, i);
-        const relativeWindBearing =  180 - (Math.abs(bearingDegree - windSpeed.bearing) % 180);
+
+        const relativeWindBearing = Math.abs(bearingDegree - (windSpeed.bearing + 180) % 360) % 180;
+
         const speed = polar.getSpeedAt(windSpeed.value, relativeWindBearing);
         const distance = speed * 3.6 * this.forecastOptions.stepHour;
         result.speed.push(this.trigoService.meterToKnot(speed));
+        // const distance = this.trigoService.knotToMeter(speed) * 3.6 * this.forecastOptions.stepHour;
+        // result.speed.push(speed);
         result.way.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distance, bearingDegree));
+        result.windRelativeBearings.push(relativeWindBearing);
+        result.windBearing.push(windSpeed.bearing);
       }
       return result;
   }

@@ -12,6 +12,7 @@ import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions } from 'leaflet'
 import 'leaflet-velocity';
 
 import { BoatMarker } from '../../plugins/boat.plugin';
+import { ForecastMarker } from '../../plugins/forecastMarker.plugin';
 
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
@@ -34,6 +35,7 @@ export class MapComponent implements AfterViewInit {
   private positionValue = new LatLng(0, 0);
   private vLayer;
   private boatMarker: BoatMarker;
+  private forecastMarkers: ForecastMarker[] = null;
 
   public zoom = 2;
   public maxBound: LatLngBounds;
@@ -61,6 +63,18 @@ export class MapComponent implements AfterViewInit {
   }
   set forecast(val: LatLng[]) {
     if ((val || []).length) {
+      if (!this.forecastMarkers) {
+        this.forecastMarkers = map<LatLng, ForecastMarker>(val, (value: LatLng, index) => {
+          const marker =  new ForecastMarker(value);
+          if (index > 0) {
+            marker.addTo(this.mainMap);
+          }
+          return marker;
+        });
+      }
+      forEach<LatLng[]>(val, (value: LatLng, index) => {
+        this.forecastMarkers[index].setPosition(value);
+      });
       this.forecastPolyline.setLatLngs(val);
       this.forecastPolyline.redraw();
     }

@@ -134,6 +134,10 @@ export class SkipperComponent implements OnInit {
     this.forecast = this.mapService.forecastRoute(this.skipper.position, this.skipper.direction, this.currentPolar);
   }
 
+  displayForecast() {
+    return JSON.stringify(this.forecast, null, 4);
+  }
+
   isForecastSpeedConfirmed(): boolean {
     return (Math.round(10 * this.forecast.getFirstSpeed()) === 0) || (Math.round(10 * this.getSpeed(this.skipper)) !== 0);
   }
