@@ -19,25 +19,29 @@
         </form>
     </div>
     <div class="col-md-6  col-sm-12">
+        <h2 translate="me.friend_title"></h2>
+        <div *ngFor="let friend of friends">
+            <span *ngIf="friend.nic">{{friend.nic}} ({{friend.name}})</span>
+            <span *ngIf="!friend.nic">{{friend.name}}</span>
+        </div>
         <form name="friendForm">
             <div class="form-group">
                 <label translate="me.friend_label" for="friend"></label>
-                <sui-select class="selection"
+                <sui-select class="selection form-control"
                             name="friend"
-                            [(ngModel)]="friend"
+                            [(ngModel)]="selectedFriend"
                             [isSearchable]="true"
-                            [optionsLookup]="refreshFriendSearch">
-                    <sui-select-option *ngFor="let player of players" value="player.id"></sui-select-option>
+                            labelField="name"
+                            [optionsLookup]="refreshFriendSearch"
+                            #searchSelect>
+                    <sui-select-option *ngFor="let player of searchSelect.filteredOptions" [value]="player"></sui-select-option>
                 </sui-select>
-                <!--<sui-select
-                    placeholder="{{ 'me.search_placeholder' | translate }}"
-                    [(ngModel)]="friend"
-                    [options]="{'fullTextSearch': true}"
-                    [isSearchable]="true"
-                    (ngModelChange)="reloadPlayer($event)">
-                    <option *ngFor="let player of players" value="{{player.id}}">{{player.name}}</option>
-                </sui-select>-->
             </div>
         </form>
+        <div *ngIf="selectedFriend.id">
+            <h3 *ngIf="selectedFriend.nic">{{selectedFriend.nic}} ({{selectedFriend.name}})</h3>
+            <h3 *ngIf="!selectedFriend.nic">{{selectedFriend.name}}</h3>
+            <button type="button" class="btn btn-primary" translate="me.add_friend" (click)="addFriend(selectedFriend)"></button>
+        </div>
     </div>
 </div>

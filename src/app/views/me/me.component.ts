@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { MeService } from '../../services/me/me.service';
+import { PlayerService } from '../../services/player/player.service';
 import { Player } from '../../models/player';
 
 interface IOption {
-    title: string;
-    index?: number;
+  id: string;
+  name: string;
+  nic: string;
 }
 
 @Component({
@@ -18,21 +21,38 @@ export class MeComponent implements OnInit {
 
   public me: Player = new Player();
   public saving: boolean;
-  public players: Player[] = [];
-  public friend: string;
+  public selectedFriend: Player = new Player();
+  public friends: Player[] = [];
+  private typingFriend: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private meService: MeService,
+    private playerService: PlayerService,
   ) {
 
   }
 
-  public async refreshFriendSearch(query: string): Promise<IOption[]> {
-    console.log(query);
+  public refreshFriendSearch = async (query: string) => {
     return new Promise<IOption[]>(resolve => {
-      resolve([]);
+      if ((query || '').length > 0) {
+        if (this.typingFriend) {
+          this.typingFriend.unsubscribe();
+        }
+        this.typingFriend = Observable.timer(700).subscribe(() => {
+          this.playerService.search(query).subscribe((players: Player[]) => {
+            const options: IOption[] = players.map((player: Player) => ({
+              name: player.name,
+              id: player.id,
+              nic: player.nic,
+            }));
+            resolve(options);
+          });
+        });
+      } else {
+        resolve([]);
+      }
     });
   }
 
@@ -43,14 +63,27 @@ export class MeComponent implements OnInit {
     });
   }
 
-  reloadPlayer(event) {
-    console.log(event);
+  addFriend(friend: Player) {
+    this.playerService.addFriend(friend).subscribe(() => {
+      this.selectedFriend = new Player();
+    });
   }
 
-  ngOnInit() {
+  listFriends() {
+    this.playerService.getFriends().subscribe((friends: Player[]) => {
+      this.friends = friends;
+    });
+  }
+
+  getIdentity() {
     this.meService.getIdentity().subscribe((player: Player) => {
       this.me = player;
     });
+  }
+
+  ngOnInit() {
+    this.getIdentity();
+    this.listFriends();
   }
 
 }

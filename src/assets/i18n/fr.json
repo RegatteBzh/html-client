@@ -17,7 +17,9 @@
         "nic_label": "Pseudo",
         "friend_label": "Chercher des amis",
         "submit": "Enregistrer",
-        "search_placeholder": "Chercher ..."
+        "search_placeholder": "Chercher ...",
+        "add_friend": "Ajouter cet(te) ami(e)",
+        "friend_title": "Mes amis"
     },
     "dashboard": {
         "your_races": "Vos compétitions",

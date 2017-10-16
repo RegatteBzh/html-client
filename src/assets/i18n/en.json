@@ -17,7 +17,9 @@
         "nic_label": "Nicname",
         "friend_label": "Search friends",
         "submit": "Save",
-        "search_placeholder": "Search ..."
+        "search_placeholder": "Search ...",
+        "add_friend": "Add this friend",
+        "friend_title": "My friends"
     },
     "dashboard": {
         "your_races": "Your races",

@@ -18,6 +18,7 @@ import { ConfigService } from './services/config/config.service';
 import { LanguageService } from './services/language/language.service';
 import { MapService } from './services/map/map.service';
 import { MeService } from './services/me/me.service';
+import { PlayerService } from './services/player/player.service';
 import { PolarService } from './services/polar/polar.service';
 import { RaceService } from './services/race/race.service';
 import { SkipperService } from './services/skipper/skipper.service';
@@ -49,6 +50,7 @@ import { TrigoService } from './services/trigo/trigo.service';
     LanguageService,
     MapService,
     MeService,
+    PlayerService,
     PolarService,
     RaceService,
     SkipperService,
