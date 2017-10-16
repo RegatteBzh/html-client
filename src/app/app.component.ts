@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,19 +10,31 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = 'LoginPage';
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Login', component: 'LoginPage' }
     ];
 
+    this.initTranslate();
+
+  }
+
+  initTranslate() {
+    // Set the default language for translation strings, and the current language.
+    this.translate.setDefaultLang('en');
+
+    if (this.translate.getBrowserLang() !== undefined) {
+      this.translate.use(this.translate.getBrowserLang());
+    } else {
+      this.translate.use('en'); // Set your language here
+    }
   }
 
   initializeApp() {

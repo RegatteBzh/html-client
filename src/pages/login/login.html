@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="content">
+    <div class="frame">
+
+      <h2 translate="login.welcome"></h2>
+
+      <a href="{{urlPrefix}}/auth/facebook/login" class="btn btn-primary">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+        <span translate="login.facebook"></span>
+      </a>
+
+      <a href="{{urlPrefix}}/auth/google/login" class="btn btn-danger">
+        <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+        <span translate="login.google"></span>
+      </a>
+
+    </div>
+  </div>
+
+  <!--button ion-button secondary menuToggle>Toggle Menu</button-->
+</ion-content>

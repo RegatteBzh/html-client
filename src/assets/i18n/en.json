@@ -1,0 +1,74 @@
+{
+    "fr": "French",
+    "en": "English",
+    "app": {
+        "disconnect": "Disconnect",
+        "dashboard": "Dashboard",
+        "me": "Profil"
+    },
+    "login": {
+        "welcome": "Welcome to Regatta",
+        "google": "Google",
+        "facebook": "Facebook"
+    },
+    "me": {
+        "email_label": "Email Address",
+        "name_label": "Name",
+        "nic_label": "Nicname",
+        "friend_label": "Search friends",
+        "submit": "Save",
+        "search_placeholder": "Search ...",
+        "add_friend": "Add this friend",
+        "friend_title": "My friends"
+    },
+    "dashboard": {
+        "your_races": "Your races",
+        "available_races": "Available races",
+        "welcome": "Welcome {{name}}"
+    },
+    "skipper": {
+        "control": {
+            "speed_label": "Speed",
+            "position_label": "Position",
+            "sail_label": "Sail",
+            "bearing_label": "Bearing",
+            "boat_label": "Boat",
+            "wind_dir_label": "Wind dir.",
+            "wind_speed_label": "Wind sp."
+        }
+    },
+    "misc": {
+        "speed": {
+            "knot_unit": "kt"
+        }
+    },
+    "sail": {
+        "maxi_trimaran": {
+            "code zéro": "Code zéro",
+            "foc": "Foc",
+            "foc2": "Foc2",
+            "gennaker": "Gennaker",
+            "genois": "Génois",
+            "spi léger": "Spi léger",
+            "spi": "Spi"
+        },
+        "mini_6.50_v2": {
+            "code zéro": "Code zéro",
+            "foc": "Foc",
+            "foc2": "Foc2",
+            "gennaker": "Gennaker",
+            "genois": "Génois",
+            "spi léger": "Spi léger",
+            "spi": "Spi"
+        },
+        "imoca60": {
+            "code zéro": "Code zéro",
+            "foc": "Foc",
+            "foc2": "Foc2",
+            "gennaker": "Gennaker",
+            "genois": "Génois",
+            "spi léger": "Spi léger",
+            "spi": "Spi"
+        }
+    }
+}
