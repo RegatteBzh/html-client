@@ -12,13 +12,14 @@ import 'rxjs/add/operator/do';
 
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
+import { App } from 'ionic-angular';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     public authService: AuthService,
-    // public navCtrl: NavController,
+    public appCtrl: App
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -41,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).do(event => {}, err => {
       if (isApi && (err.status === 401 || err.status === 403)) {
         this.authService.setToken(null);
-        // this.navCtrl.push('LoginPage');
+        this.appCtrl.getRootNav().push('LoginPage');
       }
     });
   }
