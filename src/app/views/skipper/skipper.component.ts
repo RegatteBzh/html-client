@@ -64,14 +64,6 @@ export class SkipperComponent implements OnInit {
     });
   }
 
-  getSpeed(skipper: Skipper): number {
-    return this.trigoService.meterToKnot(skipper.speed);
-  }
-
-  getWindSpeed(skipper: Skipper): number {
-    return this.trigoService.meterToKnot(skipper.windSpeed);
-  }
-
   selectSail(sail) {
     this.disablePoller = true;
     this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((skipperResp: Skipper) => {
@@ -139,7 +131,7 @@ export class SkipperComponent implements OnInit {
   }
 
   isForecastSpeedConfirmed(): boolean {
-    return (Math.round(10 * this.forecast.getFirstSpeed()) === 0) || (Math.round(10 * this.getSpeed(this.skipper)) !== 0);
+    return (Math.round(10 * this.forecast.getFirstSpeed()) === 0) || (Math.round(10 * this.skipper.speed) !== 0);
   }
 
   ngOnInit() {

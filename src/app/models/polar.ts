@@ -9,7 +9,7 @@ export class Polar {
         this.data = data;
     }
 
-    getSpeedAt(wind: number, direction: number) {
+    getSpeedCoefAt(wind: number, direction: number): number {
         const sampledWind0 = Math.floor(wind / 10);
         const sampledWind1 = sampledWind0 + 1;
         const sampledDirection = Math.round((direction % 180) / 5);
