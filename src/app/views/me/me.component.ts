@@ -6,7 +6,7 @@ import { MeService } from '../../services/me/me.service';
 import { PlayerService } from '../../services/player/player.service';
 import { Player } from '../../models/player';
 
-import { remove } from 'lodash';
+import { remove, map, filter, find } from 'lodash';
 
 interface IOption {
   id: string;
@@ -44,11 +44,14 @@ export class MeComponent implements OnInit {
         }
         this.typingFriend = Observable.timer(700).subscribe(() => {
           this.playerService.search(query).subscribe((players: Player[]) => {
-            const options: IOption[] = players.map((player: Player) => ({
-              name: player.name,
-              id: player.id,
-              nic: player.nic,
-            }));
+            const options: IOption[] = map<Player, IOption>(
+              filter(players, (player) => !find(this.friends, { id: player.id })),
+              (player: Player) => ({
+                name: player.name,
+                id: player.id,
+                nic: player.nic,
+              })
+            );
             resolve(options);
           });
         });
