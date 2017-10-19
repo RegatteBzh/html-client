@@ -24,18 +24,27 @@ export class PlayerService {
   /**
    * Add a friend
    * @param friend Player
+   * @return {Observable<Player>}
+   */
+  addFriend(friend: Player): Observable<Player> {
+    return this.httpClient.post<Player>(`/api/players/friends/`, { id: friend.id });
+  }
+
+  /**
+   * remove a friend
+   * @param friend Player
    * @return {Observable<Status>}
    */
-  addFriend(friend: Player): Observable<Status> {
-    return this.httpClient.post<Status>(`/api/players/friend`, { id: friend.id });
+  removeFriend(friend: Player): Observable<Status> {
+    return this.httpClient.delete<Status>(`/api/players/friends/${friend.id}`);
   }
 
   /**
    * list friends
-   * @return {Observable<Status>}
+   * @return {Observable<Player[]>}
    */
   getFriends(): Observable<Player[]> {
-    return this.httpClient.get<Player[]>(`/api/players/friend`);
+    return this.httpClient.get<Player[]>(`/api/players/friends/`);
   }
 
 

@@ -6,6 +6,8 @@ import { MeService } from '../../services/me/me.service';
 import { PlayerService } from '../../services/player/player.service';
 import { Player } from '../../models/player';
 
+import { remove } from 'lodash';
+
 interface IOption {
   id: string;
   name: string;
@@ -64,8 +66,15 @@ export class MeComponent implements OnInit {
   }
 
   addFriend(friend: Player) {
-    this.playerService.addFriend(friend).subscribe(() => {
+    this.playerService.addFriend(friend).subscribe((friendElt: Player) => {
+      this.friends.push(friendElt);
       this.selectedFriend = new Player();
+    });
+  }
+
+  deleteFriend(friend: Player) {
+    this.playerService.removeFriend(friend).subscribe(() => {
+      remove(this.friends, { id: friend.id });
     });
   }
 

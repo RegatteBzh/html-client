@@ -19,7 +19,8 @@
         "submit": "Enregistrer",
         "search_placeholder": "Chercher ...",
         "add_friend": "Ajouter cet(te) ami(e)",
-        "friend_title": "Mes amis"
+        "friend_title": "Mes amis",
+        "identity_title": "Mon identité"
     },
     "dashboard": {
         "your_races": "Vos compétitions",

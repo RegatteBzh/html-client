@@ -19,7 +19,8 @@
         "submit": "Save",
         "search_placeholder": "Search ...",
         "add_friend": "Add this friend",
-        "friend_title": "My friends"
+        "friend_title": "My friends",
+        "identity_title": "My Identity"
     },
     "dashboard": {
         "your_races": "Your races",
