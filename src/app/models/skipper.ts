@@ -2,6 +2,7 @@ import { LatLng } from 'leaflet';
 import { Sail } from './sail';
 import { Boat } from './boat';
 import { Race } from './race';
+import { Player } from './player';
 
 
 export class Skipper {
@@ -15,6 +16,7 @@ export class Skipper {
     public race: Race;
     public windAngle: number;
     public windSpeed: number;
+    public player: Player;
 
     constructor(
     ) {

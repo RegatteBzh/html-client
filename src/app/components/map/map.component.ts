@@ -8,11 +8,13 @@ import {
 } from '@yaga/leaflet-ng2';
 
 import { forEach, map, first } from 'lodash';
-import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions } from 'leaflet';
+import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions, Marker, Icon } from 'leaflet';
 import 'leaflet-velocity';
 
 import { BoatMarker } from '../../plugins/boat.plugin';
 import { ForecastMarker } from '../../plugins/forecastMarker.plugin';
+
+import { Skipper } from '../../models/skipper';
 
 import { MapService } from '../../services/map/map.service';
 import { ConfigService } from '../../services/config/config.service';
@@ -36,6 +38,7 @@ export class MapComponent implements AfterViewInit {
   private vLayer;
   private boatMarker: BoatMarker;
   private forecastMarkers: ForecastMarker[] = null;
+  private friendsMarkers: Marker[] = [];
 
   public zoom = 2;
   public maxBound: LatLngBounds;
@@ -87,6 +90,27 @@ export class MapComponent implements AfterViewInit {
   set position(val: LatLng) {
     this.positionValue = val;
     this.boatMarker.setPosition(val);
+  }
+
+  @Input()
+  set friends(val: Skipper[]) {
+    const friendIcon = new Icon({
+        iconUrl: '/assets/markers/friend.png',
+        shadowUrl: '/assets/markers/friend-shadow.png',
+        iconSize:     [20, 31], // size of the icon
+        shadowSize:   [15, 32], // size of the shadow
+        iconAnchor:   [10, 31], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 32],  // the same for the shadow
+        popupAnchor:  [0, -32] // point from which the popup should open relative to the iconAnchor
+    });
+    forEach<Marker[]>(this.friendsMarkers, (markerElt: Marker) => {
+      this.mainMap.removeLayer(markerElt);
+    });
+    this.friendsMarkers = map<Skipper, Marker>(val, (skipper) => {
+      const name = skipper.player.nic || skipper.player.name;
+      return  new Marker([skipper.position.lat, skipper.position.lng], {icon: friendIcon})
+      .bindPopup(`${name}(${skipper.speed})`).addTo(this.mainMap);
+    });
   }
 
   @Input()

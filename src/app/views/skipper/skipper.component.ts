@@ -46,6 +46,7 @@ export class SkipperComponent implements OnInit {
   public selectedSail: Sail;
   public skipper = new Skipper();
   public waypoints: LatLng[] = [];
+  public skipperFriends: Skipper[] = [];
 
   changeDirection(event) {
     if (this.directionStab) {
@@ -122,6 +123,12 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  getSkipperFriends(skipper: Skipper) {
+    this.skipperService.getSkipperFriends(skipper.id).subscribe((skippers: Skipper[]) => {
+      this.skipperFriends = skippers;
+    });
+  }
+
   forecastRoute() {
     this.forecast = this.mapService.forecastRoute(this.skipper.position, this.skipper.direction, this.currentPolar);
   }
@@ -140,6 +147,7 @@ export class SkipperComponent implements OnInit {
         this.skipper = skipperResp;
         this.getSails(this.skipper.boat.id);
         this.getWaypoints(this.skipper);
+        this.getSkipperFriends(this.skipper);
         this.loadPolars();
         this.startPoller();
       }, () => {
