@@ -7,7 +7,7 @@
 </div>
 <div class="boat-control">
     <div class="bearing">
-        <app-compass [(direction)]="skipper.direction" (directionChange)="changeDirection($event)">
+        <app-compass [(direction)]="skipper.direction" (directionChange)="changeDirection($event)" (isBusy)="SetCompasBusy($event)">
         </app-compass>
     </div>
     <div class="boat-computer">

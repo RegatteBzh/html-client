@@ -20,6 +20,8 @@ export class CompassComponent implements OnInit {
     this.directionValue = val;
   }
 
+  @Output() isBusy = new EventEmitter<boolean>();
+
   @ViewChild('compass')
   public compassSvg: ElementRef;
 
@@ -36,10 +38,12 @@ export class CompassComponent implements OnInit {
 
   mouseCursorDown() {
     this.mouseDownOnCursor = true;
+    this.isBusy.emit(true);
   }
 
   mouseCursorUp() {
     this.mouseDownOnCursor = false;
+    this.isBusy.emit(false);
   }
 
   mouseCursorMove(event, type: string) {

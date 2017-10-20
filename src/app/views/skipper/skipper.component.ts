@@ -39,7 +39,9 @@ export class SkipperComponent implements OnInit {
   private currentPolar: Polar;
   private directionStab: Subscription;
   private disablePoller = false;
-  private poller: Observable<number>;
+  private poller: Subscription;
+  private pollerError = 0;
+  private compasBusy = false;
 
   public availableSails: Sail[];
   public forecast = new Forecast();
@@ -80,13 +82,23 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  SetCompasBusy (event) {
+    this.compasBusy = event;
+  }
+
   startPoller() {
-    this.poller = Observable.timer(5000, 5000);
-    this.poller.subscribe(() => {
-      this.forecastRoute();
-      this.skipperService.getSkipper(this.skipper.id).subscribe((skipperResp: Skipper) => {
-        extend(this.skipper, omit(skipperResp, ['sail']));
-      });
+    this.poller = Observable.timer(5000, 5000).subscribe(() => {
+      if (!this.compasBusy) {
+        this.forecastRoute();
+        this.skipperService.getSkipper(this.skipper.id).subscribe((skipperResp: Skipper) => {
+          this.pollerError = 0;
+          extend(this.skipper, omit(skipperResp, ['sail']));
+        }, () => {
+          if (this.pollerError++ > 2) {
+            this.poller.unsubscribe();
+          }
+        });
+      }
     });
   }
 
