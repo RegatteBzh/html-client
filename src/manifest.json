@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Regatta",
+  "short_name": "Regatta",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
@@ -10,4 +10,52 @@
   }],
   "background_color": "#4e8ef7",
   "theme_color": "#4e8ef7"
+}
+{
+  "project_info": {
+    "project_number": "83973204363",
+    "project_id": "devregatta"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83973204363:android:2263ab48c44f214d",
+        "android_client_info": {
+          "package_name": "fr.noopy.vv.regatta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83973204363-517b1k2j53m7lv76ns3btqubnm0agh6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.noopy.vv.regatta",
+            "certificate_hash": "4186e412f27ebfc6e328f79b62fd95c1c5fb38d5"
+          }
+        },
+        {
+          "client_id": "83973204363-76443ipa9hhqs09cq1k455u5ttnmffuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN6c3YI8ROCU-pUUiPjw-rrImFWWOglEs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

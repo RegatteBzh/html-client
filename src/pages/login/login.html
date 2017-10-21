@@ -12,15 +12,22 @@
     <div class="frame">
 
       <h2 translate="login.welcome"></h2>
-      <a href="{{urlPrefix}}/auth/facebook/login" ion-button="">
-        <i class="fa fa-facebook-square" aria-hidden="true"></i>
-        <span translate="login.facebook"></span>
-      </a>
-
-      <a href="{{urlPrefix}}/auth/google/login" ion-button class="button-md-danger">
-        <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-        <span translate="login.google"></span>
-      </a>
+      <ng-container *ngIf="platform.is('core')">
+        <a href="{{urlPrefix}}/auth/facebook/login" ion-button="">
+          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          <span translate="login.facebook"></span>
+        </a>
+        <a href="{{urlPrefix}}/auth/google/login" ion-button class="button-md-danger">
+          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+          <span translate="login.google"></span>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="!platform.is('core')">
+        <button ion-button block color="danger" (click)="loginUser()">
+          <ion-icon name="logo-googleplus"></ion-icon>
+          Login with Google
+        </button>
+      </ng-container>
     </div>
   </div>
 

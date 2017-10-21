@@ -24,6 +24,7 @@ import {LoginPage} from '../pages/login/login';
 import {DashboardPage} from "../pages/dashboard/dashboard.component";
 import {SkipperPage} from "../pages/skipper/skipper.component";
 import {ComponentsModule} from "../components/components.module";
+import {GooglePlus} from "@ionic-native/google-plus";
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -78,6 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthService,
     BoatService,
     ConfigService,
+    GooglePlus,
     LanguageService,
     MapService,
     MeService,
