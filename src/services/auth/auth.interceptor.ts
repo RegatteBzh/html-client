@@ -1,26 +1,20 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import {Injectable} from '@angular/core';
 
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,} from '@angular/common/http';
 
 import 'rxjs/add/operator/do';
 
-import { Observable } from 'rxjs/Observable';
-import { AuthService } from './auth.service';
-import { App } from 'ionic-angular';
+import {Observable} from 'rxjs/Observable';
+import {AuthService} from './auth.service';
+import {App} from "ionic-angular";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(
-    public authService: AuthService,
-    public appCtrl: App
-  ) { }
+  constructor(public authService: AuthService,
+              public appCtrl: App) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let isApi = false;
@@ -39,7 +33,8 @@ export class AuthInterceptor implements HttpInterceptor {
         url: request.url.replace(/^\/assets\//, `${environment.apiUrl}/data/`)
       });
     }
-    return next.handle(request).do(event => {}, err => {
+    return next.handle(request).do(event => {
+    }, err => {
       if (isApi && (err.status === 401 || err.status === 403)) {
         this.authService.setToken(null);
         this.appCtrl.getRootNav().push('LoginPage');

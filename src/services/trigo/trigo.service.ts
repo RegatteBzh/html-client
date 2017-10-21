@@ -14,11 +14,11 @@ export class TrigoService {
 
     public EarthRadius: number;
 
-    meterToKnot(speed: number): number {
+    meterPerSecondToKnot(speed: number): number {
         return speed * 1.943844492;
     }
 
-    knotToMeter(speed: number): number {
+    knotToMeterPerSecond(speed: number): number {
         return speed / 1.943844492;
     }
 

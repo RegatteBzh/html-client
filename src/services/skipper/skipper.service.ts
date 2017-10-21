@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LatLng } from 'leaflet';
-import { Sail } from '../../models/sail';
-import { Boat } from '../../models/boat';
-import { Race } from '../../models/race';
 
 import { Observable } from 'rxjs/Rx';
+import { forEach } from 'lodash';
 
 import { Skipper } from '../../models/skipper';
 import { Waypoint } from '../../models/waypoint';
@@ -37,6 +35,23 @@ export class SkipperService {
 
     getWaypoints(skipperId: string): Observable<Waypoint[]> {
         return this.http.get<Waypoint[]>(`/api/skippers/${skipperId}/waypoints`);
+    }
+
+    /**
+     * List all your skipper friends
+     * @param skipperID skipper identifier
+     * @return {Observable<Skipper[]>}
+     */
+    getSkipperFriends(skipperID): Observable<Skipper[]> {
+        return Observable.create(observer => {
+            this.http.get<Skipper[]>(`/api/skippers/${skipperID}/friends`).subscribe((skippers: Skipper[]) => {
+                forEach<Skipper[]>(skippers, (skipper) => {
+                    skipper.position = new LatLng(skipper.position.lat, skipper.position.lng);
+                });
+                observer.next(skippers);
+            });
+          }
+        );
     }
 
 }

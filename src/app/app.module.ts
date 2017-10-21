@@ -21,62 +21,75 @@ import {ConfigService} from "../services/config/config.service";
 import {BoatService} from "../services/boat/boat.service";
 import {AuthService} from "../services/auth/auth.service";
 import {LoginPage} from '../pages/login/login';
+import {DashboardPage} from "../pages/dashboard/dashboard.component";
+import {SkipperPage} from "../pages/skipper/skipper.component";
+import {ComponentsModule} from "../components/components.module";
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-    declarations: [
-        MyApp,
-        LoginPage
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        IonicModule.forRoot(MyApp, {}, {
-            links: [
-                {component: LoginPage, name: 'LoginPage', segment: 'login', loadChildren: '', defaultHistory: [], priority: ''},
-                {component: LoginPage, name: 'LoginTokenPage', segment: 'login/:token', loadChildren: '', defaultHistory: [], priority: ''}
-            ]
-        }),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        }),
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        MyApp,
-        LoginPage
-    ],
-    providers: [
-        AuthInterceptor,
-        AuthService,
-        BoatService,
-        ConfigService,
-        LanguageService,
-        MapService,
-        MeService,
-        PlayerService,
-        PolarService,
-        RaceService,
-        SkipperService,
-        TrigoService,
+  declarations: [
+    MyApp,
+    LoginPage,
+    DashboardPage,
+    SkipperPage
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ComponentsModule,
+    IonicModule.forRoot(MyApp, {}, {
+      links: [
+        {component: LoginPage, name: 'LoginPage', segment: 'login', loadChildren: '', defaultHistory: [], priority: ''},
         {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
-        },
-        StatusBar,
-        SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
-    ]
+          component: LoginPage,
+          name: 'LoginTokenPage',
+          segment: 'login/:token',
+          loadChildren: '',
+          defaultHistory: [],
+          priority: ''
+        }
+      ]
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    LoginPage
+  ],
+  providers: [
+    AuthInterceptor,
+    AuthService,
+    BoatService,
+    ConfigService,
+    LanguageService,
+    MapService,
+    MeService,
+    PlayerService,
+    PolarService,
+    RaceService,
+    SkipperService,
+    TrigoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class AppModule {
 }

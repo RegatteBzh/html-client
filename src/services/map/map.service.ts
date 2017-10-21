@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LatLng } from 'leaflet';
 import { first } from 'lodash';
 
-import { environment } from '../../environments/environment';
 import { WindAxis, Wind } from '../../models/wind';
 import { Polar } from '../../models/polar';
 
@@ -82,8 +80,8 @@ export class MapService {
       return new WindSpeed();
     }
     return new WindSpeed(
-      this.trigoService.meterToKnot(value[0]),
-      this.trigoService.meterToKnot(value[1])
+      this.trigoService.meterPerSecondToKnot(value[0]),
+      this.trigoService.meterPerSecondToKnot(value[1])
     );
   }
 
@@ -93,16 +91,18 @@ export class MapService {
       result.way.push(position);
       for (let i = 0; i < this.forecastOptions.steps; i++) {
         const lastPos = result.getLastPosition();
-        const windSpeed = this.getWindAt(lastPos, i);
+        const windSpeedKnot = this.getWindAt(lastPos, i);
 
-        const relativeWindBearing = Math.abs(bearingDegree - (windSpeed.bearing + 180) % 360) % 180;
+        const relativeWindBearing = Math.abs(bearingDegree - (windSpeedKnot.bearing + 180) % 360) % 180;
 
-        const speed = polar.getSpeedAt(windSpeed.value, relativeWindBearing);
-        const distance = speed * 3.6 * this.forecastOptions.stepHour;
-        result.speed.push(this.trigoService.meterToKnot(speed));
-        result.way.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distance, bearingDegree));
+        const speedKnot = windSpeedKnot.value * polar.getSpeedCoefAt(windSpeedKnot.value, relativeWindBearing);
+        const distanceKm = this.trigoService.knotToMeterPerSecond(speedKnot) * 3.6 * this.forecastOptions.stepHour;
+        result.speed.push(speedKnot);
+        result.way.push(this.trigoService.pointAtDistanceAndBearing(lastPos, distanceKm, bearingDegree));
         result.windRelativeBearings.push(relativeWindBearing);
-        result.windBearing.push(windSpeed.bearing);
+        result.windBearing.push(windSpeedKnot.bearing);
+        result.windSpeedKnot.push(windSpeedKnot.value);
+        result.distanceKm.push(distanceKm);
       }
       return result;
   }

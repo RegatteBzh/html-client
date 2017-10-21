@@ -1,5 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import {} from 'jasmine';
+
 import { AuthInterceptor } from './auth.interceptor';
 
 describe('AuthInterceptorService', () => {

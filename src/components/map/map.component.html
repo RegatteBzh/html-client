@@ -1,0 +1,24 @@
+<div class="mapControl">
+  <select [(ngModel)]="currentMap" class="source-selector">
+    <option *ngFor="let map of maps" [ngValue]="map">
+        {{map.name}}
+    </option>
+  </select>
+  <select [(ngModel)]="currentWindIndex" class="source-selector" (ngModelChange)="selectWind($event)">
+    <option *ngFor="let windIndex of windIndexes" [ngValue]="windIndex">
+        {{windIndex.name}}
+    </option>
+  </select>
+  <div class="map">
+    <yaga-map
+    [(zoom)]="zoom"
+    [(maxBounds)]="maxBound"
+    (zoomstart)="resetWind($event)"
+    (move)="resetWind($event)"
+    maxZoom="15"
+    minZoom="2"
+    #mainMap>
+      <yaga-tile-layer [url]="currentMap.url" #mainLayer></yaga-tile-layer>
+    </yaga-map>
+  </div>
+</div>
