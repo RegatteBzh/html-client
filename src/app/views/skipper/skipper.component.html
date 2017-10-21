@@ -1,4 +1,4 @@
-<div class="map">
+<div class="map" [ngClass]="{'ground-fail': skipper.groundFail}">
     <app-map [position]="skipper.position"
              [direction]="skipper.direction"
              [waypoints]="waypoints"
@@ -6,11 +6,11 @@
              [friends]="skipperFriends"></app-map>
 </div>
 <div class="boat-control">
-    <div class="bearing">
+    <div class="bearing" [ngClass]="{'ground-fail': skipper.groundFail}">
         <app-compass [(direction)]="skipper.direction" (directionChange)="changeDirection($event)" (isBusy)="SetCompasBusy($event)">
         </app-compass>
     </div>
-    <div class="boat-computer">
+    <div class="boat-computer" [ngClass]="{'ground-fail': skipper.groundFail}">
         <div class="control-item">
             <label translate="skipper.control.boat_label"></label>
             <span class="digi">{{ skipper.boat.name }}</span>
