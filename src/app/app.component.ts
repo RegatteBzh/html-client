@@ -22,16 +22,7 @@ export class MyApp {
               public statusBar: StatusBar, public splashScreen: SplashScreen,
             public authService: AuthService) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Login', component: LoginPage },
-      { title: 'Dashboard', component: DashboardPage},
-      { title: 'Skipper', component: SkipperPage}
-    ];
-
     this.initTranslate();
-
   }
 
   initTranslate() {
@@ -51,6 +42,11 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.pages = [
+        { title: this.translate.instant('dashboard.title'), component: DashboardPage},
+        { title: this.translate.instant("app.disconnect"), component: LoginPage },
+      ];
     });
   }
 

@@ -22,6 +22,7 @@
         "friend_title": "My friends"
     },
     "dashboard": {
+        "title" : "Dashboard",
         "your_races": "Your races",
         "available_races": "Available races",
         "welcome": "Welcome {{name}}"

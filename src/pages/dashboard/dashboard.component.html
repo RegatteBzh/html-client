@@ -1,3 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <span translate="dashboard.title"></span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
 <h1 translate="dashboard.welcome" [translateParams]="{name: me.nic || me.name}"></h1>
 
 <h2 translate="dashboard.your_races"></h2>
@@ -13,3 +25,4 @@
     <button type="button" (click)="register(race.id)">{{race.name}}</button>
   </li>
 </ul>
+</ion-content>

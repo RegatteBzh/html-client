@@ -16,14 +16,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.setToken(null);
     this.urlPrefix = environment.apiUrl;
 
-    this.authService.setToken(this.navParams.get('token'));
-
-    if (this.authService.getToken()) {
-      this.navCtrl.push('DashboardPage');
+    let token = this.navParams.get('token');
+    if (token) {
+      this.authService.setToken(token);
+      this.navCtrl.setRoot('DashboardPage');
     }
-
   }
 
 }

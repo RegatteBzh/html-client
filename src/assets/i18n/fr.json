@@ -22,9 +22,10 @@
         "friend_title": "Mes amis"
     },
     "dashboard": {
+        "title" : "Tableau de bord",
         "your_races": "Vos compétitions",
         "available_races": "Compétitions disponibles",
-        "welcome": "bienvenu {{name}}"
+        "welcome": "Bienvenue {{name}}"
     },
     "skipper": {
         "control": {
