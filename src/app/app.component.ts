@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {DashboardPage} from "../pages/dashboard/dashboard.component";
 import {SkipperPage} from "../pages/skipper/skipper.component";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,7 +18,9 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(private translate: TranslateService, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, public platform: Platform,
+              public statusBar: StatusBar, public splashScreen: SplashScreen,
+            public authService: AuthService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
