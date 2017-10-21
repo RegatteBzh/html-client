@@ -13,6 +13,15 @@ page-login {
     width: 500px;
     padding: 40px;
     border-radius: 10px;
+
+    a {
+      margin-bottom: 20px;
+
+      i {
+        font-size: 1.5em;
+        margin-right: 10px;
+      }
+    }
   }
 
   h2 {
