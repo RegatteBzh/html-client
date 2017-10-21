@@ -44,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
     ComponentsModule,
     IonicModule.forRoot(MyApp, {}, {
       links: [
+        {component: LoginPage, name: 'LoginPage', segment: '', loadChildren: '', defaultHistory: [], priority: ''},
         {component: LoginPage, name: 'LoginPage', segment: 'login', loadChildren: '', defaultHistory: [], priority: ''},
         {
           component: LoginPage,
@@ -52,7 +53,9 @@ export function createTranslateLoader(http: HttpClient) {
           loadChildren: '',
           defaultHistory: [],
           priority: ''
-        }
+        },
+        {component: DashboardPage, name: 'DashboardPage', segment: 'dashboard', loadChildren: '', defaultHistory: [], priority: ''},
+        {component: SkipperPage, name: 'SkipperPage', segment: 'skipper/:id', loadChildren: '', defaultHistory: [], priority: ''},
       ]
     }),
     TranslateModule.forRoot({
@@ -66,7 +69,9 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage
+    LoginPage,
+    DashboardPage,
+    SkipperPage
   ],
   providers: [
     AuthInterceptor,

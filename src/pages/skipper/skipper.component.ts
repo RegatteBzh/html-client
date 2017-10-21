@@ -21,8 +21,7 @@ import {IonicPage, NavController, NavParams} from "ionic-angular";
 @IonicPage()
 @Component({
   selector: 'app-skipper',
-  templateUrl: './skipper.component.html',
-  styleUrls: ['./skipper.component.less']
+  templateUrl: './skipper.component.html'
 })
 export class SkipperPage implements OnInit {
 

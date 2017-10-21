@@ -3,7 +3,7 @@
 <h2 translate="dashboard.your_races"></h2>
 <ul>
   <li *ngFor="let skipper of skippers">
-    <a [routerLink]="['/skipper', skipper.id]">{{skipper.race.name}}</a>
+    <a (click)="goToRace(skipper)">{{skipper.race.name}}</a>
   </li>
 </ul>
 

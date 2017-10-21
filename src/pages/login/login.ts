@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     this.authService.setToken(this.navParams.get('token'));
 
     if (this.authService.getToken()) {
-      this.navCtrl.push('Dashboard');
+      this.navCtrl.push('DashboardPage');
     }
 
   }

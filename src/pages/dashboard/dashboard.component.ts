@@ -13,8 +13,7 @@ import {IonicPage, NavController} from "ionic-angular";
 @IonicPage()
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.less']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardPage implements OnInit {
 
@@ -33,6 +32,10 @@ export class DashboardPage implements OnInit {
     this.raceService.registerRace(id).subscribe(skipper => {
       this.navCtrl.push('Skipper', { id: skipper.id});
     });
+  }
+
+  goToRace(skipper: Skipper): void {
+    this.navCtrl.push('SkipperPage', {id: skipper.id});
   }
 
   ngOnInit() {

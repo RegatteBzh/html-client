@@ -1,18 +1,19 @@
-.map {
+app-map {
+  .map {
     width: 700px;
     height: 700px;
-}
+  }
 
-.mapControl {
+  .mapControl {
     display: inline-block;
     vertical-align: top;
-}
+  }
 
-ul.layer-control {
+  ul.layer-control {
     list-style: none;
-}
+  }
 
-.source-selector {
+  .source-selector {
     background: transparent;
     border: none;
     font-size: 14px;
@@ -23,4 +24,5 @@ ul.layer-control {
     background-color: #263b48;
     color: #fff;
     margin: 0 0 5px 0;
+  }
 }

@@ -3,6 +3,9 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {LoginPage} from "../pages/login/login";
+import {DashboardPage} from "../pages/dashboard/dashboard.component";
+import {SkipperPage} from "../pages/skipper/skipper.component";
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +22,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Login', component: 'LoginPage' }
+      { title: 'Login', component: LoginPage },
+      { title: 'Dashboard', component: DashboardPage},
+      { title: 'Skipper', component: SkipperPage}
     ];
 
     this.initTranslate();

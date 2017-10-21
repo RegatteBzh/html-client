@@ -28,8 +28,7 @@ class WindSelect {
 
 @Component({
   selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.less']
+  templateUrl: './map.component.html'
 })
 export class MapComponent implements AfterViewInit {
 

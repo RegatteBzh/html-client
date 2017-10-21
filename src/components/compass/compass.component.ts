@@ -3,8 +3,7 @@ import { first } from 'lodash';
 
 @Component({
   selector: 'app-compass',
-  templateUrl: './compass.component.html',
-  styleUrls: ['./compass.component.css']
+  templateUrl: './compass.component.html'
 })
 export class CompassComponent implements OnInit {
 
