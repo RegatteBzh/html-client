@@ -17,7 +17,8 @@
         </div>
         <div class="control-item">
             <label translate="skipper.control.speed_label"></label>
-            <span class="digi" [ngClass]="{temporary: !isForecastSpeedConfirmed()}">{{ (skipper.speed || forecast.getFirstSpeed()) | number:'1.1-1'}}</span>
+            <span class="digi" *ngIf="skipper.speed>=0">{{ skipper.speed | number:'1.1-1'}}</span>
+            <span class="digi temporary" *ngIf="skipper.speed<0">{{ forecast.getFirstSpeed() | number:'1.1-1'}}</span>
             <span class="digi" translate="misc.speed.knot_unit"></span>
         </div>
         <div class="control-item">
