@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {environment} from "../../environments/environment";
 import {AuthService} from '../../services/auth/auth.service';
 import {GooglePlus} from "@ionic-native/google-plus";
+import {TranslateService} from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
   urlPrefix: string;
   desktop: boolean;
 
-  constructor(public platform: Platform, private googlePlus: GooglePlus, private authService: AuthService, private navParams: NavParams, private navCtrl: NavController) {
+  constructor(public platform: Platform, private googlePlus: GooglePlus, private authService: AuthService, private navParams: NavParams,
+              private navCtrl: NavController, public toastCtrl: ToastController, private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -40,7 +42,11 @@ export class LoginPage implements OnInit {
       });
     })
       .catch(err =>{
-        console.error(err)
+          let toast = this.toastCtrl.create({
+              message: this.translate.instant('login.google_error'),
+              duration: 3000
+          });
+          toast.present();
       } );
   }
 

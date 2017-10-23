@@ -9,7 +9,8 @@
     "login": {
         "welcome": "Welcome to Regatta",
         "google": "Google",
-        "facebook": "Facebook"
+        "facebook": "Facebook",
+        "google_error": "Error on Google authentification"
     },
     "me": {
         "email_label": "Email Address",
