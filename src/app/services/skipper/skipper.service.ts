@@ -48,7 +48,7 @@ export class SkipperService {
     getSkipperFriends(skipperID): Observable<Skipper[]> {
         return Observable.create(observer => {
             this.http.get<Skipper[]>(`/api/skippers/${skipperID}/friends`).subscribe((skippers: Skipper[]) => {
-                forEach<Skipper[]>(skippers, (skipper) => {
+                forEach<Skipper, Skipper[]>(skippers, (skipper: Skipper) => {
                     skipper.position = new LatLng(skipper.position.lat, skipper.position.lng);
                 });
                 observer.next(skippers);
