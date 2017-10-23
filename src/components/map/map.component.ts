@@ -3,12 +3,11 @@ import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
 import {
   MapComponent as YagaMapComponent,
   TileLayerDirective as YagaTileLayerDirective,
-  MarkerDirective as YagaMarkerDirective,
   PolylineDirective as YagaPolylineDirective,
 } from '@yaga/leaflet-ng2';
 
 import { forEach, map, first } from 'lodash';
-import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions, Marker, Icon } from 'leaflet';
+import { LatLng, LatLngBounds, LeafletEvent, Marker, Icon } from 'leaflet';
 import 'leaflet-velocity';
 
 import { BoatMarker } from '../../plugins/boat.plugin';
@@ -74,7 +73,7 @@ export class MapComponent implements AfterViewInit {
           return marker;
         });
       }
-      forEach<LatLng[]>(val, (value: LatLng, index) => {
+      forEach<LatLng, LatLng[]>(val, (value: LatLng, index) => {
         this.forecastMarkers[index].setPosition(value);
       });
       this.forecastPolyline.setLatLngs(val);
@@ -102,7 +101,7 @@ export class MapComponent implements AfterViewInit {
         shadowAnchor: [0, 32],  // the same for the shadow
         popupAnchor:  [0, -32] // point from which the popup should open relative to the iconAnchor
     });
-    forEach<Marker[]>(this.friendsMarkers, (markerElt: Marker) => {
+    forEach<Marker, Marker[]>(this.friendsMarkers, (markerElt: Marker) => {
       this.mainMap.removeLayer(markerElt);
     });
     this.friendsMarkers = map<Skipper, Marker>(val, (skipper) => {

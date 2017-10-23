@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LatLng } from 'leaflet';
 
-import { find, omit, extend, map, forEach } from 'lodash';
+import { find, omit, extend, forEach } from 'lodash';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';

@@ -1,4 +1,4 @@
-import { LatLng, Marker, Icon, LatLngExpression } from 'leaflet';
+import { Marker, Icon, LatLngExpression } from 'leaflet';
 
 class MarkerIcon extends Icon {
     constructor() {
