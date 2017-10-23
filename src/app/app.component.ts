@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {DashboardPage} from "../pages/dashboard/dashboard.component";
-import {SkipperPage} from "../pages/skipper/skipper.component";
 import {AuthService} from "../services/auth/auth.service";
 
 @Component({

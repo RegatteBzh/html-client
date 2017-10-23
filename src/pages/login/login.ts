@@ -13,10 +13,6 @@ export class LoginPage implements OnInit {
 
   urlPrefix: string;
   desktop: boolean;
-  result: string;
-  resultE: string;
-
-
 
   constructor(public platform: Platform, private googlePlus: GooglePlus, private authService: AuthService, private navParams: NavParams, private navCtrl: NavController) {
   }
@@ -38,16 +34,12 @@ export class LoginPage implements OnInit {
     this.googlePlus.login({
       'webClientId': '83973204363-76443ipa9hhqs09cq1k455u5ttnmffuv.apps.googleusercontent.com'
     }).then( res => {
-      this.result = res;
-      this.authService.setToken(res.idToken);
-      // Register to API
-      // TODO
-
-      // navigate to dashboard
-      this.navCtrl.setRoot('DashboardPage');
+      this.authService.authGoogleCheckout(res).first().subscribe(r => {
+          this.authService.setToken(r.token);
+          this.navCtrl.setRoot('DashboardPage');
+      });
     })
       .catch(err =>{
-        this.resultE = err;
         console.error(err)
       } );
   }
