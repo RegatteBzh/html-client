@@ -87,6 +87,14 @@ export class MapService {
     );
   }
 
+  getRelativeAngle(boat: number, wind: number): number {
+    const angle = (wind - boat + 360) % 360;
+    if (angle < 180) {
+      return 180 - angle;
+    }
+    return angle - 180;
+  }
+
   forecastRoute(position: LatLng, bearingDegree: number, polar: Polar, options?: any): Forecast {
       options = options || {};
       const result = new Forecast();
@@ -95,7 +103,7 @@ export class MapService {
         const lastPos = result.getLastPosition();
         const windSpeedKnot = this.getWindAt(lastPos, i);
 
-        const relativeWindBearing = Math.abs(bearingDegree - (windSpeedKnot.bearing + 180) % 360) % 180;
+        const relativeWindBearing = this.getRelativeAngle(bearingDegree, windSpeedKnot.bearing);
 
         const speedKnot = windSpeedKnot.value * polar.getSpeedCoefAt(windSpeedKnot.value, relativeWindBearing);
         const distanceKm = this.trigoService.knotToMeterPerSecond(speedKnot) * 3.6 * this.forecastOptions.stepHour;

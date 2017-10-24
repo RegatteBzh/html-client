@@ -54,7 +54,7 @@ export class SkipperComponent implements OnInit {
     if (this.directionStab) {
       this.directionStab.unsubscribe();
     }
-    this.skipper.windAngle = -1;
+    this.skipper.windRelativeAngle = -1;
     this.skipper.speed = -1;
     this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {

@@ -28,8 +28,8 @@
         </div>
         <div class="control-item">
             <label translate="skipper.control.wind_dir_label"></label>
-            <span class="digi" *ngIf="skipper.windAngle>=0">{{ skipper.windAngle | number:'1.0-0'}}</span>
-            <span class="digi" *ngIf="skipper.windAngle<0">--</span>
+            <span class="digi" *ngIf="skipper.windRelativeAngle>=0">{{ skipper.windRelativeAngle | number:'1.0-0'}}</span>
+            <span class="digi" *ngIf="skipper.windRelativeAngle<0">{{ forecast.getFirstWindDirection() | number:'1.0-0'}}</span>
             <span class="digi">°</span>
         </div>
         <div class="control-item">
@@ -52,6 +52,6 @@
                 </option>
               </select>
         </div>
-        <!--<pre>{{displayForecast()}}</pre>-->
+        <pre>{{displayForecast()}}</pre>
     </div>
 </div>
