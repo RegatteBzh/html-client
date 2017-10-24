@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 import {AuthCheckout, Player} from '../../models/player';
+import {environment} from "../../environments/environment";
 
 
 @Injectable()
@@ -30,7 +31,7 @@ export class MeService {
   }
 
   authGoogleCheckout(res: any): Observable<AuthCheckout> {
-    return this.httpClient.post<AuthCheckout>(`/api/auth/google/checkout/`, res)
+    return this.httpClient.post<AuthCheckout>(environment.apiUrl + `/auth/google/checkout`, res)
   }
 
 }

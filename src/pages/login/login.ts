@@ -37,23 +37,23 @@ export class LoginPage implements OnInit {
   loginUser(): void {
     this.googlePlus.login({
       'webClientId': '83973204363-76443ipa9hhqs09cq1k455u5ttnmffuv.apps.googleusercontent.com'
-    }).then( res => {
+    }).then(res => {
 
 
       this.meService.authGoogleCheckout(res).first().subscribe(r => {
-          this.authService.setToken(r.token);
-          this.navCtrl.setRoot('DashboardPage');
+        this.authService.setToken(r.token);
+        this.navCtrl.setRoot('DashboardPage');
       });
 
 
     })
-      .catch(err =>{
-          let toast = this.toastCtrl.create({
-              message: this.translate.instant('login.google_error'),
-              duration: 3000
-          });
-          toast.present();
-      } );
+      .catch(err => {
+        let toast = this.toastCtrl.create({
+          message: this.translate.instant('login.google_error'),
+          duration: 3000
+        });
+        toast.present();
+      });
   }
 
 }
