@@ -18,3 +18,7 @@ export class Player {
     }
 
 }
+
+export class AuthCheckout {
+  token: string;
+}

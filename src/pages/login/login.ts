@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {AuthService} from '../../services/auth/auth.service';
 import {GooglePlus} from "@ionic-native/google-plus";
 import {TranslateService} from '@ngx-translate/core';
+import {MeService} from "../../services/me/me.service";
 
 @IonicPage()
 @Component({
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
   urlPrefix: string;
   desktop: boolean;
 
-  constructor(public platform: Platform, private googlePlus: GooglePlus, private authService: AuthService, private navParams: NavParams,
+  constructor(public meService: MeService,
+              public platform: Platform, private googlePlus: GooglePlus, private authService: AuthService, private navParams: NavParams,
               private navCtrl: NavController, public toastCtrl: ToastController, private translate: TranslateService) {
   }
 
@@ -36,10 +38,14 @@ export class LoginPage implements OnInit {
     this.googlePlus.login({
       'webClientId': '83973204363-76443ipa9hhqs09cq1k455u5ttnmffuv.apps.googleusercontent.com'
     }).then( res => {
-      this.authService.authGoogleCheckout(res).first().subscribe(r => {
+
+
+      this.meService.authGoogleCheckout(res).first().subscribe(r => {
           this.authService.setToken(r.token);
           this.navCtrl.setRoot('DashboardPage');
       });
+
+
     })
       .catch(err =>{
           let toast = this.toastCtrl.create({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { Player } from '../../models/player';
+import {AuthCheckout, Player} from '../../models/player';
 
 
 @Injectable()
@@ -27,6 +27,10 @@ export class MeService {
    */
   setNic(nic: string): Observable<Player> {
     return this.httpClient.put<Player>(`/api/me/`, { nic: nic });
+  }
+
+  authGoogleCheckout(res: any): Observable<AuthCheckout> {
+    return this.httpClient.post<AuthCheckout>(`/api/auth/google/checkout/`, res)
   }
 
 }

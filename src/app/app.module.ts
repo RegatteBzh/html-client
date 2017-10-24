@@ -75,7 +75,6 @@ export function createTranslateLoader(http: HttpClient) {
     SkipperPage
   ],
   providers: [
-    AuthInterceptor,
     AuthService,
     BoatService,
     ConfigService,

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   setToken(token: string) {
     sessionStorage.setItem('authorization', token || '');
@@ -19,12 +19,4 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  authGoogleCheckout(res: any): Observable<AuthCheckout> {
-    return this.http.post<AuthCheckout>(`/api/auth/google/checkout`, res)
-  }
-
-}
-
-export class AuthCheckout {
-  token: string;
 }
