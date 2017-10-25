@@ -41,6 +41,11 @@ app-skipper {
     padding: 15px;
     border-radius: 15px;
     margin: 5px;
+
+    &.ground-fail {
+        border: solid 2px #ff0000;
+        background-color: #755454;
+    }
   }
 
   div.boat-computer, div.bearing {

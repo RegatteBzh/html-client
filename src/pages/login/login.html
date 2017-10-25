@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Login</ion-title>
+    <ion-title translate="login.title"></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -25,7 +25,7 @@
       <ng-container *ngIf="!platform.is('core')">
         <button ion-button block color="danger" (click)="loginUser()">
           <ion-icon name="logo-googleplus"></ion-icon>
-          Login with Google
+          <span translate="login.device_google"></span>
         </button>
       </ng-container>
     </div>

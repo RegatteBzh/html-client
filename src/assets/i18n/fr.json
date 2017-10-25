@@ -7,6 +7,9 @@
         "me": "Profile"
     },
     "login": {
+        "title": "Connexion",
+        "device_google": "Connexion avec Google",
+        "device_facebook": "Connexion avec Facebook",
         "welcome": "Bienvenue à Regatta",
         "google": "Google",
         "facebook": "Facebook",

@@ -27,5 +27,9 @@ export class Forecast {
         return last(this.way);
     }
 
+    getFirstWindDirection (): number {
+        return first(this.windRelativeBearings);
+    }
+
 }
 

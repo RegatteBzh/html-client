@@ -15,14 +15,14 @@
 <h2 translate="dashboard.your_races"></h2>
 <ul>
   <li *ngFor="let skipper of skippers">
-    <a (click)="goToRace(skipper)">{{skipper.race.name}}</a>
+    <a (click)="goToRace(skipper)" [innerHtml]="skipper.race.name"></a>
   </li>
 </ul>
 
 <h2 translate="dashboard.available_races"></h2>
 <ul>
   <li *ngFor="let race of races">
-    <button type="button" (click)="register(race.id)">{{race.name}}</button>
+    <button type="button" (click)="register(race.id)" [innerHtml]="race.name"></button>
   </li>
 </ul>
 </ion-content>

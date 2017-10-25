@@ -52,8 +52,8 @@ export class SkipperPage implements OnInit {
     if (this.directionStab) {
       this.directionStab.unsubscribe();
     }
-    this.skipper.windAngle = -1;
-    this.skipper.speed = 0;
+    this.skipper.windRelativeAngle = -1;
+    this.skipper.speed = -1;
     this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {
       this.disablePoller = true;
@@ -145,10 +145,6 @@ export class SkipperPage implements OnInit {
 
   displayForecast() {
     return JSON.stringify(this.forecast, null, 4);
-  }
-
-  isForecastSpeedConfirmed(): boolean {
-    return (Math.round(10 * this.forecast.getFirstSpeed()) === 0) || (Math.round(10 * this.skipper.speed) !== 0);
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-<div class="map">
+<div class="map"  [ngClass]="{'ground-fail': skipper.groundFail}">
   <app-map [position]="skipper.position"
            [direction]="skipper.direction"
            [waypoints]="waypoints"
@@ -6,49 +6,47 @@
            [friends]="skipperFriends"></app-map>
 </div>
 <div class="boat-control">
-  <div class="bearing">
+  <div class="bearing" [ngClass]="{'ground-fail': skipper.groundFail}">
     <app-compass [(direction)]="skipper.direction" (directionChange)="changeDirection($event)" (isBusy)="SetCompasBusy($event)">
     </app-compass>
   </div>
-  <div class="boat-computer">
+  <div class="boat-computer"  [ngClass]="{'ground-fail': skipper.groundFail}">
     <div class="control-item">
       <label translate="skipper.control.boat_label"></label>
-      <span class="digi">{{ skipper.boat.name }}</span>
+      <span class="digi" [innerHtml]="skipper.boat.name"></span>
     </div>
     <div class="control-item">
-      <label translate="skipper.control.speed_label"></label>
-      <span class="digi" [ngClass]="{temporary: !isForecastSpeedConfirmed()}">{{ (skipper.speed || forecast.getFirstSpeed()) | number:'1.1-1'}}</span>
+      <span class="digi" *ngIf="skipper.speed>=0" [innerHtml]="skipper.speed | number:'1.1-1'"></span>
+      <span class="digi temporary" *ngIf="skipper.speed<0" [innerHtml]="forecast.getFirstSpeed() | number:'1.1-1'"></span>
       <span class="digi" translate="misc.speed.knot_unit"></span>
     </div>
     <div class="control-item">
       <label translate="skipper.control.bearing_label"></label>
-      <span class="digi">{{ skipper.direction | number:'1.0-0'}}</span>
+      <span class="digi" [innerHtml]="skipper.direction | number:'1.0-0'"></span>
       <span class="digi">°</span>
     </div>
     <div class="control-item">
       <label translate="skipper.control.wind_dir_label"></label>
-      <span class="digi" *ngIf="skipper.windAngle>=0">{{ skipper.windAngle | number:'1.0-0'}}</span>
-      <span class="digi" *ngIf="skipper.windAngle<0">--</span>
+      <span class="digi" *ngIf="skipper.windRelativeAngle>=0" [innerHtml]="skipper.windRelativeAngle | number:'1.0-0'"></span>
+      <span class="digi" *ngIf="skipper.windRelativeAngle<0" [innerHtml]="forecast.getFirstWindDirection() | number:'1.0-0'"></span>
       <span class="digi">°</span>
     </div>
     <div class="control-item">
       <label translate="skipper.control.wind_speed_label"></label>
-      <span class="digi">{{ skipper.windSpeed | number:'1.1-1'}}</span>
+      <span class="digi" [innerHtml]="skipper.windSpeed | number:'1.1-1'"></span>
       <span class="digi" translate="misc.speed.knot_unit"></span>
     </div>
     <div class="control-item">
       <label translate="skipper.control.position_label"></label>
       <span class="pos digi">
-                <span class="lat">{{skipper.position.lat | number:'1.3-3'}}</span>
-                <span class="lng">{{skipper.position.lng | number:'1.3-3'}}</span>
+                <span class="lat" [innerHtml]="skipper.position.lat | number:'1.3-3'"></span>
+                <span class="lng" [innerHtml]="skipper.position.lng | number:'1.3-3'"></span>
             </span>
     </div>
     <div class="control-item">
       <label translate="skipper.control.sail_label"></label>
       <select [(ngModel)]="selectedSail" class="sail-selector" (change)="selectSail(selectedSail)">
-        <option *ngFor="let sail of availableSails" [ngValue]="sail">
-          {{ sail.name | translate}}
-        </option>
+        <option *ngFor="let sail of availableSails" [ngValue]="sail" [innerHtml]="sail.name | translate"></option>
       </select>
     </div>
     <!--<pre>{{displayForecast()}}</pre>-->
