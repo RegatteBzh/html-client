@@ -151,7 +151,8 @@ export class SkipperComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.skipperService.getSkipper(params.id).subscribe((skipperResp: Skipper) => {
+      const skipperID = params.id;
+      this.skipperService.getSkipper(skipperID).subscribe((skipperResp: Skipper) => {
         this.skipper = skipperResp;
         this.getSails(this.skipper.boat.id);
         this.getWaypoints(this.skipper);
