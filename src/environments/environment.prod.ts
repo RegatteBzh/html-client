@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://regatta.noopy.fr'
+  apiUrl: 'http://www.sea-race.fr'
 };
