@@ -34,5 +34,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-GoogleService-Info.plist
-google-services.json
+./src/environments/environment.ts
