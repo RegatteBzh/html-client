@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
 
   loginUser(): void {
     this.googlePlus.login({
-      'webClientId': '83973204363-76443ipa9hhqs09cq1k455u5ttnmffuv.apps.googleusercontent.com'
+      webClientId: environment.webClientId
     }).then(res => {
 
 

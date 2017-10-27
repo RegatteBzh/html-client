@@ -70,7 +70,7 @@
     "tslint": "~5.7.0",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project",
+  "description": "Race at sea",
   "cordova": {
     "plugins": {
       "ionic-plugin-keyboard": {},
@@ -78,7 +78,9 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-googleplus": {}
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1027850949295-9pbmbuhjttme9ulml49up485gh5d38f5"
+      }
     },
     "platforms": [
       "android"
