@@ -3,10 +3,28 @@ body {
     background-color: #151B23;
     color: #ddd;
 
-    ion-app {
-        &.md {
+    ion-app.md {
+        background-color: transparent;
+        color: #ddd;
+    }
+
+    ion-content.content-md {
+        background-color: transparent;
+        color: #ddd;
+    }
+
+    ion-navbar {
+        div.toolbar-background {
             background-color: transparent;
+            color: #ddd;
         }
+        div.toolbar-title-md {
+            color: #ddd;
+        }
+    }
+
+    button.bar-button-default-md {
+        color: #ddd;
     }
 }
 

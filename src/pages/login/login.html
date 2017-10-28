@@ -1,11 +1,11 @@
-<ion-header>
+<!--<ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title translate="login.title"></ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header>-->
 
 <ion-content padding>
   <div class="content">
@@ -23,9 +23,9 @@
         </a>
       </ng-container>
       <ng-container *ngIf="!platform.is('core')">
-        <button ion-button class="button-md-danger" (click)="loginUser()">
-          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-          <span translate="login.google"></span>
+          <button ion-button block color="danger" (click)="loginUser()">
+              <ion-icon name="logo-googleplus"></ion-icon>
+              <span translate="login.google"></span>
         </button>
       </ng-container>
     </div>
