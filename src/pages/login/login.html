@@ -23,9 +23,9 @@
         </a>
       </ng-container>
       <ng-container *ngIf="!platform.is('core')">
-        <button ion-button block color="danger" (click)="loginUser()">
-          <ion-icon name="logo-googleplus"></ion-icon>
-          <span translate="login.device_google"></span>
+        <button ion-button class="button-md-danger" (click)="loginUser()">
+          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+          <span translate="login.google"></span>
         </button>
       </ng-container>
     </div>

@@ -1,14 +1,16 @@
 <div class="mapControl">
-  <select [(ngModel)]="currentMap" class="source-selector">
-    <option *ngFor="let map of maps" [ngValue]="map">
-        {{map.name}}
-    </option>
-  </select>
-  <select [(ngModel)]="currentWindIndex" class="source-selector" (ngModelChange)="selectWind($event)">
-    <option *ngFor="let windIndex of windIndexes" [ngValue]="windIndex">
-        {{windIndex.name}}
-    </option>
-  </select>
+  <div>
+    <select [(ngModel)]="currentMap" class="source-selector">
+      <option *ngFor="let map of maps" [ngValue]="map">
+          {{map.name}}
+      </option>
+    </select>
+    <select [(ngModel)]="currentWindIndex" class="source-selector" (ngModelChange)="selectWind($event)">
+      <option *ngFor="let windIndex of windIndexes" [ngValue]="windIndex">
+          {{windIndex.name}}
+      </option>
+    </select>
+  </div>
   <div class="map">
     <yaga-map
     [(zoom)]="zoom"
