@@ -1,6 +1,14 @@
-.map {
-    width: 700px;
-    height: 700px;
+.mapControl {
+    width: 100%;
+    .map {
+        width: 100%;
+        yaga-map {
+            width: 100%;
+            .leaflet-container{
+                width: 100%;
+            }
+        }
+    }
 }
 
 .mapControl {
@@ -18,7 +26,6 @@ ul.layer-control {
     font-size: 14px;
     height: 29px;
     padding: 5px;
-    width: 268px;
     border-radius: 5px;
     background-color: #263b48;
     color: #fff;
