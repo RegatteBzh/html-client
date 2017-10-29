@@ -54,7 +54,7 @@ export class SkipperComponent implements OnInit {
     if (this.directionStab) {
       this.directionStab.unsubscribe();
     }
-    this.skipper.windAngle = -1;
+    this.skipper.windRelativeAngle = -1;
     this.skipper.speed = -1;
     this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {
@@ -151,7 +151,8 @@ export class SkipperComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.skipperService.getSkipper(params.id).subscribe((skipperResp: Skipper) => {
+      const skipperID = params.id;
+      this.skipperService.getSkipper(skipperID).subscribe((skipperResp: Skipper) => {
         this.skipper = skipperResp;
         this.getSails(this.skipper.boat.id);
         this.getWaypoints(this.skipper);

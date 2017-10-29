@@ -15,6 +15,7 @@ export class Skipper {
     public boat: Boat;
     public race: Race;
     public windAngle: number;
+    public windRelativeAngle: number;
     public windSpeed: number;
     public player: Player;
     public groundFail: boolean;
