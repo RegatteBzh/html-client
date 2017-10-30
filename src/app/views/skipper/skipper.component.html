@@ -18,6 +18,12 @@
                 <div class="control-item">
                     <label translate="skipper.control.boat_label"></label>
                     <span class="digi" [innerHtml]="skipper.boat.name"></span>
+                    <button type="button"
+                            class="btn btn-success"
+                            *ngIf="skipper.groundFail"
+                            translate="skipper.control.unfail"
+                            (click)="unfailBoat()"
+                            [disabled]="UnfailLaunched"></button>
                 </div>
                 <div class="control-item">
                     <label translate="skipper.control.speed_label"></label>

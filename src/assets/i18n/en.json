@@ -30,6 +30,7 @@
     "skipper": {
         "control": {
             "speed_label": "Speed",
+            "unfail": "Back to the race",
             "position_label": "Position",
             "sail_label": "Sail",
             "bearing_label": "Bearing",
