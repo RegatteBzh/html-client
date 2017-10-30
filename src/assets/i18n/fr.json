@@ -32,6 +32,7 @@
     "skipper": {
         "control": {
             "speed_label": "Vitesse",
+            "unfail": "Retour en course",
             "position_label": "Position",
             "sail_label": "Voile",
             "bearing_label": "Cap",

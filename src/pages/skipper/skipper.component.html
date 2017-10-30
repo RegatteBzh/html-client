@@ -14,6 +14,11 @@
     <div class="control-item">
       <label translate="skipper.control.boat_label"></label>
       <span class="digi" [innerHtml]="skipper.boat.name"></span>
+      <button ion-button block color="success"
+              *ngIf="skipper.groundFail"
+              translate="skipper.control.unfail"
+              (click)="unfailBoat()"
+              [disabled]="UnfailLaunched"></button>
     </div>
     <div class="control-item">
       <span class="digi" *ngIf="skipper.speed>=0" [innerHtml]="skipper.speed | number:'1.1-1'"></span>
