@@ -39,6 +39,7 @@ export class MapComponent implements AfterViewInit {
   private boatMarker: BoatMarker;
   private forecastMarkers: ForecastMarker[] = null;
   private friendsMarkers: Marker[] = [];
+  private finishMarker: Marker = null;
 
   public zoom = 2;
   public maxBound: LatLngBounds;
@@ -111,6 +112,29 @@ export class MapComponent implements AfterViewInit {
       return  new Marker([skipper.position.lat, skipper.position.lng], {icon: friendIcon})
       .bindPopup(`${name}(${skipper.speed})`).addTo(this.mainMap);
     });
+  }
+
+  @Input()
+  set finish(val: LatLng) {
+    if (this.finishMarker) {
+      this.mainMap.removeLayer(this.finishMarker);
+    }
+    if (!val) {
+      return ;
+    }
+    this.finishMarker = new Marker(
+      [val.lat, val.lng],
+      {
+        icon: new Icon({
+          iconUrl: '/assets/markers/finish.png',
+          shadowUrl: '/assets/markers/finish-shadow.png',
+          iconSize:     [64, 64], // size of the icon
+          shadowSize:   [62, 38], // size of the shadow
+          iconAnchor:   [23, 60], // point of the icon which will correspond to marker's location
+          shadowAnchor: [2, 35]  // the same for the shadow
+        })
+      }
+    ).addTo(this.mainMap);
   }
 
   @Input()

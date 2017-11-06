@@ -21,7 +21,13 @@ export class SkipperService {
     }
 
     getSkipper(skipperId: string): Observable<Skipper> {
-        return this.http.get<Skipper>(`/api/skippers/${skipperId}/`);
+        return Observable.create(observer => {
+            this.http.get<Skipper>(`/api/skippers/${skipperId}/`).subscribe((skipper: Skipper) => {
+                skipper.race.start = new LatLng(skipper.race.start.lat, skipper.race.start.lng);
+                skipper.race.end = new LatLng(skipper.race.end.lat, skipper.race.end.lng);
+                observer.next(skipper);
+            });
+        });
     }
 
     setSkipperDirection(skipperId: string, bearing: number): Observable<any> {
@@ -29,7 +35,15 @@ export class SkipperService {
     }
 
     getSkippers(): Observable<Skipper[]> {
-        return this.http.get<Skipper[]>('/api/skippers/');
+        return Observable.create(observer => {
+            this.http.get<Skipper[]>('/api/skippers/').subscribe((skippers: Skipper[]) => {
+                forEach<Skipper, Skipper[]>(skippers, (skipper: Skipper) => {
+                    skipper.race.start = new LatLng(skipper.race.start.lat, skipper.race.start.lng);
+                    skipper.race.end = new LatLng(skipper.race.end.lat, skipper.race.end.lng);
+                });
+                observer.next(skippers);
+            });
+        });
     }
 
     setSkipperSail(skipperId: string, sailId: string): Observable<any> {
