@@ -42,6 +42,7 @@ export class SkipperComponent implements OnInit {
   private poller: Subscription;
   private pollerError = 0;
   private compasBusy = false;
+  private UnfailLaunched = false;
 
   public availableSails: Sail[];
   public forecast = new Forecast();
@@ -147,6 +148,12 @@ export class SkipperComponent implements OnInit {
 
   displayForecast() {
     return JSON.stringify(this.forecast, null, 4);
+  }
+
+  unfailBoat() {
+    this.skipperService.unfail(this.skipper.id).subscribe(() => {
+      this.UnfailLaunched = true;
+    });
   }
 
   ngOnInit() {

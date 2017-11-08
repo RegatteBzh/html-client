@@ -10,6 +10,7 @@ import { forEach } from 'lodash';
 
 import { Skipper } from '../../models/skipper';
 import { Waypoint } from '../../models/waypoint';
+import { Status } from '../../models/status';
 
 @Injectable()
 export class SkipperService {
@@ -52,6 +53,10 @@ export class SkipperService {
 
     getWaypoints(skipperId: string): Observable<Waypoint[]> {
         return this.http.get<Waypoint[]>(`/api/skippers/${skipperId}/waypoints`);
+    }
+
+    unfail(skipperId: string): Observable<Status> {
+        return this.http.post<Status>(`/api/skippers/${skipperId}/unfail`, null);
     }
 
     /**
