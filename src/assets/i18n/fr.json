@@ -36,7 +36,9 @@
             "bearing_label": "Cap",
             "boat_label": "Bateau",
             "wind_dir_label": "Dir. vent",
-            "wind_speed_label": "Vit. vent"
+            "wind_speed_label": "Vit. vent",
+            "distance_to_finish_label": "Arrivée",
+            "finished": "Terminé"
         }
     },
     "misc": {

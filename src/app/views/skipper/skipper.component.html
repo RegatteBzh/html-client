@@ -56,6 +56,14 @@
                     </span>
                 </div>
                 <div class="control-item">
+                    <label translate="skipper.control.distance_to_finish_label"></label>
+                    <span *ngIf="skipper.distanceToFinish>skipper.race.endRayKm" class="digi">
+                        <span [innerHtml]="skipper.distanceToFinish | number:'1.0-0'"></span>
+                        <span>km</span>
+                    </span>
+                    <span *ngIf="skipper.distanceToFinish<=skipper.race.endRayKm" class="digi" translate="skipper.control.finished"></span>
+                </div>
+                <div class="control-item">
                     <label translate="skipper.control.sail_label"></label>
                     <select [(ngModel)]="selectedSail" class="sail-selector" (change)="selectSail(selectedSail)">
                         <option *ngFor="let sail of availableSails" [ngValue]="sail" [innerHtml]="sail.name | translate"></option>

@@ -6,6 +6,7 @@ export class Race {
     public name: string;
     public start: LatLng;
     public end: LatLng;
+    public endRayKm: number;
 
     constructor(
         name?: string,

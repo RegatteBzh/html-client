@@ -19,6 +19,7 @@ export class Skipper {
     public windSpeed: number;
     public player: Player;
     public groundFail: boolean;
+    public distanceToFinish: number;
 
     constructor(
     ) {

@@ -36,7 +36,9 @@
             "bearing_label": "Bearing",
             "boat_label": "Boat",
             "wind_dir_label": "Wind dir.",
-            "wind_speed_label": "Wind sp."
+            "wind_speed_label": "Wind sp.",
+            "distance_to_finish_label": "Finish",
+            "finished": "Finished"
         }
     },
     "misc": {
