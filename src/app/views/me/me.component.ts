@@ -15,7 +15,7 @@ interface IOption {
 }
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-me',
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.less']
 })

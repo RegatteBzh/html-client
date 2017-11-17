@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 
 import { AuthService } from './services/auth/auth.service';
 
-import {LanguageService} from './services/language/language.service';
-import {TranslateService} from '@ngx-translate/core';
+import { LanguageService } from './services/language/language.service';
+import { MeService } from './services/me/me.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Player } from './models/player';
 
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,8 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   public isConnected: boolean;
   public language: string;
+  public identity: Player = null;
+  public admin = false;
 
   constructor(
     private authService: AuthService,
@@ -26,6 +30,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
     private translateService: TranslateService,
     private languageService: LanguageService,
     private cdRef: ChangeDetectorRef,
+    private meService: MeService,
   ) {
 
     this.translateService.addLangs(['en', 'fr']);
@@ -49,22 +54,37 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   }
 
+  getIdentity() {
+    this.checkConnected();
+    if (this.isConnected && !this.identity) {
+      this.meService.getIdentity().subscribe((player: Player) => {
+        this.identity = player;
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.languageService.get().subscribe((lang) => {
       this.language = lang;
     });
+    this.getIdentity();
   }
 
   changeLang(lang: string) {
     this.languageService.set(lang);
   }
 
-  ngAfterViewChecked() {
+  checkConnected() {
     const hasToken = this.authService.hasToken();
     if (this.isConnected !== hasToken) {
       this.isConnected = hasToken;
-      this.cdRef.detectChanges();
     }
+  }
+
+  ngAfterViewChecked() {
+    this. checkConnected();
+    this.admin = this.identity && this.identity.admin;
+    this.cdRef.detectChanges();
   }
 
 }

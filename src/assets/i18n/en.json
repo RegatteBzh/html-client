@@ -4,7 +4,8 @@
     "app": {
         "disconnect": "Disconnect",
         "dashboard": "Dashboard",
-        "me": "Profil"
+        "me": "Profil",
+        "logs": "logs"
     },
     "login": {
         "welcome": "Welcome to Sea-Race",

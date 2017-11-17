@@ -22,6 +22,7 @@ import { PlayerService } from './services/player/player.service';
 import { PolarService } from './services/polar/polar.service';
 import { RaceService } from './services/race/race.service';
 import { SkipperService } from './services/skipper/skipper.service';
+import { StreamService } from './services/stream/stream.service';
 import { TrigoService } from './services/trigo/trigo.service';
 
 @NgModule({
@@ -54,6 +55,7 @@ import { TrigoService } from './services/trigo/trigo.service';
     PolarService,
     RaceService,
     SkipperService,
+    StreamService,
     TrigoService,
     {
       provide: HTTP_INTERCEPTORS,
