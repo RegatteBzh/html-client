@@ -1,5 +1,9 @@
-<div class="row" *ngFor="let log of logs">
+<h1 [innerHtml]="currentStream"></h1>
+<button class="btn btn-link" (click)="switch('api')" translate="logs.api"></button>
+<button class="btn btn-link" (click)="switch('weather')" translate="logs.weather"></button>
+<button class="btn btn-link" (click)="switch('move')" translate="logs.move"></button>
+<div class="row" *ngFor="let log of logs; trackBy: trackByFn">
     <div class="col-md-2" [innerHtml]="log.timestamp"></div>
     <div class="col-md-2" [innerHtml]="log.level"></div>
-    <div class="col-md-2" [innerHtml]="log.message"></div>
+    <div class="col-md-8" [innerHtml]="log.full"></div>
 </div>

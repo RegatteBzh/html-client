@@ -32,11 +32,11 @@ export class StreamService {
    * Update a stream log
    * @return {Observable<Graylog>}
    */
-  mergeStream(name: string, graylog: Graylog): Observable<Graylog> {
+  mergeStream(name: string, messages: GraylogMessage[]): Observable<Graylog> {
     return Observable.create(observer => {
       this.httpClient.get<any>(`/api/stream/${name}?limit=151`).subscribe((data: any) => {
         const result = new Graylog(data.messages, data.total_results, data.fields);
-        forEach<GraylogMessage, GraylogMessage[]>(graylog.messages || [], (message: GraylogMessage) => {
+        forEach<GraylogMessage, GraylogMessage[]>(messages || [], (message: GraylogMessage) => {
           if (!find(result.messages, { _id: message._id })) {
             result.messages.push(message);
           }

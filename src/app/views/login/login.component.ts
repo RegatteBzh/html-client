@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { MeService } from '../../services/me/me.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private meService: MeService,
   ) {
 
   }
@@ -28,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.authService.setToken(params['token']);
         if (this.authService.getToken()) {
+          this.meService.getIdentity();
           this.router.navigate(['/dashboard']);
         }
       });

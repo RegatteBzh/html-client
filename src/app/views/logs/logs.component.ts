@@ -20,9 +20,9 @@ class PoolLogs {
 export class LogsComponent implements OnInit {
 
   public logs: GraylogMessage[] = [];
-
   public poolLogs: PoolLogs = new PoolLogs();
-
+  public currentStream = 'api';
+  private poller: Subscription = null;
 
 
   constructor(
@@ -32,26 +32,54 @@ export class LogsComponent implements OnInit {
   }
 
   getStream (stream: string) {
-    this.streamService.getStream('api').subscribe((data: Graylog) => {
+    switch (stream) {
+      case 'api':
+      this.logs = this.poolLogs.api;
+      break;
+      case 'weather':
+      this.logs = this.poolLogs.weather;
+      break;
+      case 'move':
+      this.logs = this.poolLogs.move;
+      break;
+    }
+    this.streamService.mergeStream(stream, this.logs).subscribe((data: Graylog) => {
       switch (stream) {
         case 'api':
-        this.poolLogs.api = data.messages;
-        this.logs = this.poolLogs.api;
+        this.logs = data.messages.slice(0, 20);
         break;
         case 'weather':
-        this.poolLogs.weather = data.messages;
-        this.logs = this.poolLogs.weather;
+        this.logs = data.messages.slice(0, 20);
         break;
         case 'move':
-        this.poolLogs.move = data.messages;
-        this.logs = this.poolLogs.move;
+        this.logs = data.messages.slice(0, 20);
         break;
       }
+      console.log(this.logs);
     });
   }
 
+  switch (stream: string) {
+    this.startPoller(stream);
+  }
+
+  startPoller(stream: string) {
+    if (this.poller) {
+      this.poller.unsubscribe();
+      this.currentStream = stream;
+      this.poller = null;
+    }
+    this.poller = Observable.timer(0, 5000).subscribe(() => {
+      this.getStream(this.currentStream);
+    });
+  }
+
+  trackByFn(index, item) {
+    return item._id;
+  }
+
   ngOnInit() {
-    this.getStream('api');
+    this.startPoller(this.currentStream);
   }
 
 }

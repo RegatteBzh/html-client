@@ -7,6 +7,11 @@
         "me": "Profil",
         "logs": "logs"
     },
+    "logs": {
+        "api": "API",
+        "weather": "Weather",
+        "move": "Move"
+    },
     "login": {
         "welcome": "Welcome to Sea-Race",
         "google": "Google",

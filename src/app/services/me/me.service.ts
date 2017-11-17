@@ -12,13 +12,20 @@ export class MeService {
     private httpClient: HttpClient,
   ) { }
 
+  public identity: Player = new Player();
+
 
   /**
    * Get identity of the current player
    * @return {Observable<Player>}
    */
   getIdentity(): Observable<Player> {
-    return this.httpClient.get<Player>(`/api/me/identity`);
+    return Observable.create(observer => {
+      this.httpClient.get<Player>(`/api/me/identity`).subscribe((me: Player) => {
+        this.identity = me;
+        observer.next(me);
+      });
+    });
   }
 
   /**

@@ -21,8 +21,6 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   public isConnected: boolean;
   public language: string;
-  public identity: Player = null;
-  public admin = false;
 
   constructor(
     private authService: AuthService,
@@ -54,20 +52,14 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   }
 
-  getIdentity() {
-    this.checkConnected();
-    if (this.isConnected && !this.identity) {
-      this.meService.getIdentity().subscribe((player: Player) => {
-        this.identity = player;
-      });
-    }
+  get admin(): boolean {
+    return this.meService.identity.admin;
   }
 
   ngOnInit(): void {
     this.languageService.get().subscribe((lang) => {
       this.language = lang;
     });
-    this.getIdentity();
   }
 
   changeLang(lang: string) {
@@ -83,7 +75,6 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   ngAfterViewChecked() {
     this. checkConnected();
-    this.admin = this.identity && this.identity.admin;
     this.cdRef.detectChanges();
   }
 
