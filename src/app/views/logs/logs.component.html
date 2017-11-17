@@ -1,1 +1,5 @@
-yolo
+<div class="row" *ngFor="let log of logs">
+    <div class="col-md-2" [innerHtml]="log.timestamp"></div>
+    <div class="col-md-2" [innerHtml]="log.level"></div>
+    <div class="col-md-2" [innerHtml]="log.message"></div>
+</div>
