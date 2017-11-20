@@ -19,5 +19,8 @@ export class BoatService {
         return this.http.get<Sail[]>(`/api/boats/${boatId}/sails/`);
     }
 
+    getBoats(): Observable<Boat[]> {
+        return this.http.get<Boat[]>(`/api/boats/`);
+    }
 
 }

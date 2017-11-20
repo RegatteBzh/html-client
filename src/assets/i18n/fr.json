@@ -5,7 +5,27 @@
         "disconnect": "Se déconnecter",
         "dashboard": "Tableau de bord",
         "me": "Profile",
-        "logs": "logs"
+        "logs": "logs",
+        "admin": "Admin",
+        "back": "Retour"
+    },
+    "admin": {
+        "title": "Administration",
+        "race": {
+            "title": "Courses",
+            "new": {
+                "name": "Nom",
+                "description": "Description",
+                "boat": "Bateau",
+                "start": "Début",
+                "end": "Fin",
+                "lat": "Lat",
+                "lng": "lng",
+                "submit": "Créer la course",
+                "reset": "Nouveau",
+                "ray": "Rayon à l'arrivée (km)"
+            }
+        }
     },
     "logs": {
         "api": "API",

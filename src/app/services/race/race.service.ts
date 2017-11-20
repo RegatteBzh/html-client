@@ -19,6 +19,22 @@ export class RaceService {
    * Get all Available races
    * @return {Observable<Race[]>}
    */
+  getAvailableRaces(): Observable<Race[]> {
+    return Observable.create(observer => {
+      this.httpClient.get<Race[]>(`/api/races/available`).subscribe((races: Race[]) => {
+        forEach<Race, Race[]>(races, (race) => {
+          race.end = new LatLng(race.end.lat, race.end.lng);
+          race.start = new LatLng(race.start.lat, race.start.lng);
+        });
+        observer.next(races);
+      });
+    });
+  }
+
+  /**
+   * Get all races
+   * @return {Observable<Race[]>}
+   */
   getRaces(): Observable<Race[]> {
     return Observable.create(observer => {
       this.httpClient.get<Race[]>(`/api/races/`).subscribe((races: Race[]) => {
@@ -37,7 +53,32 @@ export class RaceService {
    * @return {Observable<Skipper>}
    */
   registerRace(id: string): Observable<Skipper> {
-    return this.httpClient.post<Skipper>(`/api/races/${id}/register`, {});
+    return this.httpClient.post<Skipper>(`/api/races/register/${id}`, {});
+  }
+
+  /**
+   * Create a new Race
+   * @param race Race to create
+   * @return {Observable<Race>}
+   */
+  createRace(race: Race): Observable<Race> {
+    return Observable.create(observer => {
+      console.log(race);
+      this.httpClient.post<any>('/api/races/create', {
+        name: race.name,
+        description: race.description,
+        start: { lat: race.start.lat, lng: race.start.lng },
+        end: { lat: race.end.lat, lng: race.end.lng },
+        dateStart: race.dateStart ? race.dateStart.getTime() / 1000 : undefined,
+        dateEnd: race.dateEnd ? race.dateEnd.getTime() / 1000 : undefined,
+        endRayKm: race.endRayKm,
+        allowedBoat: race.allowedBoat.id
+      }).subscribe((createdRace: Race) => {
+        createdRace.end = new LatLng(createdRace.end.lat, createdRace.end.lng);
+        createdRace.start = new LatLng(createdRace.start.lat, createdRace.start.lng);
+        observer.next(createdRace);
+      });
+    });
   }
 
 }

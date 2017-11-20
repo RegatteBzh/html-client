@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
       this.skippers = skippers;
     });
 
-    this.raceService.getRaces().subscribe(races => {
+    this.raceService.getAvailableRaces().subscribe(races => {
       this.races = races;
     });
 

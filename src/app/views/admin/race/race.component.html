@@ -1,0 +1,86 @@
+<h1 translate="admin.race.title"></h1>
+<nav>
+    <a [routerLink]="['/admin']">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        <span translate="app.back"></span>
+    </a>
+</nav>
+
+<div class="row">
+    <div class="col-md-6">
+        <ul>
+            <li>
+                <button type="button" translate="admin.race.new.reset" class="btn btn-primary" (click)="select()"></button>
+            </li>
+            <li *ngFor="let race of races">
+                <button type="button" [innerHtml]="race.name" class="btn btn-default" (click)="select(race)"></button>
+            </li>
+        </ul>
+    </div>
+    <!-- FORM -->
+    <div class="col-md-6">
+        <form name="newRace" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name" translate="admin.race.new.name"></label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="race.name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description" translate="admin.race.new.description"></label>
+                <textarea type="text" class="form-control" id="description" [(ngModel)]="race.description" name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="boat" translate="admin.race.new.boat"></label>
+                <select #selectElem id="boat" class="form-control" (change)="setBoat(selectElem.value)" name="boat">
+                    <option *ngFor="let boat of boats" [value]="boat.id">
+                        {{boat.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date-start" translate="admin.race.new.start"></label>
+                <input suiDatepicker
+                       class="form-control"
+                       name="dateStart"
+                       id="date-start"
+                       [(ngModel)]="race.dateStart"
+                       pickerMode="datetime"
+                       pickerFirstDayOfWeek="1"
+                       [pickerUseNativeOnMobile]="false">
+            </div>
+            <div class="form-group">
+                <label for="start-lat" translate="admin.race.new.lat"></label>
+                <input type="number" class="form-control" id="start-lat" [(ngModel)]="race.start.lat" name="startLat">
+            </div>
+            <div class="form-group">
+                <label for="start-lng" translate="admin.race.new.lng"></label>
+                <input type="number" class="form-control" id="start-lng" [(ngModel)]="race.start.lng" name="startLng">
+            </div>
+            <div class="form-group">
+                <label for="date-end" translate="admin.race.new.end"></label>
+                <input suiDatepicker
+                       class="form-control"
+                       name="dateEnd"
+                       id="date-end"
+                       [(ngModel)]="race.dateEnd"
+                       pickerMode="datetime"
+                       pickerFirstDayOfWeek="1"
+                       [pickerUseNativeOnMobile]="false">
+            </div>
+            <div class="form-group">
+                <label for="end-lat" translate="admin.race.new.lat"></label>
+                <input type="number" class="form-control" id="end-lat" [(ngModel)]="race.end.lat" name="endLat">
+            </div>
+            <div class="form-group">
+                <label for="end-lng" translate="admin.race.new.lng"></label>
+                <input type="number" class="form-control" id="end-lng" [(ngModel)]="race.end.lng" name="endLng">
+            </div>
+            <div class="form-group">
+                <label for="endRayKm" translate="admin.race.new.ray"></label>
+                <input type="number" class="form-control" id="endRayKm" [(ngModel)]="race.endRayKm" name="endRayKm">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" translate="admin.race.new.submit"></button>
+        </form>
+    </div>
+</div>
+

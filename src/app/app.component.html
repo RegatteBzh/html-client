@@ -2,6 +2,10 @@
 <div style="text-align:center">
 </div>
 <nav *ngIf="isConnected">
+    <a [routerLink]="['/admin']" *ngIf="admin">
+      <i class="fa fa-cubes" aria-hidden="true"></i>
+      <span translate="app.admin"></span>
+    </a>
     <a [routerLink]="['/logs']" *ngIf="admin">
       <i class="fa fa-list" aria-hidden="true"></i>
       <span translate="app.logs"></span>
