@@ -48,7 +48,7 @@
             "wind_dir_label": "Wind dir.",
             "wind_speed_label": "Wind sp.",
             "distance_to_finish_label": "Finish",
-            "finished": "Finished",
+            "finished": "Finished ({{when}})",
             "rank_label": "Rank"
         }
     },

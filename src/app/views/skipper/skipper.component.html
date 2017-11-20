@@ -61,7 +61,7 @@
                         <span [innerHtml]="skipper.distanceToFinish | number:'1.0-0'"></span>
                         <span>km</span>
                     </span>
-                    <span *ngIf="skipper.distanceToFinish<=skipper.race.endRayKm" class="digi" translate="skipper.control.finished"></span>
+                    <span *ngIf="skipper.finished" class="digi" translate="skipper.control.finished" [translateParams]="{ when: skipper.finished | date:'dd/MM/yyyy HH:mm'}"></span>
                 </div>
                 <div class="control-item">
                     <label translate="skipper.control.sail_label"></label>

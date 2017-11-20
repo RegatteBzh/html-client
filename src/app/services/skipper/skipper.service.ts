@@ -26,6 +26,9 @@ export class SkipperService {
             this.http.get<Skipper>(`/api/skippers/${skipperId}/`).subscribe((skipper: Skipper) => {
                 skipper.race.start = new LatLng(skipper.race.start.lat, skipper.race.start.lng);
                 skipper.race.end = new LatLng(skipper.race.end.lat, skipper.race.end.lng);
+                if (skipper.finished) {
+                    skipper.finished = new Date(<any>(skipper.finished) * 1000);
+                }
                 observer.next(skipper);
             });
         });
