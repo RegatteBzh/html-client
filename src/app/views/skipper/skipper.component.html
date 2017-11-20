@@ -69,6 +69,10 @@
                         <option *ngFor="let sail of availableSails" [ngValue]="sail" [innerHtml]="sail.name | translate"></option>
                     </select>
                 </div>
+                <div class="control-item" *ngIf=skipper.rank>
+                    <label translate="skipper.control.rank_label"></label>
+                    <span [innerHtml]="skipper.rank"></span>
+                </div>
                 <!--<pre [innerHtml]="displayForecast()"></pre>-->
             </div>
         </div>

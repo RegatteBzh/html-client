@@ -1,16 +1,32 @@
-import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
-
+import {
+  Component,
+  AfterViewInit,
+  Input,
+  ViewChild
+} from '@angular/core';
 import {
   MapComponent as YagaMapComponent,
   TileLayerDirective as YagaTileLayerDirective,
   MarkerDirective as YagaMarkerDirective,
   PolylineDirective as YagaPolylineDirective,
 } from '@yaga/leaflet-ng2';
+import {
+  forEach,
+  map,
+  first
+} from 'lodash';
+import {
+  LatLng,
+  LatLngBounds,
+  Point,
+  LeafletEvent,
+  PathOptions,
+  Marker,
+  Icon
+} from 'leaflet';
 
-import { forEach, map, first } from 'lodash';
-import { LatLng, LatLngBounds, Point, LeafletEvent, PathOptions, Marker, Icon } from 'leaflet';
+import { TranslateService } from '@ngx-translate/core';
 import 'leaflet-velocity';
-
 import { BoatMarker } from '../../plugins/boat.plugin';
 import { ForecastMarker } from '../../plugins/forecastMarker.plugin';
 
@@ -107,10 +123,33 @@ export class MapComponent implements AfterViewInit {
     forEach<Marker, Marker[]>(this.friendsMarkers, (markerElt: Marker) => {
       this.mainMap.removeLayer(markerElt);
     });
-    this.friendsMarkers = map<Skipper, Marker>(val, (skipper) => {
-      const name = skipper.player.nic || skipper.player.name;
-      return  new Marker([skipper.position.lat, skipper.position.lng], {icon: friendIcon})
-      .bindPopup(`${name}(${skipper.speed})`).addTo(this.mainMap);
+    this.friendsMarkers = [];
+    forEach<Skipper, Skipper[]>(val, (skipper) => {
+
+      const marker = new Marker([skipper.position.lat, skipper.position.lng], {icon: friendIcon})
+
+      if (skipper.rank) {
+        this.translateService.get(
+          'map.finished_friend',
+          {
+            name: skipper.player.nic || skipper.player.name,
+            rank: skipper.rank
+          }
+        ).subscribe((res: string) => {
+          this.friendsMarkers.push(marker.bindPopup(res).addTo(this.mainMap));
+        });
+      } else {
+        this.translateService.get(
+          'map.sailing_friend',
+          {
+            name: skipper.player.nic || skipper.player.name,
+            speed: Math.round(skipper.speed * 10) / 10
+          }
+        ).subscribe((res: string) => {
+          this.friendsMarkers.push(marker.bindPopup(res).addTo(this.mainMap));
+        });
+      }
+
     });
   }
 
@@ -157,6 +196,7 @@ export class MapComponent implements AfterViewInit {
   constructor(
     private mapService: MapService,
     private configService: ConfigService,
+    private translateService: TranslateService,
   ) {
     this. maxBound = new LatLngBounds(new LatLng(-90, -180), new LatLng(90, 180));
     this.currentMap = this.maps[0];

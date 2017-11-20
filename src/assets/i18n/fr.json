@@ -33,6 +33,10 @@
         "available_races": "Compétitions disponibles",
         "welcome": "bienvenu {{name}}"
     },
+    "map": {
+        "sailing_friend": "{{name}} ({{speed}} nd)",
+        "finished_friend": "{{name}} : {{rank}}"
+    },
     "skipper": {
         "control": {
             "speed_label": "Vitesse",
@@ -44,7 +48,8 @@
             "wind_dir_label": "Dir. vent",
             "wind_speed_label": "Vit. vent",
             "distance_to_finish_label": "Arrivée",
-            "finished": "Terminé"
+            "finished": "Terminé",
+            "rank_label": "Classement"
         }
     },
     "misc": {

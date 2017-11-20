@@ -20,6 +20,7 @@ export class Skipper {
     public player: Player;
     public groundFail: boolean;
     public distanceToFinish: number;
+    public rank: number;
 
     constructor(
     ) {
