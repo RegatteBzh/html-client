@@ -25,6 +25,8 @@ export class RaceService {
         forEach<Race, Race[]>(races, (race) => {
           race.end = new LatLng(race.end.lat, race.end.lng);
           race.start = new LatLng(race.start.lat, race.start.lng);
+          race.dateStart = new Date(<any>race.dateStart * 1000);
+          race.dateEnd = new Date(<any>race.dateEnd * 1000);
         });
         observer.next(races);
       });
@@ -41,6 +43,8 @@ export class RaceService {
         forEach<Race, Race[]>(races, (race) => {
           race.end = new LatLng(race.end.lat, race.end.lng);
           race.start = new LatLng(race.start.lat, race.start.lng);
+          race.dateStart = new Date(<any>race.dateStart * 1000);
+          race.dateEnd = new Date(<any>race.dateEnd * 1000);
         });
         observer.next(races);
       });

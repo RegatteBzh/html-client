@@ -53,8 +53,10 @@ export class CompassComponent implements OnInit {
       const compassRect = this.compassSvg.nativeElement.getBoundingClientRect();
       switch (type) {
         case 'mouse':
-          offsetX = event.offsetX;
-          offsetY = event.offsetY;
+          offsetX = event.clientX - (compassRect.x || compassRect.left);
+          offsetY = event.clientY - (compassRect.y || compassRect.top);
+          event.stopPropagation();
+          event.preventDefault();
           break;
         case 'touch':
           const touch: any = first(event.touches);
@@ -67,6 +69,7 @@ export class CompassComponent implements OnInit {
           break;
         default:
       }
+
       const x = offsetX - (compassRect.width / 2);
       const y = (compassRect.width / 2) - offsetY;
       if (!x && !y) {

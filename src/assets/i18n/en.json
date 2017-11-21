@@ -69,7 +69,8 @@
             "wind_speed_label": "Wind sp.",
             "distance_to_finish_label": "Finish",
             "finished": "Finished ({{when}})",
-            "rank_label": "Rank"
+            "rank_label": "Rank",
+            "futur_start": "Will begin on {{date}}"
         }
     },
     "misc": {

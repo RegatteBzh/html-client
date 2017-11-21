@@ -26,8 +26,10 @@ export class SkipperService {
             this.http.get<Skipper>(`/api/skippers/${skipperId}/`).subscribe((skipper: Skipper) => {
                 skipper.race.start = new LatLng(skipper.race.start.lat, skipper.race.start.lng);
                 skipper.race.end = new LatLng(skipper.race.end.lat, skipper.race.end.lng);
+                skipper.race.dateStart = new Date(<any>skipper.race.dateStart * 1000);
+                skipper.race.dateEnd = new Date(<any>skipper.race.dateEnd * 1000);
                 if (skipper.finished) {
-                    skipper.finished = new Date(<any>(skipper.finished) * 1000);
+                    skipper.finished = new Date(<any>skipper.finished * 1000);
                 }
                 observer.next(skipper);
             });
@@ -44,6 +46,11 @@ export class SkipperService {
                 forEach<Skipper, Skipper[]>(skippers, (skipper: Skipper) => {
                     skipper.race.start = new LatLng(skipper.race.start.lat, skipper.race.start.lng);
                     skipper.race.end = new LatLng(skipper.race.end.lat, skipper.race.end.lng);
+                    skipper.race.dateStart = new Date(<any>skipper.race.dateStart * 1000);
+                    skipper.race.dateEnd = new Date(<any>skipper.race.dateEnd * 1000);
+                    if (skipper.finished) {
+                        skipper.finished = new Date(<any>skipper.finished * 1000);
+                    }
                 });
                 observer.next(skippers);
             });

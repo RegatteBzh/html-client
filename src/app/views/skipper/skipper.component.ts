@@ -68,6 +68,12 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  isRaceInFuture(): boolean {
+    return this.skipper.race.dateStart &&
+    this.skipper.race.dateStart.getTime &&
+    this.skipper.race.dateStart.getTime() > new Date().getTime();
+  }
+
   selectSail(sail) {
     this.disablePoller = true;
     this.skipperService.setSkipperSail(this.skipper.id, this.selectedSail.id).subscribe((skipperResp: Skipper) => {

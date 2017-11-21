@@ -34,6 +34,10 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  isRaceInFuture(race: Race): boolean {
+    return race.dateStart.getTime() > new Date().getTime();
+  }
+
   ngOnInit() {
 
     this.skipperService.getSkippers().subscribe(skippers => {
