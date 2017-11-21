@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-md-8 col-xs-8">
-        <div class="map" [ngClass]="{'ground-fail': skipper.groundFail}">
+        <div class="map" [ngClass]="{
+            'ground-fail': skipper.groundFail,
+            'sail-down': skipper.sailDown
+        }">
             <app-map [position]="skipper.position"
                     [direction]="skipper.direction"
                     [waypoints]="waypoints"
@@ -74,7 +77,14 @@
                     <label translate="skipper.control.rank_label"></label>
                     <span [innerHtml]="skipper.rank"></span>
                 </div>
-                <!--<pre [innerHtml]="displayForecast()"></pre>-->
+                <div class="control-item">
+                    <label translate="skipper.control.sail_down_label" for="sailDown"></label>
+                    <input [(ngModel)]="skipper.sailDown"
+                           (change)="changeSailDown()"
+                           type="checkbox"
+                           name="sailDown" 
+                           id="sailDown">
+                </div>
             </div>
         </div>
     </div>

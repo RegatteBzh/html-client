@@ -148,6 +148,12 @@ export class SkipperComponent implements OnInit {
     });
   }
 
+  changeSailDown() {
+    this.skipperService.setSailDown(this.skipper.id, this.skipper.sailDown).subscribe(() => {}, () => {
+      this.skipper.sailDown = !this.skipper.sailDown;
+    });
+  }
+
   forecastRoute() {
     this.forecast = this.mapService.forecastRoute(this.skipper.position, this.skipper.direction, this.currentPolar);
   }

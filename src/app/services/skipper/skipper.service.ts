@@ -69,6 +69,10 @@ export class SkipperService {
         return this.http.post<Status>(`/api/skippers/${skipperId}/unfail`, null);
     }
 
+    setSailDown(skipperId: string, sailDown: boolean): Observable<Status> {
+        return this.http.post<Status>(`/api/skippers/${skipperId}/sail-down`, { sailDown });
+    }
+
     /**
      * List all your skipper friends
      * @param skipperID skipper identifier

@@ -22,6 +22,7 @@ export class Skipper {
     public distanceToFinish: number;
     public finished: Date;
     public rank: number;
+    public sailDown: boolean;
 
     constructor(
     ) {

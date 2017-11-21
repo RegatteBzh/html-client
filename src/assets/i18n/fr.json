@@ -23,7 +23,8 @@
                 "lng": "lng",
                 "submit": "Créer la course",
                 "reset": "Nouveau",
-                "ray": "Rayon à l'arrivée (km)"
+                "ray": "Rayon à l'arrivée (km)",
+                "sail_down_label" : "Voiles affalées"
             }
         }
     },

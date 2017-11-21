@@ -70,7 +70,8 @@
             "distance_to_finish_label": "Finish",
             "finished": "Finished ({{when}})",
             "rank_label": "Rank",
-            "futur_start": "Will begin on {{date}}"
+            "futur_start": "Will begin on {{date}}",
+            "sail_down_label": "Sail down"
         }
     },
     "misc": {
