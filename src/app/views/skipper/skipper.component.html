@@ -16,7 +16,7 @@
                 </app-compass>
             </div>
             <div class="boat-computer" [ngClass]="{'ground-fail': skipper.groundFail}">
-                <div *ngIf="isRaceInFuture()" translate="skipper.control.futur_start" [translateParams]="{date: skipper.race.dateStart | date:'dd/MM/yyyy hh:mm'}"></div>
+                <div *ngIf="isRaceInFuture()" translate="skipper.control.futur_start" [translateParams]="{date: skipper.race.dateStart | date:'dd/MM/yyyy HH:mm'}"></div>
                 <div class="control-item">
                     <label translate="skipper.control.boat_label"></label>
                     <span class="digi" [innerHtml]="skipper.boat.name"></span>
