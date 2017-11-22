@@ -60,6 +60,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
     this.languageService.get().subscribe((lang) => {
       this.language = lang;
     });
+    this.checkConnected();
   }
 
   changeLang(lang: string) {
@@ -74,7 +75,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
   }
 
   ngAfterViewChecked() {
-    this. checkConnected();
+    this.checkConnected();
     this.cdRef.detectChanges();
   }
 
