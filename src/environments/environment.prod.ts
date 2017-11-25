@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://www.sea-race.fr'
+  apiUrl: 'https://sea-race.fr'
 };
