@@ -4,12 +4,15 @@ import { SkipperService } from '../../services/skipper/skipper.service';
 import { Skipper } from '../../models/skipper';
 import { Router } from '@angular/router';
 
+import { AutoUnsubscribe } from '../../decorators/autoUnsubscribe';
+
 import { RaceService } from '../../services/race/race.service';
 import { Race } from '../../models/race';
 
 import { MeService } from '../../services/me/me.service';
 import { Player } from '../../models/player';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
