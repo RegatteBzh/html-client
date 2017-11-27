@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 
+import { AutoUnsubscribe } from '../../../decorators/autoUnsubscribe';
+
 import { BoatService } from '../../../services/boat/boat.service';
 import { RaceService } from '../../../services/race/race.service';
 
@@ -8,7 +10,7 @@ import { Boat } from '../../../models/boat';
 import { Race } from '../../../models/race';
 import { find, first } from 'lodash';
 
-
+@AutoUnsubscribe()
 @Component({
   selector: 'app-admin-race',
   templateUrl: './race.component.html',

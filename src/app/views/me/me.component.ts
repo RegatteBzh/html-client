@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs/Rx';
 
+import { AutoUnsubscribe } from '../../decorators/autoUnsubscribe';
+
 import { MeService } from '../../services/me/me.service';
 import { PlayerService } from '../../services/player/player.service';
 import { Player } from '../../models/player';
@@ -14,6 +16,7 @@ interface IOption {
   nic: string;
 }
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',

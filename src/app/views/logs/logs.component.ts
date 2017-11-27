@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 import { StreamService } from '../../services/stream/stream.service';
@@ -12,12 +12,14 @@ class PoolLogs {
   public move: GraylogMessage[];
 }
 
+const sliceSize = 100;
+
 @Component({
   selector: 'app-logs',
   templateUrl: './logs.component.html',
   styleUrls: ['./logs.component.less']
 })
-export class LogsComponent implements OnInit {
+export class LogsComponent implements OnInit, OnDestroy {
 
   public logs: GraylogMessage[] = [];
   public poolLogs: PoolLogs = new PoolLogs();
@@ -46,13 +48,16 @@ export class LogsComponent implements OnInit {
     this.streamService.mergeStream(stream, this.logs).subscribe((data: Graylog) => {
       switch (stream) {
         case 'api':
-        this.logs = data.messages.slice(0, 20);
+        this.logs = data.messages.slice(0, sliceSize);
+        this.poolLogs.api = this.logs;
         break;
         case 'weather':
-        this.logs = data.messages.slice(0, 20);
+        this.logs = data.messages.slice(0, sliceSize);
+        this.poolLogs.weather = this.logs;
         break;
         case 'move':
-        this.logs = data.messages.slice(0, 20);
+        this.logs = data.messages.slice(0, sliceSize);
+        this.poolLogs.move = this.logs;
         break;
       }
       console.log(this.logs);
@@ -80,6 +85,12 @@ export class LogsComponent implements OnInit {
 
   ngOnInit() {
     this.startPoller(this.currentStream);
+  }
+
+  ngOnDestroy() {
+    if (this.poller) {
+      this.poller.unsubscribe();
+    }
   }
 
 }

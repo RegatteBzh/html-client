@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Point, LatLng } from 'leaflet';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, Event } from '@angular/router';
+
+import { AutoUnsubscribe } from '../../decorators/autoUnsubscribe';
 
 import { find, omit, extend, map, forEach } from 'lodash';
 
@@ -19,12 +21,13 @@ import { Skipper } from '../../models/skipper';
 import { Waypoint } from '../../models/waypoint';
 import { Forecast } from '../../models/forecast';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-skipper',
   templateUrl: './skipper.component.html',
   styleUrls: ['./skipper.component.less']
 })
-export class SkipperComponent implements OnInit {
+export class SkipperComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -184,6 +187,13 @@ export class SkipperComponent implements OnInit {
 
     });
 
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.poller) {
+      this.poller.unsubscribe();
+    }
   }
 
 }
