@@ -184,6 +184,10 @@ export class SkipperComponent implements OnInit {
 
     });
 
+    this.router.events.subscribe(p => {
+      console.log(p);
+    });
+
   }
 
 }
