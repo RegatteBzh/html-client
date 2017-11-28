@@ -21,6 +21,7 @@ import { MeService } from './services/me/me.service';
 import { PlayerService } from './services/player/player.service';
 import { PolarService } from './services/polar/polar.service';
 import { RaceService } from './services/race/race.service';
+import { ShapeService } from './services/shape/shape.service';
 import { SkipperService } from './services/skipper/skipper.service';
 import { StreamService } from './services/stream/stream.service';
 import { TrigoService } from './services/trigo/trigo.service';
@@ -54,6 +55,7 @@ import { TrigoService } from './services/trigo/trigo.service';
     PlayerService,
     PolarService,
     RaceService,
+    ShapeService,
     SkipperService,
     StreamService,
     TrigoService,

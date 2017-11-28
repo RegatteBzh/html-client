@@ -25,6 +25,9 @@
                 "reset": "New",
                 "ray": "Ray on the finish line (km)"
             }
+        },
+        "overview": {
+            "title": "overview"
         }
     },
     "logs": {

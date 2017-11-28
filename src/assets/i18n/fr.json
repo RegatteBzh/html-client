@@ -25,6 +25,9 @@
                 "reset": "Nouveau",
                 "ray": "Rayon à l'arrivée (km)"
             }
+        },
+        "overview": {
+            "title": "Ensemble"
         }
     },
     "logs": {
