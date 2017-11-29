@@ -47,11 +47,17 @@ export class OverviewComponent implements OnInit {
   ngOnInit() {
     this.shapeService.getShapes().subscribe((shapes: Shape[]) => {
       this.shapes = shapes;
-      forEach(shapes, (shape) => {
+      forEach(shapes, (shape, index) => {
         const shapePolyline = new YagaPolylineDirective<GeoJSON.GeometryCollection>(this.mainMap);
         const points = map<any, LatLng>(shape.points, (pt) => {
           return new LatLng(pt.lat, pt.lng);
         });
+        points.push(points[0]);
+        if (!index) {
+          shapePolyline.setStyle({
+            color: '#ff0000',
+          });
+        }
         shapePolyline.setLatLngs(points);
         shapePolyline.redraw();
       });
