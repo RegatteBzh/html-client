@@ -3,7 +3,12 @@
 <button class="btn btn-link" (click)="switch('weather')" translate="logs.weather"></button>
 <button class="btn btn-link" (click)="switch('move')" translate="logs.move"></button>
 <div class="row" *ngFor="let log of logs; trackBy: trackByFn">
-    <div class="col-md-2" [innerHtml]="log.timestamp"></div>
-    <div class="col-md-2" [innerHtml]="log.level"></div>
-    <div class="col-md-8" [innerHtml]="log.full"></div>
+    <div class="col-md-2" [innerHtml]="log.timestamp | date:'yyyy:MM:dd | HH:mm:ss'"></div>
+    <div class="col-md-1" [innerHtml]="log.level"></div>
+    <div class="col-md-2" *ngIf="currentStream==='api'" [innerHtml]="log.ip"></div>
+    <div class="col-md-2" *ngIf="currentStream==='api'" [innerHtml]="log.method"></div>
+    <div class="col-md-3" *ngIf="currentStream==='api'" [innerHtml]="log.path"></div>
+    <div class="col-md-2" *ngIf="currentStream==='api'" [innerHtml]="log.status"></div>
+    <div class="col-md-3" *ngIf="currentStream!=='api'" [innerHtml]="log.title"></div>
+    <div class="col-md-6" *ngIf="currentStream!=='api'" [innerHtml]="log.msg"></div>
 </div>
