@@ -10,6 +10,7 @@ export class GraylogMessage {
     public latency: string;
     public method: string;
     public path: string;
+    public skipper: string;
 
 
     constructor (data: any) {

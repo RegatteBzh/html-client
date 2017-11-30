@@ -9,6 +9,7 @@
     <div class="col-md-2" *ngIf="currentStream==='api'" [innerHtml]="log.method"></div>
     <div class="col-md-3" *ngIf="currentStream==='api'" [innerHtml]="log.path"></div>
     <div class="col-md-2" *ngIf="currentStream==='api'" [innerHtml]="log.status"></div>
-    <div class="col-md-3" *ngIf="currentStream!=='api'" [innerHtml]="log.title"></div>
+    <div class="col-md-1" *ngIf="currentStream!=='api'" [innerHtml]="log.title"></div>
+    <div class="col-md-2" *ngIf="currentStream!=='api'" [innerHtml]="log.skipper"></div>
     <div class="col-md-6" *ngIf="currentStream!=='api'" [innerHtml]="log.msg"></div>
 </div>
