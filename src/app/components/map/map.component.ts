@@ -25,8 +25,9 @@ import {
   Icon
 } from 'leaflet';
 
+import VLayer from '../../plugins/wind/index';
+
 import { TranslateService } from '@ngx-translate/core';
-import 'leaflet-velocity';
 import { BoatMarker } from '../../plugins/boat.plugin';
 import { ForecastMarker } from '../../plugins/forecastMarker.plugin';
 
@@ -126,7 +127,7 @@ export class MapComponent implements AfterViewInit {
     this.friendsMarkers = [];
     forEach<Skipper, Skipper[]>(val, (skipper) => {
 
-      const marker = new Marker([skipper.position.lat, skipper.position.lng], {icon: friendIcon})
+      const marker = new Marker([skipper.position.lat, skipper.position.lng], {icon: friendIcon});
 
       if (skipper.rank) {
         this.translateService.get(
@@ -233,13 +234,9 @@ export class MapComponent implements AfterViewInit {
     if (this.vLayer) {
       this.mainMap.removeLayer(this.vLayer);
     }
-    this.vLayer = L.velocityLayer({
-      /*displayValues: true,
-      displayOptions: {
-        velocityType: 'GBR Wind',
-        displayPosition: 'bottomleft',
-        displayEmptyString: 'No wind data'
-      },*/
+
+
+    this.vLayer = VLayer({
       data: this.mapService.getForecastWind(index).data,
       maxVelocity: 15,
       minVelocity: 0,
