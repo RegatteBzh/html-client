@@ -54,7 +54,7 @@
     "dashboard": {
         "your_races": "Vos compétitions",
         "available_races": "Compétitions disponibles",
-        "welcome": "bienvenu {{name}}"
+        "welcome": "bienvenue {{name}}"
     },
     "map": {
         "sailing_friend": "{{name}} ({{speed}} nd)",
