@@ -27,7 +27,15 @@
             }
         },
         "overview": {
-            "title": "overview"
+            "title": "overview",
+            "name_label": "Name",
+            "boat_label": "Boat",
+            "date_start_label": "Starts on",
+            "date_end_label": "Ends on",
+            "start_label": "Starting line",
+            "finish_label": "Finish line",
+            "submit": "Create race",
+            "ray_label": "Finish ray (km)"
         }
     },
     "logs": {

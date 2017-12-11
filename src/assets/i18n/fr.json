@@ -27,7 +27,15 @@
             }
         },
         "overview": {
-            "title": "Ensemble"
+            "title": "Ensemble",
+            "name_label": "Nom",
+            "boat_label": "Bateau",
+            "date_start_label": "Commence le",
+            "date_end_label": "Finit le",
+            "start_label": "Ligne de départ",
+            "finish_label": "Ligne d'arrivée",
+            "submit": "Créer la course",
+            "ray_label": "Rayon d'arrivée (km)"
         }
     },
     "logs": {
