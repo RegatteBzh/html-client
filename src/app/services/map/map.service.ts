@@ -48,7 +48,7 @@ export class MapService {
 
   loadCurrentWind(): Observable<WindAxis[]> {
     return Observable.create(observer => {
-      this.httpClient.get<WindAxis[]>(`/assets/winds/wind000.json`).subscribe((data: WindAxis[]) => {
+      this.httpClient.get<WindAxis[]>(`/assets/winds/1.0/wind000.json`).subscribe((data: WindAxis[]) => {
         this.currentWind = new Wind(data);
         observer.next(this.currentWind.data);
       });
