@@ -94,7 +94,7 @@ export default class VelocityLayer {
 					bounds._southWest.lat,
 					bounds._southWest.lng
 				),
-				new CanvasBound(0,0,size.x, size.y)
+				new CanvasBound(0, 0, size.x, size.y)
 			)
 			
 		);
@@ -108,32 +108,47 @@ export default class VelocityLayer {
 
 		// prepare context global var, start drawing
 		this._context = this._canvasLayer._canvas.getContext('2d');
-		this._canvasLayer._canvas.classList.add("velocity-overlay");
+		this._canvasLayer._canvas.classList.add('velocity-overlay');
 		(<any>this).onDrawLayer();
 
-		this._map.on('dragstart',() => {
+		this._map.on('dragstart', () => {
+			if (!this._windy) {
+				return;
+			}
 			this._windy.stop();
 		});
 
 		this._map.on('dragend', () => {
+			if (!this._windy) {
+				return;
+			}
 			this._clearAndRestart();
 		});
 
 		this._map.on('zoomstart', () => {
+			if (!this._windy) {
+				return;
+			}
 			this._windy.stop();
 		});
 
 		this._map.on('zoomend', () => {
+			if (!this._windy) {
+				return;
+			}
 			this._clearAndRestart();
 		});
 		this._map.on('resize', () => {
+			if (!this._windy) {
+				return;
+			}
 			this._clearWind();
 		});
 	}
 
 
 
-	_clearAndRestart(){
+	_clearAndRestart() {
 		if (this._context) this._context.clearRect(0, 0, 3000, 3000);
 		if (this._windy) this._startWindy();
 	}
@@ -147,7 +162,7 @@ export default class VelocityLayer {
 		if (this._displayTimeout) clearTimeout(this._displayTimeout);
 		if (this._windy) this._windy.stop();
 		if (this._context) this._context.clearRect(0, 0, 3000, 3000);
-		this._map.off();
+		this._map.off(['dragstart', 'dragend', 'zoomstart', 'zoomend', 'resize']);
 		this._windy = null;
 		this._map.removeLayer(this._canvasLayer);
 	}
