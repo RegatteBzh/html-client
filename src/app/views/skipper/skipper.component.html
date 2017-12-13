@@ -33,8 +33,8 @@
                 </div>
                 <div class="control-item">
                     <label translate="skipper.control.speed_label"></label>
-                    <span class="digi" *ngIf="skipper.speed>=0" [innerHtml]="skipper.speed | number:'1.1-1'"></span>
-                    <span class="digi temporary" *ngIf="skipper.speed<0" [innerHtml]="forecast.getFirstSpeed() | number:'1.1-1'"></span>
+                    <span class="digi" *ngIf="skipper.speed !== invalidValue" [innerHtml]="skipper.speed | number:'1.1-1'"></span>
+                    <span class="digi temporary" *ngIf="skipper.speed === invalidValue" [innerHtml]="forecast.getFirstSpeed() | number:'1.1-1'"></span>
                     <span class="digi" translate="misc.speed.knot_unit"></span>
                 </div>
                 <div class="control-item">
@@ -44,8 +44,8 @@
                 </div>
                 <div class="control-item">
                     <label translate="skipper.control.wind_dir_label"></label>
-                    <span class="digi" *ngIf="skipper.windRelativeAngle>=0" [innerHtml]="skipper.windRelativeAngle | number:'1.0-0'"></span>
-                    <span class="digi" *ngIf="skipper.windRelativeAngle<0" [innerHtml]="forecast.getFirstWindDirection() | number:'1.0-0'"></span>
+                    <span class="digi" *ngIf="skipper.windRelativeAngle !== invalidValue" [innerHtml]="skipper.windRelativeAngle | number:'1.0-0'"></span>
+                    <span class="digi" *ngIf="skipper.windRelativeAngle === invalidValue" [innerHtml]="forecast.getFirstWindDirection() | number:'1.0-0'"></span>
                     <span class="digi">°</span>
                 </div>
                 <div class="control-item">

@@ -47,6 +47,7 @@ export class SkipperComponent implements OnInit, OnDestroy {
   private compasBusy = false;
   private UnfailLaunched = false;
 
+  public invalidValue = -1000;
   public availableSails: Sail[];
   public forecast = new Forecast();
   public selectedSail: Sail;
@@ -58,8 +59,8 @@ export class SkipperComponent implements OnInit, OnDestroy {
     if (this.directionStab) {
       this.directionStab.unsubscribe();
     }
-    this.skipper.windRelativeAngle = -1;
-    this.skipper.speed = -1;
+    this.skipper.windRelativeAngle = this.invalidValue;
+    this.skipper.speed = this.invalidValue;
     this.forecastRoute();
     this.directionStab = Observable.timer(1000).subscribe(() => {
       this.disablePoller = true;
