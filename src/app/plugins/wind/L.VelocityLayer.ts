@@ -1,13 +1,13 @@
 import Windy from './windy';
 import CanvasBound from './canvasBound'
 import MapBound from './mapBound';
-import Layer from "./layer";
+import Layer from './layer';
 import CanvasLayer from './L.CanvasLayer';
 import * as L from 'leaflet';
 
 
 const L_CanvasLayer = (L.Layer ? L.Layer : L.Class).extend(new CanvasLayer());
-let L_canvasLayer = function () {
+const L_canvasLayer = function () {
 	return new L_CanvasLayer();
 };
 
@@ -147,6 +147,7 @@ export default class VelocityLayer {
 		if (this._displayTimeout) clearTimeout(this._displayTimeout);
 		if (this._windy) this._windy.stop();
 		if (this._context) this._context.clearRect(0, 0, 3000, 3000);
+		this._map.off();
 		this._windy = null;
 		this._map.removeLayer(this._canvasLayer);
 	}
