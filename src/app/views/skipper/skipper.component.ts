@@ -42,8 +42,10 @@ export class SkipperComponent implements OnInit, OnDestroy {
   private currentPolar: Polar;
   private directionStab: Subscription;
   private disablePoller = false;
-  private poller: Subscription;
-  private pollerError = 0;
+  private skipperPoller: Subscription;
+  private friendsPoller: Subscription;
+  private skipperPollerError = 0;
+  private friendsPollerError = 0;
   private compasBusy = false;
   private UnfailLaunched = false;
 
@@ -97,19 +99,25 @@ export class SkipperComponent implements OnInit, OnDestroy {
     this.compasBusy = event;
   }
 
-  startPoller() {
-    this.poller = Observable.timer(5000, 5000).subscribe(() => {
+  startSkipperPoller() {
+    this.skipperPoller = Observable.timer(5000, 5000).subscribe(() => {
       if (!this.compasBusy) {
         this.forecastRoute();
         this.skipperService.getSkipper(this.skipper.id).subscribe((skipperResp: Skipper) => {
-          this.pollerError = 0;
+          this.skipperPollerError = 0;
           extend(this.skipper, omit(skipperResp, ['sail']));
         }, () => {
-          if (this.pollerError++ > 2) {
-            this.poller.unsubscribe();
+          if (this.skipperPollerError++ > 2) {
+            this.skipperPoller.unsubscribe();
           }
         });
       }
+    });
+  }
+
+  startFriendsPoller() {
+    this.friendsPoller = Observable.timer(30000, 30000).subscribe(() => {
+        this.getSkipperFriends(this.skipper);
     });
   }
 
@@ -181,7 +189,8 @@ export class SkipperComponent implements OnInit, OnDestroy {
         this.getWaypoints(this.skipper);
         this.getSkipperFriends(this.skipper);
         this.loadPolars();
-        this.startPoller();
+        this.startSkipperPoller();
+        this.startFriendsPoller();
       }, () => {
         this.router.navigate(['/dashboard']);
       });
@@ -192,8 +201,11 @@ export class SkipperComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.poller) {
-      this.poller.unsubscribe();
+    if (this.skipperPoller) {
+      this.skipperPoller.unsubscribe();
+    }
+    if (this.friendsPoller) {
+      this.friendsPoller.unsubscribe();
     }
   }
 
