@@ -68,7 +68,7 @@ export class MapService {
     } else {
       const indexStr = `000${index * this.forecastOptions.stepHour}`.slice(-3);
 
-      this.httpClient.get<WindAxis[]>(`/assets/winds/wind${indexStr}.json`).subscribe((data: WindAxis[]) => {
+      this.httpClient.get<WindAxis[]>(`/assets/winds/1.0/wind${indexStr}.json`).subscribe((data: WindAxis[]) => {
         this.winds[index] = new Wind(data);
         this.loadForecastWinds (index + 1, observer);
       });
