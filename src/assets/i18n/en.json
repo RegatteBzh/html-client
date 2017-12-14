@@ -36,6 +36,13 @@
             "finish_label": "Finish line",
             "submit": "Create race",
             "ray_label": "Finish ray (km)"
+        },
+        "player": {
+            "title": "Players",
+            "name": "Name",
+            "email": "Email",
+            "id": "ID",
+            "skippers": "Races"
         }
     },
     "logs": {
@@ -118,5 +125,9 @@
             "spi léger": "Spi léger",
             "spi": "Spi"
         }
+    },
+    "paginator": {
+        "previous": "Prev",
+        "next": "Next"
     }
 }

@@ -36,6 +36,13 @@
             "finish_label": "Ligne d'arrivée",
             "submit": "Créer la course",
             "ray_label": "Rayon d'arrivée (km)"
+        },
+        "player": {
+            "title": "Joueurs",
+            "name": "Name",
+            "email": "Email",
+            "id": "ID",
+            "skippers": "Courses"
         }
     },
     "logs": {
@@ -119,5 +126,9 @@
             "spi léger": "Spi léger",
             "spi": "Spi"
         }
+    },
+    "paginator": {
+        "previous": "Prev",
+        "next": "Next"
     }
 }

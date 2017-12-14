@@ -1,0 +1,49 @@
+<h1 translate="admin.player.title"></h1>
+<nav>
+    <a [routerLink]="['/admin']">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        <span translate="app.back"></span>
+    </a>
+</nav>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row" *ngFor="let player of players.data">
+            <div class="col-md-4">
+                <button class="btn btn-link" [innerHtml]="player.name" (click)=loadDetails(player)></button>
+            </div>
+            <div class="col-md-4" [innerHtml]="player.email"></div>
+            <div class="col-md-4" [innerHtml]="player.nic"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" [disabled]="players.page === 0" translate="paginator.previous" (click)=previousPage()></button>
+                <button class="btn btn-primary" [disabled]="players.page >= players.maxPage-1" translate="paginator.next" (click)=nextPage()></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" *ngIf="currentPlayer.id">
+        <div class="row">
+            <div class="col-md-6" translate="admin.player.id"></div>
+            <div class="col-md-6" [innerHtml]="currentPlayer.id"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" translate="admin.player.name"></div>
+            <div class="col-md-6" [innerHtml]="currentPlayer.name"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" translate="admin.player.email"></div>
+            <div class="col-md-6" [innerHtml]="currentPlayer.email"></div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6" translate="admin.player.skippers"></div>
+            <div class="col-md-6">
+                <div class="row" *ngFor="let skipper of currentSkippers">
+                    <div class="col-md-12" [innerHtml]="skipper.race.name"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

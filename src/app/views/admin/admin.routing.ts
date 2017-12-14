@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { RaceComponent } from './race/race.component';
 import { OverviewComponent } from './overview/overview.component';
+import { PlayerComponent } from './player/player.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
     {
         path: 'overview',
         component: OverviewComponent,
+    },
+    {
+        path: 'player',
+        component: PlayerComponent,
     }
 ];
 
