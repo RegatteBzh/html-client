@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
+import { Paginate } from '../../models/paginate';
+
 import {
   HttpRequest,
   HttpHandler,
@@ -41,7 +43,21 @@ export class AuthInterceptor implements HttpInterceptor {
         url: request.url.replace(/^\/assets\//, `${environment.apiUrl}/data/`)
       });
     }
-    return next.handle(request).do(event => {}, err => {
+    return next.handle(request).map((event: HttpResponse<any>) => {
+      const headers = event.headers;
+      if (headers) {
+        if (headers.has('Page')) {
+          // The response is paginated
+          const paginated = new Paginate(event.body);
+          paginated.count = parseInt(headers.get('Total'), 10);
+          paginated.maxPage = parseInt(headers.get('Total-Pages'), 10);
+          paginated.page = parseInt(headers.get('Page'), 10) || 0;
+          paginated.perPage = parseInt(headers.get('PerPage'), 10) || 10;
+          return event.clone<Paginate<any>>({body: paginated});
+        }
+      }
+      return event;
+    }).do(event => {}, err => {
       if (isApi && (err.status === 401 || err.status === 403)) {
         this.authService.setToken(null);
         this.router.navigate(['/login']);
