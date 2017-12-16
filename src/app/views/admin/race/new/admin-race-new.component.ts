@@ -1,15 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { AutoUnsubscribe } from '../../../decorators/autoUnsubscribe';
-import { ShapeService } from '../../../services/shape/shape.service';
-import { BoatService } from '../../../services/boat/boat.service';
-import { RaceService } from '../../../services/race/race.service';
-import { Shape } from '../../../models/shape';
+import { AutoUnsubscribe } from '../../../../decorators/autoUnsubscribe';
+import { BoatService } from '../../../../services/boat/boat.service';
+import { RaceService } from '../../../../services/race/race.service';
 import { find, omit, extend, map, forEach } from 'lodash';
 
-import { Boat } from '../../../models/boat';
-import { Race } from '../../../models/race';
+import { Boat } from '../../../../models/boat';
+import { Race } from '../../../../models/race';
 
 import { Marker, Icon } from 'leaflet';
 
@@ -28,11 +26,12 @@ import {
 
 @AutoUnsubscribe()
 @Component({
-  selector: 'app-admin-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.less']
+  selector: 'app-admin-race-new',
+  templateUrl: './admin-race-new.component.html',
+  styleUrls: ['./admin-race-new.component.less']
 })
-export class OverviewComponent implements OnInit {
+export class AdminRaceNewComponent implements OnInit {
+
 
   @ViewChild('mainMap')
   public mainMap: YagaMapComponent;
@@ -42,8 +41,6 @@ export class OverviewComponent implements OnInit {
 
   public tileUrl = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
   public zoom = 2;
-  public maxBound: LatLngBounds;
-  public shapes: Shape[] = [];
 
   // Creation form
   public boats: Boat[] = [];
@@ -52,9 +49,9 @@ export class OverviewComponent implements OnInit {
   public finishMarkerSelected = false;
   public saving = false;
   public race: Race = new Race();
+  public maxBound: LatLngBounds;
 
   constructor(
-    private shapeService: ShapeService,
     private boatService: BoatService,
     private raceService: RaceService,
   ) {
@@ -135,24 +132,6 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shapeService.getShapes().subscribe((shapes: Shape[]) => {
-      this.shapes = shapes;
-      forEach(shapes, (shape, index) => {
-        const shapePolyline = new YagaPolylineDirective<GeoJSON.GeometryCollection>(this.mainMap);
-        const points = map<any, LatLng>(shape.points, (pt) => {
-          return new LatLng(pt.lat, pt.lng);
-        });
-        points.push(points[0]);
-        if (!index) {
-          shapePolyline.setStyle({
-            color: '#ff0000',
-          });
-        }
-        shapePolyline.setLatLngs(points);
-        shapePolyline.redraw();
-      });
-    });
-
     this.loadBoats();
     this.createMarkers();
     this.race.endRayKm = 10;

@@ -13,29 +13,29 @@
         "title": "Administration",
         "race": {
             "title": "Race",
+            "id": "ID",
+            "name": "Name",
+            "description" : "Description",
+            "dateStart": "Start date",
+            "dateEnd": "Finish date",
+            "rayKm": "End Ray (km)",
+            "boat": "Boat",
+            "closed": "Race is closed",
             "new": {
-                "name": "Name",
-                "description": "Description",
-                "boat": "Boat",
-                "start": "Start",
-                "end": "End",
-                "lat": "Lat",
-                "lng": "lng",
+                "title": "New race",
+                "name_label": "Name",
+                "description_label": "Description",
+                "boat_label": "Boat",
+                "date_start_label": "Starts on",
+                "date_end_label": "Ends on",
+                "start_label": "Starting line",
+                "finish_label": "Finish line",
                 "submit": "Create race",
-                "reset": "New",
-                "ray": "Ray on the finish line (km)"
+                "ray_label": "Finish ray (km)"
             }
         },
         "overview": {
-            "title": "overview",
-            "name_label": "Name",
-            "boat_label": "Boat",
-            "date_start_label": "Starts on",
-            "date_end_label": "Ends on",
-            "start_label": "Starting line",
-            "finish_label": "Finish line",
-            "submit": "Create race",
-            "ray_label": "Finish ray (km)"
+            "title": "overview"
         },
         "player": {
             "title": "Players",

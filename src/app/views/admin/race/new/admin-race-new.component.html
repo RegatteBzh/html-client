@@ -1,6 +1,6 @@
-<h1 translate="admin.overview.title"></h1>
-<nav>
-    <a [routerLink]="['/admin']">
+<h1 translate="admin.race.title"></h1>
+<nav class="admin">
+    <a [routerLink]="['/admin/race']">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
         <span translate="app.back"></span>
     </a>
@@ -23,11 +23,15 @@
     <div class="col-md-6">
         <form name="RaceCreate" (ngSubmit)="saveRace()">
             <div class="form-group">
-                <label translate="admin.overview.name_label" for="name"></label>
+                <label translate="admin.race.new.name_label" for="name"></label>
                 <input type="string" class="form-control" name="name" [(ngModel)]="race.name" [disabled]="saving" required>
             </div>
             <div class="form-group">
-                <label translate="admin.overview.boat_label" for="boat"></label>
+                <label translate="admin.race.new.description_label" for="description"></label>
+                <textarea class="form-control" name="description" [(ngModel)]="race.description" [disabled]="saving" required></textarea>
+            </div>
+            <div class="form-group">
+                <label translate="admin.race.new.boat_label" for="boat"></label>
                 <sui-select class="selection form-control"
                             name="boat"
                             [(ngModel)]="race.allowedBoat"
@@ -39,7 +43,7 @@
                 </sui-select>
             </div>
             <div class="form-group">
-                <label translate="admin.overview.date_start_label" for="dateStart"></label>
+                <label translate="admin.race.new.date_start_label" for="dateStart"></label>
                 <input suiDatepicker
                     name="dateStart"
                     class="form-control"
@@ -51,7 +55,7 @@
                     [pickerUseNativeOnMobile]="false">
             </div>
             <div class="form-group">
-                <label translate="admin.overview.date_end_label" for="dateEnd"></label>
+                <label translate="admin.race.new.date_end_label" for="dateEnd"></label>
                 <input suiDatepicker
                     name="dateEnd"
                     class="form-control"
@@ -64,21 +68,21 @@
             </div>
             <div class="form-group">
                 <label class="form-check-inline">
-                    <span translate="admin.overview.start_label"></span>
+                    <span translate="admin.race.new.start_label"></span>
                     <input class="form-check-input" type="radio" name="mode" [value]="false" [(ngModel)]="finishMarkerSelected">
                 </label>
                 <label class="form-check-inline">
-                    <span translate="admin.overview.finish_label"></span>
+                    <span translate="admin.race.new.finish_label"></span>
                     <input class="form-check-input" type="radio" name="mode" [value]="true" [(ngModel)]="finishMarkerSelected">
                 </label>
             </div>
             <div class="form-group">
-                <label translate="admin.overview.ray_label" for="ray"></label>
+                <label translate="admin.race.new.ray_label" for="ray"></label>
                 <input type="number" class="form-control" name="ray" [(ngModel)]="race.endRayKm" [disabled]="saving" required>
             </div>
 
             <button type="submit" class="btn btn-default">
-                <span translate="admin.overview.submit"></span>
+                <span translate="admin.race.new.submit"></span>
             </button>
             
         </form>

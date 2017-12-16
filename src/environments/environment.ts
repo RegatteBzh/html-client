@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://dev.sea-race.fr'
+  // apiUrl: 'http://dev.sea-race.fr'
+  apiUrl: 'http://localhost:3000'
 };

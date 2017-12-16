@@ -1,9 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { AdminComponent } from './admin.component';
-import { RaceComponent } from './race/race.component';
-import { OverviewComponent } from './overview/overview.component';
-import { PlayerComponent } from './player/player.component';
+import { AdminRaceComponent } from './race/admin-race.component';
+import { AdminRaceNewComponent } from './race/new/admin-race-new.component';
+import { AdminOverviewComponent } from './overview/admin-overview.component';
+import { AdminPlayerComponent } from './player/admin-player.component';
 
 
 const routes: Routes = [
@@ -13,15 +14,19 @@ const routes: Routes = [
     },
     {
         path: 'race',
-        component: RaceComponent,
+        component: AdminRaceComponent,
+    },
+    {
+        path: 'race/new',
+        component: AdminRaceNewComponent,
     },
     {
         path: 'overview',
-        component: OverviewComponent,
+        component: AdminOverviewComponent,
     },
     {
         path: 'player',
-        component: PlayerComponent,
+        component: AdminPlayerComponent,
     }
 ];
 

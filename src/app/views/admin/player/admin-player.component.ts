@@ -13,10 +13,10 @@ import { Paginate } from '../../../models/paginate';
 @AutoUnsubscribe()
 @Component({
   selector: 'app-admin-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.less']
+  templateUrl: './admin-player.component.html',
+  styleUrls: ['./admin-player.component.less']
 })
-export class PlayerComponent implements OnInit {
+export class AdminPlayerComponent implements OnInit {
 
   public players: Paginate<Player> = new Paginate<Player>();
   public currentPlayer: Player = new Player();

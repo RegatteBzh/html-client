@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
-import { RaceComponent } from './race/race.component';
-import { OverviewComponent } from './overview/overview.component';
-import { PlayerComponent } from './player/player.component';
+import { AdminRaceComponent } from './race/admin-race.component';
+import { AdminRaceNewComponent } from './race/new/admin-race-new.component';
+import { AdminOverviewComponent } from './overview/admin-overview.component';
+import { AdminPlayerComponent } from './player/admin-player.component';
 import { FormsModule } from '@angular/forms';
 import { adminRouting } from './admin.routing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,9 +14,10 @@ import { YagaModule } from '@yaga/leaflet-ng2';
 @NgModule({
     declarations: [
         AdminComponent,
-        RaceComponent,
-        OverviewComponent,
-        PlayerComponent,
+        AdminRaceComponent,
+        AdminRaceNewComponent,
+        AdminOverviewComponent,
+        AdminPlayerComponent,
     ],
     imports: [
         adminRouting,

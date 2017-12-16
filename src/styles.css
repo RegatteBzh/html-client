@@ -18,3 +18,11 @@ app-root {
 .yaga-map {
     min-height: 700px;
 }
+
+nav.admin {
+    margin-bottom: 15px;
+}
+
+nav.admin a {
+    padding: 0 10px 0 10px;
+}
